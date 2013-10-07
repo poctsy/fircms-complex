@@ -20,7 +20,7 @@
     <header>
       <div class="inner">
         <h1>Fircms</h1>
-        <h2></h2>
+        <h2>FIRCMS基于yiiframework的cms，采用apache2.0开源协议。。。</h2>
         <a href="https://github.com/poctsy/fircms" class="button"><small>View project on</small>GitHub</a>
       </div>
     </header>
@@ -28,37 +28,95 @@
     <div id="content-wrapper">
       <div class="inner clearfix">
         <section id="main-content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+          <h1>
+<a name="fircms-" class="anchor" href="#fircms-"><span class="octicon octicon-link"></span></a>fircms </h1>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E" class="anchor" href="#%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>部署说明：</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<h4>
+<a name="%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" href="#%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="octicon octicon-link"></span></a>需要建立3个文件夹</h4>
+
+<ul>
+<li>根目录下新建assets文件夹</li>
+<li>protected目录下新建runtime文件夹</li>
+<li>protected\runtime目录下新建admin文件夹</li>
+</ul><p><strong>如下</strong>:</p>
+
+<blockquote>
+<p>assets/</p>
+
+<p>protected/runtime/</p>
+
+<p>protected/runtime/admin</p>
+</blockquote>
+
+<hr><h3>
+<a name="%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E" class="anchor" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>使用说明：</h3>
+
+<p>程序里已提供2个帐号</p>
+
+<p><em>参数配置文件params.php 可更改创始人</em></p>
+
+<ol>
+<li>创始人</li>
+</ol><blockquote>
+<blockquote>
+<p>帐号/密码:fircms/fircms</p>
+</blockquote>
+</blockquote>
+
+<ol>
+<li>超级管理员</li>
+</ol><blockquote>
+<blockquote>
+<p>帐号/密码:admin/admin</p>
+</blockquote>
+</blockquote>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="%E6%9E%B6%E6%9E%84%E8%AF%B4%E6%98%8E" class="anchor" href="#%E6%9E%B6%E6%9E%84%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>架构说明：</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<p><em>程序以功能模块为核心思路</em></p>
+
+<pre>
+attachment/                              ------文件上传位置
+protected/
+      /config/                           ------配置目录
+             /application                ------应用配置目录
+             /baseconfig.php             ------基础配置文件
+             /custom.php                 ------自定义配置
+             /database.php               ------数据库配置
+             /params.php                 ------自定义参数
+     /extensions                         ------外部扩展库
+     /messages                           ------I18N
+     /models                             ------共用模型
+     /modules/                           ------功能模块目录
+             admin/                      ------后台控制器
+             config/Manifest.php         ------模块配置文件
+             controllers/                ------后台控制器
+             models/                     ------模块模型
+             views/                      ------前台视图目录
+                 /index_index.php        ------前台视图文件
+                 admin/                  ------后台视图目录
+                     /manage_index.php   ------后台视图文件
+themes/
+    admin/                               ------默认的后台主题
+    default/                             ------默认的前台主题
+
+</pre>
 
 <h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<a name="%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83" class="anchor" href="#%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="octicon octicon-link"></span></a>开发规范:</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<ol>
+<li>模型数据表                使用小驼峰式写法</li>
+<li>函数与对象方法.对象属性   使用小驼峰式</li>
+<li>视图                      使用全小写带下划线写法</li>
+<li>(区分于框架官方的层次目录，采用单目录存放)</li>
+<li>数据字段                  使用全小写带下划线</li>
+<li>控制器名/模型名/模块名    采用大驼峰式</li>
+</ol>
         </section>
 
         <aside id="sidebar">
