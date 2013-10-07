@@ -1,0 +1,27 @@
+#page{
+    background-color: #488dcb;
+    height:100%;
+    width:100%;
+
+}
+
+#header{
+   height: 100px;
+}
+
+#content{
+    font-size:30px;
+    text-align: center;
+    padding-top: 100px;
+    margin: 0 auto;
+    width: 682px;
+    height: 378px;
+    background: url('../img/error-blackground.gif') no-repeat;
+}
+#footer{
+    margin-top: -100px;
+    margin-left: 10%;
+    width: 296px;
+    height: 428px;
+    background:url('../img/bird-down.gif' ) no-repeat;
+}

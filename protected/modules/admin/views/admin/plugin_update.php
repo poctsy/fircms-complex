@@ -1,0 +1,18 @@
+<?php
+/* @var $this PluginController */
+/* @var $model Plugin */
+
+$this->breadcrumbs=array(
+	'Plugins'=>array('admin'),
+	'Update',
+);
+
+$this->menu=array(
+        array('label'=>Yii::t('core', 'Create Plugin'), 'url'=>array('create')),
+        array('label'=>Yii::t('core', 'Plugin Plugin'), 'url'=>array('admin')),
+);
+?>
+
+ 
+
+<?php $this->renderPartial('plugin__form', array('model'=>$model)); ?>
