@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <meta charset="UTF-8">
+
+                <title>nestedsetbehavior </title>
+                <style>
+                    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent;}body{line-height:1;}ol,ul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}:focus{outline:0;}ins{text-decoration:none;}del{text-decoration:line-through;}table{border-collapse:collapse;border-spacing:0;}body{font:13px/1.5 'Helvetica Neue',Arial,'Liberation Sans',FreeSans,sans-serif;}a:focus{outline:1px dotted;}hr{border:0 #ccc solid;border-top-width:1px;clear:both;height:0;}h1{font-size:25px;}h2{font-size:23px;}h3{font-size:21px;}h4{font-size:19px;}h5{font-size:17px;}h6{font-size:15px;}ol{list-style:decimal;}ul{list-style:disc;}li{margin-left:30px;}p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset{margin-bottom:20px;}.clear{clear:both;display:block;overflow:hidden;visibility:hidden;width:0;height:0;}.clearfix:after{clear:both;content:' ';display:block;font-size:0;line-height:0;visibility:hidden;width:0;height:0;}* html .clearfix,*:first-child+html .clearfix{zoom:1;}a:link,a:visited,a:hover{color:#09c;text-decoration:none;}a:hover{color:#9c0;}body{min-width:960px;}.container_12,.container_16{margin-left:auto;margin-right:auto;width:960px;}.grid_1,.grid_2,.grid_3,.grid_4,.grid_5,.grid_6,.grid_7,.grid_8,.grid_9,.grid_10,.grid_11,.grid_12,.grid_13,.grid_14,.grid_15,.grid_16{display:inline;float:left;margin-left:10px;margin-right:10px;}.push_1,.pull_1,.push_2,.pull_2,.push_3,.pull_3,.push_4,.pull_4,.push_5,.pull_5,.push_6,.pull_6,.push_7,.pull_7,.push_8,.pull_8,.push_9,.pull_9,.push_10,.pull_10,.push_11,.pull_11,.push_12,.pull_12,.push_13,.pull_13,.push_14,.pull_14,.push_15,.pull_15{position:relative;}.container_12 .grid_3,.container_16 .grid_4{width:220px;}.container_12 .grid_6,.container_16 .grid_8{width:460px;}.container_12 .grid_9,.container_16 .grid_12{width:700px;}.container_12 .grid_12,.container_16 .grid_16{width:940px;}.alpha{margin-left:0;}.omega{margin-right:0;}.inner{margin-left:0;margin-right:0;}.container_12 .grid_1{width:60px;}.container_12 .grid_2{width:140px;}.container_12 .grid_4{width:300px;}.container_12 .grid_5{width:380px;}.container_12 .grid_7{width:540px;}.container_12 .grid_8{width:620px;}.container_12 .grid_10{width:780px;}.container_12 .grid_11{width:860px;}.container_16 .grid_1{width:40px;}.container_16 .grid_2{width:100px;}.container_16 .grid_3{width:160px;}.container_16 .grid_5{width:280px;}.container_16 .grid_6{width:340px;}.container_16 .grid_7{width:400px;}.container_16 .grid_9{width:520px;}.container_16 .grid_10{width:580px;}.container_16 .grid_11{width:640px;}.container_16 .grid_13{width:760px;}.container_16 .grid_14{width:820px;}.container_16 .grid_15{width:880px;}.container_12 .prefix_3,.container_16 .prefix_4{padding-left:240px;}.container_12 .prefix_6,.container_16 .prefix_8{padding-left:480px;}.container_12 .prefix_9,.container_16 .prefix_12{padding-left:720px;}.container_12 .prefix_1{padding-left:80px;}.container_12 .prefix_2{padding-left:160px;}.container_12 .prefix_4{padding-left:320px;}.container_12 .prefix_5{padding-left:400px;}.container_12 .prefix_7{padding-left:560px;}.container_12 .prefix_8{padding-left:640px;}.container_12 .prefix_10{padding-left:800px;}.container_12 .prefix_11{padding-left:880px;}.container_16 .prefix_1{padding-left:60px;}.container_16 .prefix_2{padding-left:120px;}.container_16 .prefix_3{padding-left:180px;}.container_16 .prefix_5{padding-left:300px;}.container_16 .prefix_6{padding-left:360px;}.container_16 .prefix_7{padding-left:420px;}.container_16 .prefix_9{padding-left:540px;}.container_16 .prefix_10{padding-left:600px;}.container_16 .prefix_11{padding-left:660px;}.container_16 .prefix_13{padding-left:780px;}.container_16 .prefix_14{padding-left:840px;}.container_16 .prefix_15{padding-left:900px;}.container_12 .suffix_3,.container_16 .suffix_4{padding-right:240px;}.container_12 .suffix_6,.container_16 .suffix_8{padding-right:480px;}.container_12 .suffix_9,.container_16 .suffix_12{padding-right:720px;}.container_12 .suffix_1{padding-right:80px;}.container_12 .suffix_2{padding-right:160px;}.container_12 .suffix_4{padding-right:320px;}.container_12 .suffix_5{padding-right:400px;}.container_12 .suffix_7{padding-right:560px;}.container_12 .suffix_8{padding-right:640px;}.container_12 .suffix_10{padding-right:800px;}.container_12 .suffix_11{padding-right:880px;}.container_16 .suffix_1{padding-right:60px;}.container_16 .suffix_2{padding-right:120px;}.container_16 .suffix_3{padding-right:180px;}.container_16 .suffix_5{padding-right:300px;}.container_16 .suffix_6{padding-right:360px;}.container_16 .suffix_7{padding-right:420px;}.container_16 .suffix_9{padding-right:540px;}.container_16 .suffix_10{padding-right:600px;}.container_16 .suffix_11{padding-right:660px;}.container_16 .suffix_13{padding-right:780px;}.container_16 .suffix_14{padding-right:840px;}.container_16 .suffix_15{padding-right:900px;}.container_12 .push_3,.container_16 .push_4{left:240px;}.container_12 .push_6,.container_16 .push_8{left:480px;}.container_12 .push_9,.container_16 .push_12{left:720px;}.container_12 .push_1{left:80px;}.container_12 .push_2{left:160px;}.container_12 .push_4{left:320px;}.container_12 .push_5{left:400px;}.container_12 .push_7{left:560px;}.container_12 .push_8{left:640px;}.container_12 .push_10{left:800px;}.container_12 .push_11{left:880px;}.container_16 .push_1{left:60px;}.container_16 .push_2{left:120px;}.container_16 .push_3{left:180px;}.container_16 .push_5{left:300px;}.container_16 .push_6{left:360px;}.container_16 .push_7{left:420px;}.container_16 .push_9{left:540px;}.container_16 .push_10{left:600px;}.container_16 .push_11{left:660px;}.container_16 .push_13{left:780px;}.container_16 .push_14{left:840px;}.container_16 .push_15{left:900px;}.container_12 .pull_3,.container_16 .pull_4{left:-240px;}.container_12 .pull_6,.container_16 .pull_8{left:-480px;}.container_12 .pull_9,.container_16 .pull_12{left:-720px;}.container_12 .pull_1{left:-80px;}.container_12 .pull_2{left:-160px;}.container_12 .pull_4{left:-320px;}.container_12 .pull_5{left:-400px;}.container_12 .pull_7{left:-560px;}.container_12 .pull_8{left:-640px;}.container_12 .pull_10{left:-800px;}.container_12 .pull_11{left:-880px;}.container_16 .pull_1{left:-60px;}.container_16 .pull_2{left:-120px;}.container_16 .pull_3{left:-180px;}.container_16 .pull_5{left:-300px;}.container_16 .pull_6{left:-360px;}.container_16 .pull_7{left:-420px;}.container_16 .pull_9{left:-540px;}.container_16 .pull_10{left:-600px;}.container_16 .pull_11{left:-660px;}.container_16 .pull_13{left:-780px;}.container_16 .pull_14{left:-840px;}.container_16 .pull_15{left:-900px;}div.form input,div.form textarea,div.form select{margin:.2em 0 .5em 0;}div.form fieldset{border:1px solid #DDD;padding:10px;margin:0 0 10px 0;-moz-border-radius:7px;}div.form label{font-weight:bold;font-size:.9em;display:block;}div.form .entry{margin:5px 0;}div.form .hint{margin:0;padding:0;color:#999;}div.form span.required{color:red;}div.form div.error label,div.form label.error,div.form span.error{color:#C00;}div.form div.error input,div.form div.error textarea,div.form div.error select,div.form input.error,div.form textarea.error,div.form select.error{background:#FEE;border-color:#C00;}div.form .errorSummary{border:2px solid #C00;padding:7px 7px 12px 7px;margin:0 0 20px 0;background:#FEE;font-size:.9em;}div.form .errorMessage{color:red;font-size:.9em;}div.form .errorSummary p{margin:0;padding:5px;}div.form .errorSummary ul{margin:0;padding:0 0 0 20px;}div.wide.form label{float:left;margin-right:10px;position:relative;text-align:right;width:100px;}div.wide.form .entry{clear:left;}div.wide.form .buttons,div.wide.form .hint,div.wide.form .errorMessage{clear:left;padding-left:110px;}.layout-main{background:white;}.layout-main-bg{background:url(img/mainbg.png) no-repeat center 0;}.layout-main-shortcuts{background:#eee;border-bottom:1px solid #ddd;margin:0 auto;padding:3px 0;text-align:right;line-height:16px;}.layout-main-shortcuts a:focus{outline:none;}.layout-main-shortcuts a:link,.layout-main-shortcuts a:visited,.layout-main-shortcuts a:hover{text-decoration:none;}.layout-main-shortcuts a:hover{color:#9c0;}.layout-main-shortcuts .container_12{width:980px;}.layout-main .layout-main-shortcuts a{text-transform:lowercase;color:#666;}.layout-main .layout-main-shortcuts a:hover{color:#09C;}.layout-main-header{height:76px;}.layout-main-header .logo{display:block;margin:8px 0 0 0;}.layout-main-header .menu,.layout-main-header .menu li a.main:hover,.layout-main-header .menu li:hover a.main,.layout-main-header .menu li ul li.last a,.layout-main-header .menu li.about a.main,.layout-main-header .menu li.about a.main:hover,.layout-main-header .menu li.about:hover a.main,.layout-main-header .menu li.active.about a.main,.layout-main-header .menu li.active.about a.main:hover,.layout-main-header .search{background-image:url(img/menu-bar.png);background-repeat:repeat-x;}.layout-main-header .menu li ul li.last a{border-bottom-left-radius:5px;border-bottom-right-radius:5px;-moz-border-radius-bottomleft:5px;-moz-border-radius-bottomright:5px;}.layout-main-header .nav{position:relative;height:36px;margin:20px -20px 0 0;z-index:10001;}.layout-main-header .nav a:focus{outline:none;}.layout-main-header .nav a:link,.layout-main-header .nav a:visited,.layout-main-header .nav a:hover{text-decoration:none;}.layout-main-header .menu{display:block;list-style:none;margin:0;padding:0;height:36px;background-position:0 -36px;}.layout-main-header .menu li{position:relative;display:inline;margin:0;padding:0;float:left;border-right:1px solid #999;text-transform:lowercase;line-height:19.5px;}.layout-main-header .menu a.main{float:left;height:16px;padding:8px 10px 12px 11px;color:white;border-right:1px solid #666;letter-spacing:1px;text-shadow:1px 1px 1px #333;}.layout-main-header .menu li.about a.main{background-repeat:no-repeat;padding-left:14px;}.layout-main-header li.active a.main{background-color:#666;background-image:none;color:#eee;}.layout-main-header .menu li a.main:hover,.layout-main-header .menu li:hover a.main{border-bottom:1px solid transparent;background-position:0 -144px;color:#fff;}.layout-main-header .menu li.about a.main:hover,.layout-main-header .menu li.about:hover a.main{background-position:0 -108px;}.layout-main-header li.active.about a.main{background-position:0 -180px;}.layout-main-header .search{position:absolute;top:0;right:0;width:145px;height:36px;background-position:right -72px;background-repeat:no-repeat;}.layout-main-header .search .keyword a{position:absolute;height:0;width:22px;padding-top:20px;left:120px;top:8px;overflow:hidden;}.layout-main-header .search .keyword input{margin:12px 0 0 15px;width:95px;height:13px;font-size:11px;background:transparent;border:0 none;}.layout-main-header .menu li ul{display:none;width:160px;position:absolute;top:36px;left:0;}.layout-main-header .menu li ul li{float:none;display:block;border-right:0 none;}.layout-main-header .menu li ul li a{color:#fff;padding:4px 15px;border-bottom:solid #666 1px;background-color:#444;display:block;}.layout-main-header .menu li ul li.last a{border-bottom:0 none;background-repeat:no-repeat;background-position:0 bottom;}.layout-main-header .menu li ul li a:hover{color:#9c0;}.layout-main-header .menu li:hover ul{display:block;}.layout-main-ads{margin:2em 0 0 0;}.layout-main-footer{background:url(img/footer-bg.png) #202020;color:#ccc;margin:2em 0 0 0;padding:20px 0;font-size:.9em;}.layout-main-footer h3{color:#CCC;font-size:16px;}.layout-main-footer .copyright{font-size:11px;margin:30px 0 0 0;text-align:center;}.layout-main-footer ul.menu,.layout-main-footer ul.menu ul,.layout-main-footer ul.menu li{list-style:none;margin:0;padding:0;}.layout-main-footer ul.menu ul{margin:0 0 0 10px;}.layout-main-footer ul.menu li.main{display:block;float:left;width:150px;margin:0 0 1em 0;min-height:125px;}.layout-main-footer .tweets,.layout-main-footer .tweets li{list-style:none;margin:0;padding:0;}.layout-main-footer .tweets li{margin:0 0 5px;}.layout-main-footer .tweets .time{color:#666;}.layout-main-footer .social{width:160px;margin:0 auto 0 auto;padding:0;}.layout-main-footer .social li{list-style:none;margin:0;padding:0;display:inline;}.layout-main-footer .social li a{float:left;height:0;padding-top:32px;width:32px;margin:0 0 0 5px;overflow:hidden;background:url(img/social.png) no-repeat;}.layout-main-footer .social li.twitter a{background-position:-3px -4px;}.layout-main-footer .social li.facebook a{background-position:-115px -4px;}.layout-main-footer .social li.linkedin a{background-position:-78px -4px;}.layout-main-footer .social li.feeds a{background-position:-40px -4px;}.layout-main-footer .supporters li{margin:0 0 1em 0;}.layout-main-notice{width:450px;font-size:12px;padding:.5em 1em;border:1px solid #FFA500;background:#fff7e7;margin:10px auto -10px auto;}.layout-main-submenu{margin:20px 0 0 0;background:#F3F3F3;font-size:12px;}.layout-main-submenu ul,.layout-main-submenu li{list-style:none;margin:0;padding:5px 2px;}.layout-main-submenu ul{padding-left:0;}.layout-main-submenu li{display:inline;}.layout-main-submenu li.main{padding:5px 10px;background:#999;color:white;font-weight:bold;text-transform:uppercase;}.layout-main-submenu li a{padding:5px 7px 7px 7px;}.layout-main-submenu li.active a{background:white;}.layout-main-submenu li a:hover{padding:5px 7px;background:#eee;}.layout-main-body{padding:10px 0;min-height:400px;}.layout-main-left{margin:40px 0 0 0;}.layout-main-right{margin:40px 0 0 0;}body{color:#222;font-family:Arial,sans-serif;}#fauxconsole{position:absolute;top:0;right:0;border:1px solid #ccc;padding:1em;}.g-breadcrumbs{font-size:12px;margin-bottom:.5em;}.g-dropdown{position:relative;font-size:.85em;}.g-dropdown span{display:block;padding:2px 3px 2px 10px;cursor:pointer;border:1px solid #eee;}.g-dropdown span i{background:url(img/bg-input.png) no-repeat scroll -15px 0 #fff;float:right;width:15px;height:15px;margin-top:1px;*margin-top:-20px;*margin-right:4px;}.g-dropdown:hover span{border-color:#ccc;border-bottom:none;background-color:#F9F9F9;}.g-dropdown:hover i{background-position:0 0;*margin-top:-19px;}.g-dropdown ul{z-index:1000;display:none;width:100px;position:absolute;left:0;border:1px solid #ccc;border-top:none;background:#F9F9F9;margin:0;padding:2px 0;}.g-dropdown ul li{float:none;display:block;border-right:0 none;margin:0;padding:0;}.g-dropdown ul li a{padding:2px 10px;display:block;}.g-dropdown ul li a:hover{background:#fff;}.g-dropdown:hover ul{display:block;}.g-missing-page{margin:20px 0 0 0;color:#BF2323;}.g-text{background:url(img/bg-input.png) repeat-x scroll 0 -130px #fff;border:1px solid #ccc;padding:4px 5px;}.g-text:focus{border-color:#999;}.g-button,.g-button input{background:transparent url(img/bg-input.png) no-repeat scroll 100% -55px;}.g-button input{border:0 none;height:24px;padding-right:14px;color:#444;font-size:12px;}span.g-button input{margin:0;}.ie .g-button input{padding-right:10px;}.g-button input::-moz-focus-inner{border:0 none;}.g-button{background-position:0 -55px;padding:0 0 0 10px;height:24px;line-height:24px;display:inline-block;}.ie .g-button{padding-left:12px;}.g-button:hover{background-position:0 -103px;cursor:pointer;}.g-button:hover input{background-position:100% -103px;cursor:pointer;}.g-button:active{background-position:0 -103px;}.gecko .g-button:active{padding-left:9px;}.g-button:active input{background-position:100% -103px;}.g-list-none,.g-list-none li{list-style:none;margin:0;padding:0;}.g-loading{background:transparent url(img/loading.gif) no-repeat scroll 0 0;padding-left:30px;}.g-voter-reporter .widget-voter{float:right;}.g-voter-reporter .widget-reporter{float:right;}.g-vote.plus{color:green;}.g-vote.minus{color:#c00;}.g-markdown-preview{margin-left:.5em;}.g-progress{border:1px solid #D1DBDF;padding:1px;}.g-progress .bar{background-color:#EFFAFF;height:30px;}.g-progress .info{float:left;width:100%;height:30px;margin-top:-30px;}.g-progress .per{float:right;margin-right:15px;color:#666;}.g-starring{float:left;}.g-user-rank-link.gold{;padding-left:19px;}.g-user-rank-link.silver{;padding-left:19px;}.g-user-rank-link.bronze{padding-left:19px;}.hl-default{color:Black;}.hl-code{color:Gray;}.hl-brackets{color:Olive;}.hl-comment{color:#808080;font-style:italic;}.hl-quotes{color:red;}.hl-string{color:Red;}.hl-identifier{color:green;}.hl-builtin{color:Teal;}.hl-reserved{color:black;font-weight:bold;}.hl-inlinedoc{color:Blue;}.hl-var{color:blue;}.hl-url{color:Blue;}.hl-special{color:Navy;}.hl-number{color:Maroon;}.hl-inlinetags{color:Blue;}.hl-main{font-family:'Courier New',Courier,monospace;font-weight:normal;font-size:12px;}ol.hl-main pre{margin:0;padding:0;}.hl-gutter{background-color:#999;color:White;}.hl-table{font-family:courier;font-size:12px;border:solid 1px #505050;}.source .copycode{text-align:right;float:right;}.source .copycode a{cursor:pointer;color:blue;}.source .copycode_hover a{color:red;}.search-index .query,.search-empty .query{width:518px;margin:1em 5px 1em 0;padding:6px 10px;font-size:1.2em;}.ie .search-index .submit-button,.ie .search-empty .submit-button{margin-top:-41px;}.search-index .counts{margin-bottom:1em;color:#555;margin-left:10px;}.search-index .spelling,.search-empty .spelling{font-size:1.2em;margin-left:10px;margin-bottom:.75em;color:#c00;}.search-index .spelling a,.search-empty .spelling a{text-decoration:underline;color:#ABC5E4;}.search-index .spelling a em,.search-empty .spelling a em{font-weight:bold;font-style:italic;text-decoration:none;color:#09c;}.search-empty .empty-results{margin-left:10px;font-size:14px;}.search-index h2{font-size:1.2em;font-weight:normal;margin:0;}.search-index .doc h2{text-decoration:underline;color:#ABC5E4;}.search-index h2 a{text-decoration:none;}.ie .search-index h2 a{text-decoration:underline;}.search-index em{font-weight:bold;font-style:normal;}.search-index .lang-zh_cn .abstract em,.search-index .lang-ja .abstract em{background-color:#ffc;}.search-index .pos{display:none;}.search-index .doc{margin-bottom:1em;margin-left:10px;font-size:14px;}.search-index .doc a:visited{color:#661A8B;}.search-index .doc a:hover{color:#9c0;}.search-index .doc .links .url{color:#580;}.search-index .options{margin-top:4em;}.search-index .options ul,.search-index .options li{margin:0;padding:0;list-style:none;}.search-index .facets{margin-left:1em;margin-top:1em;}.search-index .index{margin-bottom:5em;}.search-index .docs .info{font-size:.9em;color:#777;}.search-index .docs .info a,.search-index .docs .links a{color:#8284CC;}.search-index .docs .info a:hover,.search-index .docs .links a:hover{color:#9c0;}.search-index .star-ratings{float:left;margin-top:4px;margin-right:5px;}.search-index .doc h2{;background-color:#fff;background-repeat:no-repeat;padding-left:22px;}.search-index .forum h2{background-position:0 -174px;}.search-index .guide h2,.search-index .blog h2{background-position:0 -223px;}.search-index .wiki h2{background-position:0 -322px;}.search-index .extension h2{background-position:0 -272px;}.search-index .api h2{padding-left:10px;}.search-index .api ul{margin:0;}.search-index .api{margin-bottom:1em;}.search-index .api li{list-style:none;padding:0;margin:0;font-size:14px;}.star-ratings i{background-image:url('img/stars10x10.png');background-repeat:no-repeat;width:10px;height:10px;font-size:1px;display:inline-block;margin-right:1px;}.star-ratings i.half{background-position:0 -20px;}.star-ratings i.empty{background-position:0 -40px;}.portlet{margin:2em 0 0 0;border:1px solid #ccc;}.portlet .portlet-decoration{background:#eee;padding:3px 10px;border-bottom:1px solid #ccc;font-weight:bold;text-align:center;}.portlet .portlet-content{padding:.5em .8em;}.portlet.g-operations{background:#f3f3f3;border:1px solid #ddd;}ul.yiiPager{font-size:11px;border:0;margin:2.5em 0;padding:0;line-height:100%;}ul.yiiPager li{display:inline;font-size:1.1em;margin:0 5px 0 0;}ul.yiiPager a:link,ul.yiiPager a:visited{border:solid 1px #006483;font-weight:bold;color:#006483;text-decoration:none;padding:3px 9px;}ul.yiiPager .page a{font-weight:normal;}ul.yiiPager a:hover{border:solid 1px #09c;background:#A7DEFF;}ul.yiiPager .selected a{background:#09c;color:#FFF;font-weight:bold;}ul.yiiPager .hidden a{border:solid 1px #DEDEDE;color:#888;}ul.yiiPager .first,ul.yiiPager .last{display:none;}.widget-comment-list{margin:2em 0;padding:1em 0;border-top:2px solid #eee;}.widget-comment-list h3{margin-bottom:10px;}.widget-comment-list #comment-form .title input{width:650px;font-size:1.1em;}.widget-comment-list #comment-form .markItUp{width:650px;}.markItUp textarea{font-family:Menlo,Consolas,"Courier New",Courier,mono;font-size:10pt;}.widget-comment-list #comment-form .markItUp textarea{width:650px;height:200px;}.widget-comment-list .comment{background-color:#F5F5F5;padding:.5em;margin-bottom:1em;border-bottom:1px solid #ddd;border-right:1px solid #ddd;border-top:1px solid #F9F9F9;border-left:1px solid #F9F9F9;border-radius:10px;}.widget-comment-list .comment .meta{margin:2px 0 4px;color:#999;font-size:.9em;}.widget-comment-list .comment .title{font-weight:bold;}.widget-comment-list .comment .content{margin:.5em 0 0 0;border:1px solid #F5F5F5;}.widget-comment-list .comment .cid{float:left;padding:0 .5em 0 0;background:#F5F5F5;font-size:1.6em;font-weight:bold;color:#ccc;line-height:1em;}.widget-comment-list .comment .cid:hover{color:#09c;text-decoration:none;}.widget-comment-list .prompt{padding:1em;background:lightyellow;}.widget-comment-list .widget-voter,.widget-comment-list .widget-reporter{float:right;margin-top:-4px;}.widget-search-box{font-size:14px;}.widget-search-box .keyword{margin-right:5px;width:128px;}.widget-search-box strong{display:block;text-transform:uppercase;color:#666;font-size:.7em;letter-spacing:1px;font-weight:normal;margin:0 0 .2em 0;}.widget-list-view .summary{font-size:13px;color:#555;margin:0 0 1em 0;}.widget-list-view .sorter{margin:0 0 5px 0;text-align:right;}.widget-list-view .pager{border-top:1px solid #eee;margin:1em 0 0 0;padding:0;}.widget-list-view .sorter{font-weight:bold;border-bottom:1px solid #eee;margin:0 0 1em;padding:0 0 .5em;}.widget-list-view .sorter ul{display:inline;list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0;font-weight:normal;}.widget-list-view .sorter li{display:inline;margin:0 0 0 5px;padding:0;}.widget-list-view .sorter a.asc{padding-right:10px;}.widget-list-view .sorter a.desc{padding-right:10px;}.widget-related-contents{margin-top:1em;}.widget-related-contents ul{list-style:none;margin:0;padding:0;}.widget-related-contents li{margin:.6em 0;line-height:125%;}.widget-related-contents li a.featured{padding-right:22px;}.portlet.downloads ul{list-style:circle inside;margin:0;padding:0;}.portlet.downloads li{margin:0;padding:0;}.portlet.downloads .see-all{text-align:right;margin:.5em 0 0 0;}.widget-category-list .count{color:#777;font-size:.85em;margin-left:2px;}.widget-filter-display{background-color:#F3F2FF;padding:.5em 10px;margin-bottom:1em;font-weight:bold;font-size:13px;}.widget-filter-display .close{border:1px solid #09c;float:right;font-size:11px;font-family:Arial;padding:0 5px;padding-top:1px;background-color:#fff;*margin-top:-2em;*margin-right:5px;*padding-top:0;}.widget-filter-display .close a:hover{color:#09c;}.widget-voter ul{margin:0;padding:0;list-style:none;float:left;}.widget-voter li{float:left;margin:0;padding:0;list-style:none;cursor:pointer;line-height:19px;font-size:12px;}.widget-voter li a:hover{display:inline;float:left;background:url("img/rating-hover-bg.gif") repeat-x scroll 0 0 transparent;}.widget-voter li a span{background:url("img/rating.png") no-repeat;display:inline;float:left;margin-right:8px;padding-left:7px;padding-right:17px;}.widget-voter li.up a span{background-position:100% -199px;}.widget-voter li.up a:hover span{background-position:100% -299px;}.widget-voter li.up a.voted span{background-position:100% -399px;}.widget-voter li.down a span{background-position:100% -598px;}.widget-voter li.down a:hover span{background-position:100% -698px;}.widget-voter li.down a.voted span{background-position:100% -798px;}.widget-voter li a.voting span{background:url("img/loading.gif") no-repeat;background-position:100% 0;}.widget-reporter span{font-size:12px;background:url("img/rating.png") no-repeat;padding:0 5px 0 22px;background-position:5px -897px;}.widget-reporter:hover span{background-position:5px -997px;}.widget-reporter.reported span{background-position:5px -1097px;}.widget-reporter.reported{color:#666;}.widget-reporter.reported:hover{color:#666;text-decoration:none;}.widget-tag-cloud{margin:1em 0 0 0;}.widget-tag-cloud strong,.widget-tag-cloud .tag{display:block;}.widget-tag-cloud .count{color:#777;font-size:.85em;margin-left:2px;}.widget-action-links .inactive{color:#ddd;}.widget-recent-comments{margin:1em 0 0 0;}.widget-recent-comments ul li{margin:0 0 .3em;}.widget-recent-comments li a.featured{padding-right:22px;}.widget-comment-list code{font-family:Menlo,Consolas,"Courier New",Courier,mono;}.about-editor{float:right;font-size:12px;}.widget-comment-list .about-editor{margin-right:38px;margin-top:-15px;}.webkit .widget-comment-list .about-editor{margin-top:0;}.widget-comment-list pre{background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;font-family:Menlo,Consolas,"Courier New",Courier,mono;margin:1em 0;font-size:10pt;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;padding:1em;}.widget-follower img{border:0;margin:0;}.widget-follower span{padding:0 0 0 .5em;font-size:.9em;color:#666;}.g-markdown{font-size:14px;}.g-markdown pre{display:block;padding:1em;background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;font-family:Menlo,Consolas,"Courier New",Courier,mono;margin:1em 0;font-size:10pt;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;}.g-markdown code{border-bottom:1px dotted #ccc;font-family:Menlo,Consolas,"Courier New",Courier,mono;}.g-markdown h1{color:#555;}.g-markdown h2,.g-markdown h3,.g-markdown h4{font-size:1.3em;margin-bottom:.25em;margin-top:1.5em;color:#444;}.g-markdown h3{font-size:1.2em;}.g-markdown h4{font-size:1.15em;}.g-markdown .revision{font-size:.8em;color:#999;margin-top:10em;}.g-markdown .tip,.g-markdown .info,.g-markdown .note{border-top:1px solid #0cf;border-bottom:1px solid #0cf;padding:1em 1em 0 55px;margin:1em 0;border-color:#E4DFB8;background-color:#FFFAE6;background-repeat:no-repeat;background-position:10px 45%}.g-markdown .note{background-color:#FFE6E6;border-color:#D9C3C3}.g-markdown .info{border-color:#B4DAA5;background-color:#EBFFCE;background-image:url(img/info.gif);}.g-markdown span.type{float:left;font-size:1em;padding-right:.5em;font-weight:bold;}.g-markdown .image{margin:1em 0;border:1px solid #e5e5e5;text-align:center;}.g-markdown .image>p{background:#f5f5f5;margin:0;padding:.5em;text-align:center;}.g-markdown .image img{margin:1em;}.g-markdown .toc{background-color:#f9f9f9;border:1px solid #eee;padding:.7em 1em;margin:0 0 1em 0;font-size:.95em;width:350px;line-height:125%;}.g-markdown .toc ol{margin:.5em 0;color:#666;}.g-markdown .toc li{padding:.3em 0;}.g-markdown .toc code{font-size:.95em;}.g-markdown .toc .ref{margin:0 0 .3em 0;}.g-markdown .toc .ref.level-3{margin-left:20px;}.g-markdown li p{margin:0 0 .2em;}.g-markdown .anchor{visibility:hidden;}.g-markdown h2:hover .anchor,.g-markdown h3:hover .anchor,.g-markdown h4:hover .anchor{visibility:visible;}.markItUp *{margin:0;padding:0;outline:none;}.markItUp a:link,.markItUp a:visited{color:#000;text-decoration:none;}.markItUp{width:700px;margin:5px 0 5px 0;}.markItUpContainer{font:11px Verdana,Arial,Helvetica,sans-serif;}.markItUpEditor{font:12px 'Courier New',Courier,monospace;padding:5px;width:690px;height:320px;clear:both;display:block;line-height:18px;overflow:auto;}.markItUpPreviewFrame{overflow:auto;background-color:#FFF;width:99.9%;height:300px;margin:5px 0;}.markItUpFooter{width:100%;}.markItUpResizeHandle{overflow:hidden;width:22px;height:5px;margin-left:auto;margin-right:auto;background-image:url(markitup/handle.png);cursor:n-resize;}.markItUpHeader ul li{list-style:none;float:left;position:relative;}.markItUpHeader ul li:hover>ul{display:block;}.markItUpHeader ul .markItUpDropMenu{background:transparent url(markitup/menu.png) no-repeat 115% 50%;margin-right:5px;}.markItUpHeader ul .markItUpDropMenu li{margin-right:0;}.markItUpHeader ul ul{display:none;position:absolute;top:18px;left:0;background:#FFF;border:1px solid #000;}.markItUpHeader ul ul li{float:none;border-bottom:1px solid #000;}.markItUpHeader ul ul .markItUpDropMenu{background:#FFF url(markitup/submenu.png) no-repeat 100% 50%;}.markItUpHeader ul .markItUpSeparator{margin:0 10px;width:1px;height:16px;overflow:hidden;background-color:#CCC;}.markItUpHeader ul ul .markItUpSeparator{width:auto;height:1px;margin:0;}.markItUpHeader ul ul ul{position:absolute;top:-1px;left:150px;}.markItUpHeader ul ul ul li{float:none;}.markItUpHeader ul a{display:block;width:16px;height:16px;text-indent:-10000px;background-repeat:no-repeat;padding:3px;margin:0;}.markItUpHeader ul ul a{display:block;padding-left:0;text-indent:0;width:120px;padding:5px 5px 5px 25px;background-position:2px 50%;}.markItUpHeader ul ul a:hover{color:#FFF;background-color:#000;}.markItUp .markItUpButton1 a{background-image:url(markitup/h1.png);}.markItUp .markItUpButton2 a{background-image:url(markitup/h2.png);}.markItUp .markItUpButton3 a{background-image:url(markitup/h3.png);}.markItUp .markItUpButton4 a{background-image:url(markitup/h4.png);}.markItUp .markItUpButton5 a{background-image:url(markitup/h5.png);}.markItUp .markItUpButton6 a{background-image:url(markitup/h6.png);}.markItUp .markItUpButton7 a{background-image:url(markitup/bold.png);}.markItUp .markItUpButton8 a{background-image:url(markitup/italic.png);}.markItUp .markItUpButton9 a{background-image:url(markitup/list-bullet.png);}.markItUp .markItUpButton10 a{background-image:url(markitup/list-numeric.png);}.markItUp .markItUpButton11 a{background-image:url(markitup/picture.png);}.markItUp .markItUpButton12 a{background-image:url(markitup/link.png);}.markItUp .markItUpButton13 a{background-image:url(markitup/quotes.png);}.markItUp .markItUpButton14 a{background-image:url(markitup/code.png);}.markItUp .preview a{background-image:url(markitup/preview.png);}.jqmWindow{display:none;position:fixed;top:17%;left:50%;margin-left:-300px;width:700px;background-color:#fff;border:1px solid black;padding:12px;}.jqmWindow .jqmClose{background:url("img/close.png") no-repeat scroll 0 0 transparent;display:block;float:right;height:20px;width:20px;}.jqmWindow .jqmTitle{border-bottom:1px solid #eee;margin:0 0 1em;padding:0 0 .5em;font-weight:bold;}.jqmWindow .jqmClose:hover{background-position:0 -20px;}.jqmWindow .jqmClose em{display:none;font-size:1.1em;font-weight:bold;}.jqmWindow .jqmContent{clear:both;min-height:200px;max-height:500px;overflow:auto;padding-right:.5em;}.jqmOverlay{background-color:#000;}* iframe.jqm{position:absolute;top:0;left:0;z-index:-1;width:expression(this.parentNode.offsetWidth+'px');height:expression(this.parentNode.offsetHeight+'px');}* html .jqmWindow{position:absolute;top:expression((document.documentElement.scrollTop || document.body.scrollTop)+Math.round(17 *(document.documentElement.offsetHeight || document.body.clientHeight) / 100)+'px');}#jquery-overlay{position:absolute;top:0;left:0;z-index:90;width:100%;height:500px;}#jquery-lightbox{position:absolute;top:0;left:0;width:100%;z-index:100;text-align:center;line-height:0;}#jquery-lightbox a img{border:none;}#lightbox-container-image-box{position:relative;background-color:#fff;width:250px;height:250px;margin:0 auto;}#lightbox-container-image{padding:10px;}#lightbox-loading{position:absolute;top:40%;left:0;height:25%;width:100%;text-align:center;line-height:0;}#lightbox-nav{position:absolute;top:0;left:0;height:100%;width:100%;z-index:10;}#lightbox-container-image-box>#lightbox-nav{left:0;}#lightbox-nav a{outline:none;}#lightbox-nav-btnPrev,#lightbox-nav-btnNext{width:49%;height:100%;zoom:1;display:block;}#lightbox-nav-btnPrev{left:0;float:left;}#lightbox-nav-btnNext{right:0;float:right;}#lightbox-container-image-data-box{font:10px Verdana,Helvetica,sans-serif;background-color:#fff;margin:0 auto;line-height:1.4em;overflow:auto;width:100%;padding:0 10px 0;}#lightbox-container-image-data{padding:0 10px;color:#666;}#lightbox-container-image-data #lightbox-image-details{width:70%;float:left;text-align:left;}#lightbox-image-details-caption{font-weight:bold;}#lightbox-image-details-currentNumber{display:block;clear:left;padding-bottom:1.0em;}#lightbox-secNav-btnClose{width:66px;float:right;padding-bottom:.7em;}.site-index{padding:20px 0;}.site-index .tour-download{margin-top:1em;margin-bottom:.25em;}.site-index .tour-download a{color:white;width:130px;font-weight:bold;}.site-index .tour{margin-left:1.85em;margin-right:2.5em;}.site-index .tour-alternative,.site-index .release{margin-top:5px;font-size:.85em;color:#888;text-align:center;}.site-index .tour-alternative{float:left;margin-left:25px;width:170px;}.site-index .release{float:right;margin-right:25px;width:170px;}.site-index .release .note{border-right:1px solid #888;}.site-index .release .note a{margin-right:5px;}.site-index .release .license a{margin-left:3px;}.site-index .simple{font-style:italic;}.site-index .fast{color:#D8582B;}.site-index .secure{color:#16A314;}.site-index .professional{color:#3B6FBA;}.site-index .slogan h1{font-size:26px;font-weight:bold;line-height:120%;color:#666;}.site-index .slogan h2{font-size:17px;font-weight:normal;color:#333;}.site-index .slogan p{font-size:14px;color:#666;margin:0;}.site-index .steps{border:1px solid #FAE8BC;background:#FEFAF1;padding:10px 20px 10px 20px;}.site-index .steps h3{font-size:20px;line-height:120%;font-weight:normal;margin:0 0 10px;padding:0;}.site-index .steps ol{font-size:17px;margin:0;}.site-index .aspects{border-top:1px solid #eee;border-bottom:1px solid #eee;padding:1.5em 0;margin:1.5em 0;}.site-index .aspects h3{margin:0 0 10px;}.site-index .aspects p{margin:0;}.site-index .see-all{text-align:right;padding:0 20px 0 0;margin:1em 0 0 0;}.site-index .see-all.left{text-align:left;display:inline;}.site-index .latest-news{margin:0 0 2em 0;}.site-index .testimonials li{margin:0;}.site-index .testimonials .summary img{float:left;margin:0 .5em .5em 0;}.site-index .testimonials .summary h3{font-size:16px;margin:0 0 .5em 0;}.site-index .testimonials .summary p{margin:0 0 .5em 0;}.site-index .testimonials .quote{padding:10px 0 0 10px;margin:0;position:relative;}.site-index .testimonials .quote .mark{position:absolute;left:10px;top:-10px;font-size:64px;color:#ccc;font-family:Arial;}.site-index .testimonials .quote p{font-style:italic;margin:10px 0 10px 30px;}.site-index .testimonials .quote .author{font-size:14px;font-weight:bold;text-align:right;}.site-index .testimonials .quote .website{text-align:right;}.site-index .testimonials .browse{font-size:20px;float:left;margin-top:7px;}.site-index .testimonials .browse a{padding:5px;}.site-index .testimonials .pager a{font-size:20px;float:left;margin-top:8px;padding:0 5px;}.site-index .testimonials .pager a.pager-active{color:#222;}.site-index .aspects h3{padding-left:52px;line-height:48px;}.site-index h3.fast{background:transparent url(img/fsp.png) no-repeat scroll 0 0;}.site-index h3.secure{background:transparent url(img/fsp.png) no-repeat scroll 0 -58px;}.site-index h3.professional{background:transparent url(img/fsp.png) no-repeat scroll 0 -116px;}.site-index .books{margin:2em 0;}.site-index .books img{float:left;margin:0 1em 1em 0;}.site-index .books h3{font-size:14px;margin:0;padding:0;}.site-index .books h3 a{color:#333;text-decoration:underline;}.site-index .books .thanks{margin:.5em 0;color:#666;}.site-about-members .member{margin:.5em 0;}.site-about-members .member .name{font-size:1.1em;font-weight:bold;}.site-about-members .member .since{font-style:italic;}.site-error p{margin:20px 0 0 0;color:#BF2323;}.site-login .entry.remember-me label{display:inline;font-weight:normal;}.site-login .login-hint{margin:150px 0 0 -200px;padding:1em;background:#ECF8FF;border:1px solid #B0E1FF;width:250px;}.site-login .login-hint ul{margin:1em 0 0 0;}.site-performance img{margin:0 auto;display:block;text-align:center;margin-bottom:10px;}.site-downloads table{width:100%;}.site-downloads table th{background:#eee;text-align:left;}.site-downloads table th,.site-downloads table td{border:1px #ddd solid;padding:.2em .5em;}.site-downloads .unstable{color:red;}.site-downloads .stable{color:green;}.site-downloads .instructions{background:#eee;font-family:"Courier New",Courier,mono;padding:.5em;}.site-doc .books img{float:left;margin:0 1em 1em 0;}.site-markdown-help{font-size:14px;}.site-markdown-help .spaces{background-color:#FFC;}.site-markdown-help pre{padding:6px 5px;border:none;background-color:#eee;line-height:115%;overflow:hidden;font-family:Menlo,Consolas,"Courier New",Courier,mono;margin:1em 0;font-size:10pt;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word;}.site-markdown-help p code{padding:0;background-color:#fff;}.site-markdown-help .hi{background-color:#ccc;}.site-markdown-help h3{margin:1.5em 0 .25em 0;}.site-contact .name input,.site-contact .email input{width:30em;}.site-contact .subject input,.site-contact .body textarea{width:600px;}.site-contact .body textarea{font-family:Menlo,Consolas,"Courier New",Courier,mono;font-size:10pt;height:10em;}.site-tour .step{margin:0 0 1em 0;padding:1em 0;}.site-tour .step img{padding:5px;border:1px solid #ccc;}.site-tour .step img:hover{background-color:#ECF8FF;border-color:#B0E1FF;}.site-tour .step0,.site-tour .step1,.site-tour .step2b{border-bottom:1px solid #eee;}.site-tour .step2a{border-bottom:1px dashed #eee;}.site-tour .step .screenshot{float:left;}.site-tour .step h2{font-size:16px;margin:0 0 .2em 0;}.site-tour .step .desc{float:left;margin:0 0 0 15px;width:450px;}.site-tour .step .desc del{background:pink;}.site-logo .copy{margin:0 0 2em 0;}.site-logo .copy img{display:block;margin:0 0 1em 0;}.site-logo .copy a{display:block;margin:0 0 .5em 0;}.site-features ul.features,.site-features ul.features li{list-style:none;margin:0;padding:0;}.site-features ul.features li{float:left;width:260px;height:130px;margin:0 1em 1em 0;padding:1em;border:1px solid #eee;}.site-features ul.features b{display:block;margin:0 0 .5em 0;}.site-screencasts .cast{margin:0 0 2em 0;}.site-screencasts .video{float:left;display:inline;width:660px;}.site-screencasts .description{display:inline;float:left;width:240px;}.comment-buttons{text-align:right;}.comment-buttons a{margin-right:10px;}.site-license .can{color:#16A314;}.site-license .cannot{color:#D8582B;}.site-license .must{color:#3B6FBA;}.site-license .legal{border-right:1px solid #ddd;padding-right:20px;min-height:340px;}.tutorial-index .yii-book img{float:left;margin:0 1em 1em 0;}.tutorial-index .book{width:220px;float:left;margin:0 1em .5em 0;}.tutorial-index .book .recommended{color:#666;margin:0;}.tutorial-index .book img{float:left;margin:0 .5em .5em 0;}.tutorial-index .book h4{margin:0;padding:0;font-size:13px;}.tutorial-view{font-size:14px;}.tutorial-view .nav-toc .title{margin:0 1em 1em 0;border-bottom:5px dotted #eee;color:#666;padding:0 0 .5em 0;text-transform:uppercase;}.tutorial-view .nav-toc{border-right:1px solid #dfdfdf;padding-bottom:2em;margin-top:.5em;}.tutorial-view .widget-search-box{margin-top:.5em;padding-top:.5em;}.tutorial-view .langver strong{display:block;text-transform:uppercase;color:#666;font-size:.7em;letter-spacing:1px;font-weight:normal;margin:0 0 .2em 0;}.tutorial-view .langver select{padding:.1em;margin:0;}.tutorial-view .langver select.version{width:60px;margin-right:2px;}.tutorial-view .langver select.lang{width:140px;}.tutorial-view .nav-toc .toc,.tutorial-view .nav-toc .toc ul,.tutorial-view .nav-toc .toc li,.tutorial-view .nav-toc .toc li li{list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0;}.tutorial-view .nav-toc .toc{font-size:13px;}.tutorial-view .nav-toc .toc li{padding:.3em 16px;line-height:125%;}.tutorial-view .nav-toc .toc .chapter{font-size:14px;margin-top:1em;padding-left:0;color:#444;}.tutorial-view .nav-toc .toc li.active{padding-left:4px;}.tutorial-view .prev-next-nav{margin:10px 0 3em 0;padding-top:.5em;border-top:1px solid silver;font-weight:bold;color:#999;font-size:1em;}.tutorial-view .prev-topic{float:left;}.tutorial-view .prev-topic a{padding-left:20px;}.ie .tutorial-view .prev-topic a{background-position:0 -58px;}.tutorial-view .next-topic{float:right;}.tutorial-view .next-topic a{padding-right:20px;}.ie .tutorial-view .next-topic a{background-position:100% -88px;}.tutorial-view .languages.g-dropdown{float:left;width:140px;margin:0 5px 0 0;}.tutorial-view .languages.g-dropdown ul{width:138px;}.tutorial-view .versions.g-dropdown{float:left;width:60px;}.tutorial-view .versions.g-dropdown ul{width:58px;}.tutorial-view .memo{margin:2em 0;padding:1em;background:lightyellow;}.api-index,.api-view{font-size:14px;}.api-index .summaryTable,.api-view .summaryTable{font-size:13px;}.api-index table th{background:#eee;}.api-index table.summaryTable th,.api-index table.summaryTable td{border:1px #ddd solid;padding:.2em .5em;}.api-index h1,.api-index h2,.api-index h3,.api-view h1,.api-view h2,.api-view h3{color:#444;font-weight:normal;}.api-view .content h1,.api-view .content h2,.api-view .content h3,.api-view .content ol,.api-view .content ul,.api-view .content p{margin:0 0 .2em;}.api-view h4{font-size:14px;margin:10px 0;font-weight:bold;}.api-view pre{display:block;padding:1em;background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;font-family:Menlo,Consolas,"Courier New",Courier,mono;margin:1em 0;font-size:10pt;}.api-view div.code{display:none;overflow:auto;padding:1em;background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;font-family:Menlo,Consolas,"Courier New",Courier,mono;margin:1em 0;font-size:10pt;}.api-view table.summaryTable{background:#f6f6f6;border-collapse:collapse;width:100%;}.api-view table.summaryTable th,.api-view table.summaryTable td{border:1px #ddd solid;padding:.2em .5em;}.api-view table.summaryTable th{background:#eee;text-align:left;}.api-view #nav{padding:3px;margin:0 0 10px 0;border-top:1px #ddd solid;}.api-view #classDescription{padding:5px;margin:10px 0 20px 0;border-bottom:1px solid #ddd;}.api-view .detailHeader{font-weight:bold;font-size:12pt;margin:30px 0 5px 0;border-bottom:1px solid #ddd;}.api-view .detailHeaderTag{font-weight:normal;font-size:10pt;}.api-view .signature,.api-view .signature2{padding:.2em .5em;margin:.5em 0;background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;font-family:Menlo,Consolas,"Courier New",Courier,mono;}.api-view .paramNameCol{width:12%;font-weight:bold;}.api-view .paramTypeCol{width:12%;}.api-view .memo{margin:20px 0;padding:10px;background:lightyellow;}.api-view .sourceCode{margin:0 0 10px 0;padding:.2em .5em;background:#F6F6F6;}.api-view .docProperty .summaryTable,.api-view .docMethod .summaryTable,.api-view .docEvent .summaryTable,.api-view .summaryTable.docClass{table-layout:fixed;}.api-view .col-property,.api-view .col-method,.api-view .col-event{width:150px;}.api-view .col-type{width:100px;}.api-view .col-defined{width:150px;}.api-view .col-name{width:150px;}.api-toc{border-right:1px solid #dfdfdf;padding-bottom:2em;margin-top:.5em;}.api-toc .toc{font-size:13px;margin:1em 0;padding:0;}.api-toc .toc ul,.api-toc .toc li{margin:0;list-style-image:none;list-style-type:none;}.api-toc .toc li{margin:0;}.api-toc .toc li span{position:relative;top:-4px;}.api-toc .toc li span,.api-toc .toc li a{font-size:12px;}.api-toc .toc li.active{font-weight:bolder;}.api-toc .toc .closed ul{display:none;}.api-toc .search .keyword{margin-right:5px;width:128px;}.api-toc .versions strong,.api-toc .search strong,.api-suggest strong{display:block;text-transform:uppercase;color:#666;font-size:.7em;letter-spacing:1px;font-weight:normal;margin:0 0 .2em 0;}.api-toc .versions{margin:0 0 10px;}.api-toc .versions ul,.api-toc .versions li{list-style-image:none;list-style-position:outside;list-style-type:none;margin:0 0 .2em;}.api-toc .versions li{display:inline;margin:0 1em 0 0;}.api-toc .versions li span{font-weight:bold;}.api-toc .treeview a:active,.api-toc .treeview a:hover,.api-toc .treeview .folder:hover{color:#9C0;}.api-toc .treeview .folder,.api-toc .treeview li.expandable .folder{background-position:0 3px;padding-left:18px;}.api-toc .treeview li ul li{padding-top:0;}.api-toc .treeview li.active{font-size:12px;}.api-toc .treeview li.last{padding-bottom:5px;}.api-suggest{margin:.5em 0 1em 0;}.api-suggest .keyword{font-size:1.1em;width:448px;margin-right:5px;}.api.ac_results li{font-size:15px;line-height:20px;padding:3px 6px;}.news-item{margin:0 0 10px 0;}.news-item .date{color:#999;text-transform:uppercase;}.news-item .title{font-size:16px;font-weight:bold;}.news-item .teaser .image{float:right;margin:0 0 10px 10px;}.news-view .date{color:#999;text-transform:uppercase;}.news-view .content{margin:10px 0 0 0;}.news-view .content .image{float:right;margin:0 0 10px 10px;}.news-view .related{margin:2em 0;}.news-view .tags{background:#eee;margin:10px 0;padding:5px 10px;}.news-view .tags h3{font-size:13px;font-weight:solid;margin:0 10px 0 0;padding:0;display:inline;}.news-index .filter{background-color:#F3F2FF;padding:.5em 10px;margin-bottom:1em;font-weight:bold;}.news-index .filter .close{border:1px solid #09c;float:right;font-size:11px;font-family:Arial;padding:0 5px;padding-top:1px;background-color:#fff;*margin-top:-2em;*margin-right:5px;*padding-top:0;}.news-index .filter .close a:hover{color:#09c;}.news-index .counts{color:#555;margin:0 0 1em;}.extension-item{width:220px;float:left;margin:0 12px 12px 0;}.extension-index .pager{clear:both;}.extension-item .item{border:1px solid #ddd;padding:10px;min-height:180px;}.extension-item h3{line-height:110%;margin:0;font-size:17px;text-decoration:underline;color:#ABC5E4;}.extension-item h3 a.featured{padding-right:22px;}.ie .extension-item h3 a{text-decoration:underline;}.extension-item .info{font-size:.9em;color:#ccc;margin-top:.1em;margin-bottom:1.1em;}.extension-item .votes{color:#666;}.extension-item .cat{text-transform:uppercase;font-size:11px;color:#666;letter-spacing:1px;}.extension-item .downloads,.extension-item .comments{background-image:url(img/icons-13x13.png);background-repeat:no-repeat;padding-right:13px;display:inline-block;color:#999;font-size:12px;}.extension-item .downloads{margin-left:6px;background-position:100% -25px;}.extension-item .comments{background-position:100% 5px;}.extension-item .meta a{color:#8284CC;}.extension-item .meta a:hover{color:#9c0;}.extension-item .meta{font-size:.9em;margin-top:1em;color:#999;}.extension-view h1{margin-bottom:.25em;}.extension-view .content{margin:1em 0 0 0;}.extension-view .content h2{font-size:18px;margin:1em 0;}.extension-view .content h3,.extension-view .content h4{font-size:14px;margin:1em 0;}.extension-view .related{margin:2em 0;}.extension-view .tagline{font-style:italic;}.extension-index .counts{color:#555;margin:0 0 1em;}.extension-downloads .files .file{margin:0 0 1em;}.extension-portlets .action{margin-bottom:1em;}.extension-portlets{padding-bottom:2em;margin-top:1em;font-size:13px;margin-left:1em;}.extension-portlets .widget-search-box .keyword{width:120px;}.ie .extension-portlets .widget-search-box .g-button{padding-left:0;margin-left:-5px;}.extension-portlets .actions,.extension-portlets .widget-category-list,.extension-portlets .info,.extension-portlets .downloads{margin-top:1em;}.extension-portlets .info{border-top:1px solid #eee;padding-top:1em;border-bottom:1px solid #eee;padding-bottom:1em;color:#777;}.extension-portlets .downloads ul{margin:.5em 0;}.wiki-index,.wiki-view,.wiki-history,.wiki-create,.wiki-revision,.wiki-update{font-size:14px;}.wiki-portlets{padding-bottom:2em;margin-top:1em;font-size:13px;margin-left:1em;}.wiki-portlets .widget-search-box .keyword{width:120px;}.ie .wiki-portlets .widget-search-box .g-button{padding-left:0;margin-left:-5px;}.wiki-portlets .actions,.wiki-portlets .widget-category-list{margin-top:1em;}.wiki-portlets .action{margin-bottom:1em;}.wiki-portlets .info{margin-top:1em;border-top:1px solid #eee;padding-top:1em;border-bottom:1px solid #eee;padding-bottom:1em;color:#777;}.wiki-item{margin:0 0 20px 0;}.wiki-item .title{font-size:16px;margin:0;text-decoration:underline;color:#ABC5E4;}.wiki-item .title a.featured{padding-right:22px;}.wiki-item a{text-decoration:none;}.ie .wiki-item a{text-decoration:underline;}.wiki-item .info,.wiki-item .tags{color:#777;font-size:.9em;}.wiki-item .info a,.wiki-item .tags a{color:#8284CC;}.wiki-item .info a:hover,.wiki-item .tags a:hover{color:#9c0;}.wiki-index .view-all{text-align:center;}.wiki-index .view-all a{font-size:22px;font-weight:bold;padding-right:20px;}.wiki-view h1{color:#555;margin-bottom:.25em;}.wiki-view .meta{color:#999;}.wiki-view .meta .count{float:right;}.wiki-view .content{margin:1em 0 0 0;}.wiki-view .related{margin:2em 0;}.wiki-history table.history{background:#f6f6f6;border-collapse:collapse;width:100%;table-layout:fixed;font-size:.9em;}.wiki-history table.history .col-checkbox{width:30px;}.wiki-history table.history .col-author{width:100px;}.wiki-history table.history .col-time{width:135px;}.wiki-history table.history th,.wiki-history table.history td{border:1px #ddd solid;padding:.2em .5em;}.wiki-history table.history th{background:#eee;}.wiki-history table.history tr.current td{background:#fff;}.wiki-revision .revert{text-align:right;margin:1em 0;font-weight:bold;}.wiki-revision .entry{margin:0 0 1em;}.wiki-revision .label{font-weight:bold;}.wiki-revision .unchanged{color:green;float:right;}.wiki-revision .changed{color:red;float:right;}.wiki-revision .diff{padding:1em;background:#fcfcfc;border-top:1px solid #eee;border-bottom:1px solid #eee;overflow:auto;}.wiki-revision .diff pre{font-family:Menlo,Consolas,"Courier New",Courier,mono;font-size:10pt;}.wiki-revision .diff del{background:#fee;color:#c03;}.wiki-revision .diff ins{background:#dfd;color:#083;}.wiki-revision pre{padding:0;margin:0;}.wiki-form .entry.agree label,.wiki-form .entry.agree label.error{color:#333;display:inline;font-weight:normal;}.user-view h2{font-size:16px;margin:2em 0 1em 0;}.user-view .profile th{background:#eee;text-align:right;width:120px;}.user-view .profile th,.user-view .profile td{border:1px #ddd solid;padding:.2em .5em;}.user-view .profile td b{font-size:1.2em;}.user-view .forum-link{margin:0 0 1em 0;font-weight:bold;}.user-index .summary{margin:0 0 1em 0;}.user-index .members{width:100%;margin-bottom:0;}.user-index .members th{background:#eee;}.user-index .members th,.user-index .members td{border:1px #ddd solid;padding:.2em .5em;}.user-index .members td.number{text-align:right;}.user-index .members th a.asc{background:url(img/icons-13x13.png) no-repeat scroll 100% -144px transparent;padding-right:10px;}.user-index .members th a.desc{background:url(img/icons-13x13.png) no-repeat scroll 100% -112px transparent;padding-right:10px;}.user-halloffame .members{border:1px solid #eee;font-size:13px;border-bottom:none;}.user-halloffame .members h2{margin:0;padding:.3em 1em;font-size:13px;background:#f3f3f3;border-bottom:1px solid #eee;text-align:center;}.user-halloffame .members ul,.user-halloffame .members li{list-style:none;margin:0;padding:0;}.user-halloffame .members li{padding:.3em 1em;border-bottom:1px solid #eee;}.user-halloffame .members li span{float:right;color:green;}.user-halloffame .all-members{margin:2em 0 0 0;text-align:center;}.user-halloffame .all-members a{ font-size:22px;font-weight:bold;padding-right:20px;}.user-view .badge{border:1px solid #ccc;padding:10px;}.user-view .badge h3{font-size:16px;margin:0;}.user-view .badge .completed{float:right;margin-top:-2.3em;color:#666;}.user-view .badge p{margin:0;}.user-view .badge{margin-bottom:1em;}.user-view .badge .g-progress{color:#999;margin-top:10px;}.user-view .badge .g-progress .info{text-align:center;padding-top:5px;margin-bottom:-5px;}.badge-view h2{margin:0;}.badge-view h3{color:#999;font-weight:normal;text-transform:uppercase;letter-spacing:1px;}.badge-view .summary{display:none;}.badge-view .description{font-size:16px;}.badge-view .info{margin-bottom:1em;font-size:18px;}.badge-view .info .count{font-weight:bold;font-size:40px;color:#666;line-height:100%;}.badge-index .badge h3{font-size:16px;margin:0;}.badge-index .badge{margin-bottom:1em;}.badge-index .badge p{margin:0;}.badge-view .badge{margin:.5em 0;}.badge-index .g-progress .bar{height:60px;}.badge-index .g-progress .info{height:60px;margin-top:-60px;padding:7px;}.badge-index .g-progress .per{margin-top:-30px;}.badge-index .badge h3{letter-spacing:1px;}.badge-index .badge .count{color:#333;}.badge-index .badge .x{font-weight:normal;color:#777;display:inline-block;padding:0 5px 0 0;}.badge-index .badge,.badge-view .badge{background-image:url(img/badges.png);background-repeat:no-repeat;padding-left:65px;height:60px;}.badge-view .badge{padding-left:70px;}.badge-supporter{background-position:0 -325px;}.badge-greenhorn{background-position:0 -585px;}.badge-extension-smith{background-position:0 -260px;}.badge-regular{background-position:0 -195px;}.badge-editor{background-position:0 -65px;}.badge-critic{background-position:0 -455px;}.badge-mogul{background-position:0 -520px;}.badge-civic-duty{background-position:0 -130px;}.badge-commentator{background-position:0 -390px;}.btn{display:inline-block;*display:inline;padding:4px 10px 4px;margin-bottom:0;*margin-left:.3em;font-size:13px;line-height:18px;*line-height:20px;color:#333;text-align:center;text-shadow:0 1px 1px rgba(255,255,255,0.75);vertical-align:middle;cursor:pointer;background-color:#f5f5f5;*background-color:#e6e6e6;background-image:-ms-linear-gradient(top,#fff,#e6e6e6);background-image:-webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));background-image:-webkit-linear-gradient(top,#fff,#e6e6e6);background-image:-o-linear-gradient(top,#fff,#e6e6e6);background-image:linear-gradient(top,#fff,#e6e6e6);background-image:-moz-linear-gradient(top,#fff,#e6e6e6);background-repeat:repeat-x;border:1px solid #ccc;*border:0;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;filter:progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff',endColorstr='#e6e6e6',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);*zoom:1;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);}.btn:hover,.btn:active,.btn.active,.btn.disabled,.btn[disabled]{background-color:#e6e6e6;*background-color:#d9d9d9;}.btn:active,.btn.active{background-color:#ccc \9;}.btn:first-child{*margin-left:0;}.btn:hover{color:#333;text-decoration:none;background-color:#e6e6e6;*background-color:#d9d9d9;background-position:0 -15px;-webkit-transition:background-position .1s linear;-moz-transition:background-position .1s linear;-ms-transition:background-position .1s linear;-o-transition:background-position .1s linear;transition:background-position .1s linear;}.btn:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px;}.btn.active,.btn:active{background-color:#e6e6e6;background-color:#d9d9d9 \9;background-image:none;outline:0;-webkit-box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);}.btn.disabled,.btn[disabled]{cursor:default;background-color:#e6e6e6;background-image:none;opacity:.65;filter:alpha(opacity=65);-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;}.btn-large{padding:9px 14px;font-size:15px;line-height:normal;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}.btn-large [class^="icon-"]{margin-top:1px;}.btn-small{padding:5px 9px;font-size:11px;line-height:16px;}.btn-small [class^="icon-"]{margin-top:-1px;}.btn-mini{padding:2px 6px;font-size:11px;line-height:14px;}.btn-primary,.btn-primary:hover,.btn-warning,.btn-warning:hover,.btn-danger,.btn-danger:hover,.btn-success,.btn-success:hover,.btn-info,.btn-info:hover,.btn-inverse,.btn-inverse:hover{color:#fff;text-shadow:0 -1px 0 rgba(0,0,0,0.25);}.btn-primary.active,.btn-warning.active,.btn-danger.active,.btn-success.active,.btn-info.active,.btn-inverse.active{color:rgba(255,255,255,0.75);}.btn{border-color:#ccc;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);}.btn-primary{background-color:#0074cc;*background-color:#05c;background-image:-ms-linear-gradient(top,#08c,#05c);background-image:-webkit-gradient(linear,0 0,0 100%,from(#08c),to(#05c));background-image:-webkit-linear-gradient(top,#08c,#05c);background-image:-o-linear-gradient(top,#08c,#05c);background-image:-moz-linear-gradient(top,#08c,#05c);background-image:linear-gradient(top,#08c,#05c);background-repeat:repeat-x;border-color:#05c #0055cc #003580;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#0088cc',endColorstr='#0055cc',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-primary:hover,.btn-primary:active,.btn-primary.active,.btn-primary.disabled,.btn-primary[disabled]{background-color:#05c;*background-color:#004ab3;}.btn-primary:active,.btn-primary.active{background-color:#004099 \9;}.btn-warning{background-color:#faa732;*background-color:#f89406;background-image:-ms-linear-gradient(top,#fbb450,#f89406);background-image:-webkit-gradient(linear,0 0,0 100%,from(#fbb450),to(#f89406));background-image:-webkit-linear-gradient(top,#fbb450,#f89406);background-image:-o-linear-gradient(top,#fbb450,#f89406);background-image:-moz-linear-gradient(top,#fbb450,#f89406);background-image:linear-gradient(top,#fbb450,#f89406);background-repeat:repeat-x;border-color:#f89406 #f89406 #ad6704;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#fbb450',endColorstr='#f89406',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-warning:hover,.btn-warning:active,.btn-warning.active,.btn-warning.disabled,.btn-warning[disabled]{background-color:#f89406;*background-color:#df8505;}.btn-warning:active,.btn-warning.active{background-color:#c67605 \9;}.btn-danger{background-color:#da4f49;*background-color:#bd362f;background-image:-ms-linear-gradient(top,#ee5f5b,#bd362f);background-image:-webkit-gradient(linear,0 0,0 100%,from(#ee5f5b),to(#bd362f));background-image:-webkit-linear-gradient(top,#ee5f5b,#bd362f);background-image:-o-linear-gradient(top,#ee5f5b,#bd362f);background-image:-moz-linear-gradient(top,#ee5f5b,#bd362f);background-image:linear-gradient(top,#ee5f5b,#bd362f);background-repeat:repeat-x;border-color:#bd362f #bd362f #802420;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#ee5f5b',endColorstr='#bd362f',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-danger:hover,.btn-danger:active,.btn-danger.active,.btn-danger.disabled,.btn-danger[disabled]{background-color:#bd362f;*background-color:#a9302a;}.btn-danger:active,.btn-danger.active{background-color:#942a25 \9;}.btn-success{background-color:#5bb75b;*background-color:#51a351;background-image:-ms-linear-gradient(top,#62c462,#51a351);background-image:-webkit-gradient(linear,0 0,0 100%,from(#62c462),to(#51a351));background-image:-webkit-linear-gradient(top,#62c462,#51a351);background-image:-o-linear-gradient(top,#62c462,#51a351);background-image:-moz-linear-gradient(top,#62c462,#51a351);background-image:linear-gradient(top,#62c462,#51a351);background-repeat:repeat-x;border-color:#51a351 #51a351 #387038;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#62c462',endColorstr='#51a351',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-success:hover,.btn-success:active,.btn-success.active,.btn-success.disabled,.btn-success[disabled]{background-color:#51a351;*background-color:#499249;}.btn-success:active,.btn-success.active{background-color:#408140 \9;}.btn-info{background-color:#49afcd;*background-color:#2f96b4;background-image:-ms-linear-gradient(top,#5bc0de,#2f96b4);background-image:-webkit-gradient(linear,0 0,0 100%,from(#5bc0de),to(#2f96b4));background-image:-webkit-linear-gradient(top,#5bc0de,#2f96b4);background-image:-o-linear-gradient(top,#5bc0de,#2f96b4);background-image:-moz-linear-gradient(top,#5bc0de,#2f96b4);background-image:linear-gradient(top,#5bc0de,#2f96b4);background-repeat:repeat-x;border-color:#2f96b4 #2f96b4 #1f6377;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#5bc0de',endColorstr='#2f96b4',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-info:hover,.btn-info:active,.btn-info.active,.btn-info.disabled,.btn-info[disabled]{background-color:#2f96b4;*background-color:#2a85a0;}.btn-info:active,.btn-info.active{background-color:#24748c \9;}.btn-inverse{background-color:#414141;*background-color:#222;background-image:-ms-linear-gradient(top,#555,#222);background-image:-webkit-gradient(linear,0 0,0 100%,from(#555),to(#222));background-image:-webkit-linear-gradient(top,#555,#222);background-image:-o-linear-gradient(top,#555,#222);background-image:-moz-linear-gradient(top,#555,#222);background-image:linear-gradient(top,#555,#222);background-repeat:repeat-x;border-color:#222 #222222 #000;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);filter:progid:dximagetransform.microsoft.gradient(startColorstr='#555555',endColorstr='#222222',GradientType=0);filter:progid:dximagetransform.microsoft.gradient(enabled=false);}.btn-inverse:hover,.btn-inverse:active,.btn-inverse.active,.btn-inverse.disabled,.btn-inverse[disabled]{background-color:#222;*background-color:#151515;}.btn-inverse:active,.btn-inverse.active{background-color:#080808 \9;}button.btn,input[type="submit"].btn{*padding-top:2px;*padding-bottom:2px;}button.btn::-moz-focus-inner,input[type="submit"].btn::-moz-focus-inner{padding:0;border:0;}button.btn.btn-large,input[type="submit"].btn.btn-large{*padding-top:7px;*padding-bottom:7px;}button.btn.btn-small,input[type="submit"].btn.btn-small{*padding-top:3px;*padding-bottom:3px;}button.btn.btn-mini,input[type="submit"].btn.btn-mini{*padding-top:1px;*padding-bottom:1px;}a.btn,a.btn:hover{color:#fff;}
+                </style>
+                </head>
+
+                <body class="webkit safari chrome win" style="margin:0 auto;width:960px">
+                    <div class="toc" style="float:left;width:250px;position: fixed;margin-top: 60px;">
+                        <div class="ref level-3"><a href="#hh0">资源</a></div>
+                        <div class="ref level-2"><a href="#hh1">参考资料</a></div>
+                        <div class="ref level-2"><a href="#hh2">安装和配置</a></div>
+                        <div class="ref level-2"><a href="#hh3">从树中选择</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh4">获取所有的根</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh5">获取所有的后代节点</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh6">获取所有的子节点</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh7">获取所有的直系父节点</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh8">获取一个节点的父节点</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh9">获取同级节点的上一个或下一个</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh10">获取整棵树</a></div>
+                        <div class="ref level-2" ><a href="#hh11">修改一个树</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh12">创建根节点</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh13">添加子节点</a></div>
+                        <div class="ref level-2"><a href="#hh14">修改一个树</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh15">树的修改方法</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh16">使节点成为一个新的根</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh17">识别节点类型</a></div>
+                        <div class="ref level-2"><a href="#hh18">用户代码</a></div>
+                        <div class="ref level-3" style="padding-left:15px"><a href="#hh19">非递归遍历树</a></div>
+                        <div class="ref level-2"><a href="#hh20">版本记录</a></div>
+                        <div class="ref level-2"><a href="#hh21">1.05</a></div>
+                        <div class="ref level-2"><a href="#hh22">1.04</a></div>
+                        <div class="ref level-2"><a href="#hh23">1.03</a></div>
+                        <div class="ref level-2"><a href="#hh24">1.02</a></div>
+                        <div class="ref level-2"><a href="#hh25">1.01</a></div>
+                        <div class="ref level-2"><a href="#hh26">1.00</a></div>
+                        <div class="ref level-2"><a href="#hh27">0.99b</a></div>
+                        <div class="ref level-2"><a href="#hh28">0.99</a></div>
+                        <div class="ref level-2"><a href="#hh29">0.95</a></div>
+                        <div class="ref level-2"><a href="#hh30">0.90</a></div>
+                        <div class="ref level-2"><a href="#hh31">0.85</a></div></div>
+
+                    <div class="toc-2" style="float:right;width:710px">                                                   
+                        <div class="grid_9 alpha">
+                            <div class="layout-main-body">
+                                <div class="extension-view">
+                                    <h1>nestedsetbehavior  </h1>
+                                    <div class="tagline">The offline  doc revised by:poctsy,mail:poctsy@foxmail.com www.fircms.com</div>
+                                    <div class="tagline">Nested set behavior for AR models</div>
+
+                                    <div class="tagline"><a href="http://www.yiiframework.com/extension/nestedsetbehavior">Extension Nestedsetbehavior (external links)</div>
+                                    <div class="g-voter-reporter">
+                                    </div>
+                                    <div class="g-starring">
+                                    </div>
+                                    <div class="clear"></div>
+
+                                    <div class="content g-markdown">
+
+
+
+                                        <blockquote class="note">
+                                            <p><strong>Note:</strong> Latest release and documentation are available from <a href="http://yiiext.github.com/extensions/nested-set-behavior/index.html" title="">extension github page (external links)</a>.</p>
+                                        </blockquote>
+
+                                        <p>This extension allows managing trees stored in database as nested sets.
+                                            It's implemented as Active Record behavior.</p>
+
+                                        <p>Implemented by <a href="http://www.yiiframework.com/forum/index.php?/user/801-creocoder/">creocoder   (external links)</a>.</p>
+
+                                        <h3 id="hh0">Resources <a class="anchor" href="#hh0">¶</a></h3>
+
+                                        <ul><li><a href="https://github.com/yiiext/nested-set-behavior">GitHub    (external links)</a></li>
+                                            <li><a href="http://www.yiiframework.com/forum/index.php?/topic/9819-nested-set/">Join discussion    (external links)</a></li>
+                                            <li><a href="https://github.com/yiiext/nested-set-behavior/issues">Report a bug    (external links)</a></li>
+                                        </ul><h2 id="hh1">Documentation <a class="anchor" href="#hh1">¶</a></h2>
+
+                                        <h2 id="hh2">Installing and configuring <a class="anchor" href="#hh2">¶</a></h2>
+
+                                        <p>First you need to configure model as follows:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-reserved">public</span> <span class="hl-reserved">function</span> <span class="hl-identifier">behaviors</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span>
+<span class="hl-brackets">{</span>
+    <span class="hl-reserved">return</span> <span class="hl-reserved">array</span><span class="hl-brackets">(</span>
+        <span class="hl-quotes">'</span><span class="hl-string">NestedSetBehavior</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span>
+            <span class="hl-quotes">'</span><span class="hl-string">class</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">ext.yiiext.behaviors.trees.NestedSetBehavior</span><span class="hl-quotes">'</span><span class="hl-code">,
+            </span><span class="hl-quotes">'</span><span class="hl-string">leftAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">lft</span><span class="hl-quotes">'</span><span class="hl-code">,
+            </span><span class="hl-quotes">'</span><span class="hl-string">rightAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">rgt</span><span class="hl-quotes">'</span><span class="hl-code">,
+            </span><span class="hl-quotes">'</span><span class="hl-string">levelAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">level</span><span class="hl-quotes">'</span><span class="hl-code">,
+    </span><span class="hl-brackets">)</span><span class="hl-code">;
+}</span></pre></div></div>
+
+                                        <p>There is no need to validate fields specified in <code>leftAttribute</code>,
+                                            <code>rightAttribute</code>, <code>rootAttribute</code> and <code>levelAttribute</code> options. Moreover,
+                                            there could be problems if there are validation rules for these. Please
+                                            check if there are no rules for fields mentioned in model's rules() method.</p>
+
+                                        <p>In case of storing a single tree per database, DB structure can be built with
+                                            <code>extensions/yiiext/behaviors/trees/schema.sql</code>. If you're going to store multiple
+                                            trees you'll need <code>extensions/yiiext/behaviors/trees/schema_many_roots.sql</code>.</p>
+
+                                        <p>By default <code>leftAttribute</code>, <code>rightAttribute</code> and <code>levelAttribute</code> values are
+                                            matching filed names in default DB schemas so you can skip configuring these.</p>
+
+                                        <p>There are two ways this behavior can work: one tree per table and multiple trees
+                                            per table. The mode is selected based on the value of <code>hasManyRoots</code> option that
+                                            is <code>false</code> by default meaning single tree mode. In multiple trees mode you can
+                                            set <code>rootAttribute</code> option to match existing filed in the table storing the tree.</p>
+
+                                        <h2 id="hh3">Selecting from a tree <a class="anchor" href="#hh3">¶</a></h2>
+
+                                        <p>In the following we'll use an example model <code>Category</code> with the following in its
+                                            DB:</p>
+
+                                        <pre>- 1. Mobile phones
+    - 2. iPhone
+    - 3. Samsung
+        - 4. X100
+        - 5. C200
+        - 6. Motorola
+- 7. Cars
+    - 8. Audi
+    - 9. Ford
+    - 10. Mercedes
+                                        </pre>
+
+                                        <p>In this example we have two trees. Tree roots are ones with ID=1 and ID=7.</p>
+
+                                        <h3 id="hh4">Getting all roots <a class="anchor" href="#hh4">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::roots()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$roots</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">roots</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to Mobile phones and Cars nodes.</p>
+
+                                        <h3 id="hh5">Getting all descendants of a node <a class="anchor" href="#hh5">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::descendants()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$descendants</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">descendants</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to iPhone, Samsung, X100, C200 and Motorola.</p>
+
+                                        <h3 id="hh6">Getting all children of a node <a class="anchor" href="./index_files/index.htm">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::children()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$descendants</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">children</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to iPhone, Samsung and Motorola.</p>
+
+                                        <h3 id="hh7">Getting all ancestors of a node <a class="anchor" href="#hh7">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::ancestors()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">5</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$descendants</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">ancestors</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to Samsung and Mobile phones.</p>
+
+                                        <h3 id="hh8">Getting parent of a node <a class="anchor" href="#hh8">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::getParent()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">9</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$parent</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">parent</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to Cars.</p>
+
+                                        <h3 id="hh9">Getting node siblings <a class="anchor" href="#hh9">¶</a></h3>
+
+                                        <p>Using <code>NestedSetBehavior::getPrevSibling()</code> or
+                                            <code>NestedSetBehavior::getNextSibling()</code>:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">9</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$nextSibling</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">nextSibling</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <p>Array of Active Record objects corresponding to Mercedes.</p>
+
+                                        <h3 id="hh10">Getting the whole tree <a class="anchor" href="#hh10">¶</a></h3>
+
+                                        <p>You can get the whole tree using standard AR methods like the following.</p>
+
+                                        <p>For single tree per table:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">order</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">lft</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>For multiple trees per table:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findAll</span><span class="hl-brackets">(</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">condition</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">root_id=?</span><span class="hl-quotes">'</span><span class="hl-code">,</span><span class="hl-quotes">'</span><span class="hl-string">order</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">lft</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">,</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-var">$root_id</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <h2 id="hh11">Modifying a tree <a class="anchor" href="#hh11">¶</a></h2>
+
+                                        <p>In this section we'll build a tree like the one used in the previous section.</p>
+
+                                        <h3 id="hh12">Creating root nodes <a class="anchor" href="#hh12">¶</a></h3>
+
+                                        <p>You can create a root node using <code>NestedSetBehavior::saveNode()</code>.
+                                            In a single tree per table mode you can create only one root node. If you'll attempt
+                                            to create more there will be CException thrown.</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$root</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Root</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Mobile Phones</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">saveNode</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Root</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Cars</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">saveNode</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <pre>- 1. Mobile Phones
+- 2. Cars
+                                        </pre>
+
+                                        <h3 id="hh13">Adding child nodes <a class="anchor" href="#hh13">¶</a></h3>
+
+                                        <p>There are multiple methods allowing you adding child nodes. To get more info
+                                            about these refer to API. Let's use these
+                                            to add nodes to the tree we have:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category1</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Ford</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Mercedes</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Audi</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">appendTo</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">insertAfter</span><span class="hl-brackets">(</span><span class="hl-var">$category1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">-&gt;</span><span class="hl-identifier">insertBefore</span><span class="hl-brackets">(</span><span class="hl-var">$category1</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <pre>- 1. Mobile phones
+    - 3. Audi
+    - 4. Ford
+    - 5. Mercedes
+- 2. Cars
+                                        </pre>
+
+                                        <p>Logically the tree above doesn't looks correct. We'll fix it later.</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category1</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Samsung</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">Motorola</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">iPhone</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$root</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">2</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">appendTo</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">insertAfter</span><span class="hl-brackets">(</span><span class="hl-var">$category1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category3</span><span class="hl-code">-&gt;</span><span class="hl-identifier">prependTo</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <pre>- 1. Mobile phones
+    - 3. Audi
+    - 4. Ford
+    - 5. Mercedes
+- 2. Cars
+    - 6. iPhone
+    - 7. Samsung
+    - 8. Motorola
+                                        </pre>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$category1</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">X100</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">=</span><span class="hl-reserved">new</span> <span class="hl-identifier">Category</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">C200</span><span class="hl-quotes">'</span><span class="hl-code">;
+</span><span class="hl-var">$node</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">3</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category1</span><span class="hl-code">-&gt;</span><span class="hl-identifier">appendTo</span><span class="hl-brackets">(</span><span class="hl-var">$node</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$category2</span><span class="hl-code">-&gt;</span><span class="hl-identifier">prependTo</span><span class="hl-brackets">(</span><span class="hl-var">$node</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <pre>- 1. Mobile phones
+    - 3. Audi
+        - 9. С200
+        - 10. X100
+    - 4. Ford
+    - 5. Mercedes
+- 2. Cars
+    - 6. iPhone
+    - 7. Samsung
+    - 8. Motorola
+                                        </pre>
+
+                                        <h2 id="hh14">Modifying a tree <a class="anchor" href="#hh14">¶</a></h2>
+
+                                        <p>In this section we'll finally make our tree logical.</p>
+
+                                        <h3 id="hh15">Tree modification methods <a class="anchor" href="#hh15">¶</a></h3>
+
+                                        <p>There are several methods allowing you to modify a tree. To get more info
+                                            about these refer to API.</p>
+
+                                        <p>Let's start:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-comment">//</span><span class="hl-comment"> move phones to the proper place</span>
+<span class="hl-var">$x100</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">10</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$c200</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">9</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$samsung</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">7</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$x100</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAsFirst</span><span class="hl-brackets">(</span><span class="hl-var">$samsung</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$c200</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveBefore</span><span class="hl-brackets">(</span><span class="hl-var">$x100</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> now move all Samsung phones branch</span>
+<span class="hl-var">$mobile_phones</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$samsung</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAsFirst</span><span class="hl-brackets">(</span><span class="hl-var">$mobile_phones</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> move the rest of phone models</span>
+<span class="hl-var">$iphone</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">6</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$iphone</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAsFirst</span><span class="hl-brackets">(</span><span class="hl-var">$mobile_phones</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$motorola</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">8</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$motorola</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAfter</span><span class="hl-brackets">(</span><span class="hl-var">$samsung</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> move car models to appropriate place</span>
+<span class="hl-var">$cars</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">2</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$audi</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">3</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$ford</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">4</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$mercedes</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">5</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+</span><span class="hl-reserved">foreach</span><span class="hl-brackets">(</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span><span class="hl-var">$audi</span><span class="hl-code">,</span><span class="hl-var">$ford</span><span class="hl-code">,</span><span class="hl-var">$mercedes</span><span class="hl-brackets">)</span> <span class="hl-reserved">as</span> <span class="hl-var">$category</span><span class="hl-brackets">)</span>
+    <span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAsLast</span><span class="hl-brackets">(</span><span class="hl-var">$cars</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <p>Result:</p>
+
+                                        <pre>- 1. Mobile phones
+    - 6. iPhone
+    - 7. Samsung
+        - 10. X100
+        - 9. С200
+    - 8. Motorola
+- 2. Cars
+    - 3. Audi
+    - 4. Ford
+    - 5. Mercedes
+                                        </pre>
+
+                                        <h3 id="hh16">Moving a node making it a new root <a class="anchor" href="#hh16">¶</a></h3>
+
+                                        <p>There is a special <code>moveAsRoot()</code> method that allows moving a node and making it
+                                            a new root. All descendants are moved as well in this case.</p>
+
+                                        <p>Example:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$node</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">10</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-var">$node</span><span class="hl-code">-&gt;</span><span class="hl-identifier">moveAsRoot</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                        <h3 id="hh17">Identifying node type <a class="anchor" href="#hh17">¶</a></h3>
+
+                                        <p>There are three methods to get node type: <code>isRoot()</code>, <code>isLeaf()</code>, <code>isDescendantOf()</code>.</p>
+
+                                        <p>Example:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$root</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isRoot</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">true;</span>
+<span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isLeaf</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">false;</span>
+<span class="hl-var">$node</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">9</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$node</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isDescendantOf</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">true;</span>
+<span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$node</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isRoot</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">false;</span>
+<span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isLeaf</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">true;</span>
+<span class="hl-var">$samsung</span><span class="hl-code">=</span><span class="hl-identifier">Category</span><span class="hl-code">::</span><span class="hl-identifier">model</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">findByPk</span><span class="hl-brackets">(</span><span class="hl-number">7</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">CVarDumper</span><span class="hl-code">::</span><span class="hl-identifier">dump</span><span class="hl-brackets">(</span><span class="hl-var">$node</span><span class="hl-code">-&gt;</span><span class="hl-identifier">isDescendantOf</span><span class="hl-brackets">(</span><span class="hl-var">$samsung</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment">true;</span></pre></div></div>
+
+                                        <h2 id="hh18">Useful code <a class="anchor" href="#hh18">¶</a></h2>
+
+                                        <h3 id="hh19">Non-recursive tree traversal <a class="anchor" href="#hh19">¶</a></h3>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$level</span><span class="hl-code">=</span><span class="hl-number">0</span><span class="hl-code">;
+ 
+</span><span class="hl-reserved">foreach</span><span class="hl-brackets">(</span><span class="hl-var">$categories</span> <span class="hl-reserved">as</span> <span class="hl-var">$n</span><span class="hl-code">=&gt;</span><span class="hl-var">$category</span><span class="hl-brackets">)</span>
+<span class="hl-brackets">{</span>
+    <span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">level</span><span class="hl-code">==</span><span class="hl-var">$level</span><span class="hl-brackets">)</span>
+        <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">li</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+    </span><span class="hl-reserved">else</span> <span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">level</span><span class="hl-code">&gt;</span><span class="hl-var">$level</span><span class="hl-brackets">)</span>
+        <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">openTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ul</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+    </span><span class="hl-reserved">else</span>
+    <span class="hl-brackets">{</span>
+        <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">li</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+ 
+        </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-var">$i</span><span class="hl-code">=</span><span class="hl-var">$level</span><span class="hl-code">-</span><span class="hl-var">$model</span><span class="hl-code">-&gt;</span><span class="hl-identifier">level</span><span class="hl-code">;</span><span class="hl-var">$i</span><span class="hl-code">;</span><span class="hl-var">$i</span><span class="hl-code">--</span><span class="hl-brackets">)</span>
+        <span class="hl-brackets">{</span>
+            <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ul</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+            </span><span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">li</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span>
+    <span class="hl-brackets">}</span>
+ 
+    <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">openTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">li</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">encode</span><span class="hl-brackets">(</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">title</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-var">$level</span><span class="hl-code">=</span><span class="hl-var">$category</span><span class="hl-code">-&gt;</span><span class="hl-identifier">level</span><span class="hl-code">;
+</span><span class="hl-brackets">}</span>
+ 
+<span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-var">$i</span><span class="hl-code">=</span><span class="hl-var">$level</span><span class="hl-code">;</span><span class="hl-var">$i</span><span class="hl-code">;</span><span class="hl-var">$i</span><span class="hl-code">--</span><span class="hl-brackets">)</span>
+<span class="hl-brackets">{</span>
+    <span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">li</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+    </span><span class="hl-reserved">echo</span> <span class="hl-identifier">CHtml</span><span class="hl-code">::</span><span class="hl-identifier">closeTag</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">ul</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">.</span><span class="hl-quotes">"</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-code">;
+</span><span class="hl-brackets">}</span></pre></div></div>
+
+                                        <h2 id="hh20">Change Log <a class="anchor" href="#hh20">¶</a></h2>
+
+                                        <h2 id="hh21">1.05 <a class="anchor" href="#hh21">¶</a></h2>
+
+                                        <ul><li>External transaction support for NestedSetBehavior::delete() method (creocoder)</li>
+                                        </ul><h2 id="hh22">1.04 <a class="anchor" href="#hh22">¶</a></h2>
+
+                                        <ul><li>Fix for $depth parameter of NestedSetBehavior::ancestors() method (creocoder)</li>
+                                        </ul><h2 id="hh23">1.03 <a class="anchor" href="#hh23">¶</a></h2>
+
+                                        <ul><li>Class renamed to NestedSetBehavior (creocoder)</li>
+                                            <li>Rare bug with cache correction after NestedSetBehavior::addNode() fixed (creocoder)</li>
+                                            <li>Readmes non-recursive tree traversal algorithm fix (creocoder)</li>
+                                        </ul><h2 id="hh24">1.02 <a class="anchor" href="#hh24">¶</a></h2>
+
+                                        <ul><li>Added moveAsRoot() method (creocoder)</li>
+                                            <li>Updated readmes (Sam Dark)</li>
+                                        </ul><h2 id="hh25">1.01 <a class="anchor" href="#hh25">¶</a></h2>
+
+                                        <ul><li>Added not integer pk support (creocoder)</li>
+                                            <li>Remove <code>final</code> from class (creocoder)</li>
+                                        </ul><h2 id="hh26">1.00 <a class="anchor" href="#hh26">¶</a></h2>
+
+                                        <ul><li>Some behavior refactoring before release (creocoder)</li>
+                                            <li>Advanced doc added (creocoder)</li>
+                                        </ul><h2 id="hh27">0.99b <a class="anchor" href="#hh27">¶</a></h2>
+
+                                        <ul><li>Allow to use multiply change tree operations (creocoder)</li>
+                                            <li>Method saveNode() now create root in "single root mode" (creocoder)</li>
+                                            <li>Unit tests refactored (creocoder)</li>
+                                            <li>Some behavior refactoring (creocoder)</li>
+                                        </ul><h2 id="hh28">0.99 <a class="anchor" href="#hh28">¶</a></h2>
+
+                                        <ul><li>Added note about removing fields from <code>rules</code> (Sam Dark)</li>
+                                            <li>Added Unit tests for single root mode (creocoder)</li>
+                                            <li>All attributes are now correctly quoted (creocoder)</li>
+                                            <li>Renamed fields: 'root'=&gt;'rootAttribute', 'left'=&gt;'leftAttribute', 'right'=&gt;'rightAttribute',
+                                                'level'=&gt;'levelAttribute' (creocoder)</li>
+                                            <li>Renamed method parent() =&gt; getParent() (creocoder)</li>
+                                        </ul><h2 id="hh29">0.95 <a class="anchor" href="#hh29">¶</a></h2>
+
+                                        <ul><li>Unit tests added (creocoder)</li>
+                                            <li>Incorrect usage of save() and delete() instead of behavior's saveNode() and deleteNode() is now detected (creocoder)</li>
+                                        </ul><h2 id="hh30">0.90 <a class="anchor" href="#hh30">¶</a></h2>
+
+                                        <ul><li>Moving a node to a different root is now supported (creocoder)</li>
+                                        </ul><h2 id="hh31">0.85 <a class="anchor" href="#hh31">¶</a></h2>
+
+                                        <ul><li>Initial public release (creocoder)</li>
+                                        </ul>	</div>
+                                </div><div class="widget-comment-list" id="comments">
+                                    <div class="comments">
+                                        <h3>Total 20 comments</h3>
+                                        <div class="comment alt-0">
+                                            <a class="cid" id="c11023" title="permalink to this comment" href="#c11023">#11023</a>
+
+                                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/84494/">datevid (external links)</a> at 2012/12/10 10:25pm</div>
+                                        <div class="title">La documentacion está muy pobre</div>
+                                        <div class="content"><p>debido a que no tenemos demasiada informacion aqui, es necesario ver el código directamente, pues es el lugar donde mencionan los parametros adicionales al momento de crear nodos sin realizar la validación.
+                                                <a href="http://www.yiiframework.com/forum/index.php/topic/9819-nested-set/page__st__20__p__83855__hl__ne+ted+etbehavior" title="Enlace">here (external links)</a></p>
+
+                                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$root</span><span class="hl-code"> = </span><span class="hl-reserved">new</span> <span class="hl-identifier">Menu</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-comment">//</span><span class="hl-comment"> $rolft = 1;</span>
+<span class="hl-comment">//</span><span class="hl-comment"> $root-&gt;rgt = 2;</span>
+<span class="hl-comment">//</span><span class="hl-comment"> $root-&gt;level = 1;</span>
+<span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">text</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">root</span><span class="hl-quotes">'</span><span class="hl-code">;
+ 
+</span><span class="hl-var">$root</span><span class="hl-code">-&gt;</span><span class="hl-identifier">saveNode</span><span class="hl-brackets">(</span> <span class="hl-reserved">false</span> <span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                                            <p>and</p>
+
+                                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$help</span><span class="hl-code"> = </span><span class="hl-reserved">new</span> <span class="hl-identifier">Menu</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-var">$help</span><span class="hl-code">-&gt;</span><span class="hl-identifier">text</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">Help</span><span class="hl-quotes">'</span><span class="hl-code">;
+    </span><span class="hl-var">$help</span><span class="hl-code">-&gt;</span><span class="hl-identifier">enabled</span><span class="hl-code"> = </span><span class="hl-reserved">true</span><span class="hl-code">;
+    </span><span class="hl-var">$appended</span><span class="hl-code"> = </span><span class="hl-var">$help</span><span class="hl-code">-&gt;</span><span class="hl-identifier">appendTo</span><span class="hl-brackets">(</span> <span class="hl-var">$root</span><span class="hl-code">, </span><span class="hl-reserved">false</span> <span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+                                        </div>
+                                    </div>
+                                    <div class="comment alt-1">
+                                        <a class="cid" id="c10514" title="permalink to this comment" href="#c10514">#10514</a>
+
+                                        <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/87222/">__construct()</a> at 2012/11/01 01:33pm</div>
+                                    <div class="title">Wrong data structure visualization in this example</div>
+                                    <div class="content"><p>Just look closer to the "Selecting from tree" section and "<a href="#hh6">Getting all children of a node</a>" example.</p>
+
+                                        <p>Example data structure:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-code">- </span><span class="hl-number">2</span><span class="hl-code">. </span><span class="hl-identifier">iPhone</span><span class="hl-code">
+    - </span><span class="hl-number">3</span><span class="hl-code">. </span><span class="hl-identifier">Samsung</span><span class="hl-code">
+        - </span><span class="hl-number">4</span><span class="hl-code">. </span><span class="hl-identifier">X100</span><span class="hl-code">
+        - </span><span class="hl-number">5</span><span class="hl-code">. </span><span class="hl-identifier">C200</span><span class="hl-code">
+        - </span><span class="hl-number">6</span><span class="hl-code">. </span><span class="hl-identifier">Motorola</span></pre></div></div>
+
+                                        <p>but CORRECT example data structure shoud be:</p>
+
+                                        <div class="hl-code"><div class="hl-main"><pre><span class="hl-code">- </span><span class="hl-number">2</span><span class="hl-code">. </span><span class="hl-identifier">iPhone</span><span class="hl-code">
+    - </span><span class="hl-number">3</span><span class="hl-code">. </span><span class="hl-identifier">Samsung</span><span class="hl-code">
+        - </span><span class="hl-number">4</span><span class="hl-code">. </span><span class="hl-identifier">X100</span><span class="hl-code">
+        - </span><span class="hl-number">5</span><span class="hl-code">. </span><span class="hl-identifier">C200</span><span class="hl-code">
+    - </span><span class="hl-number">6</span><span class="hl-code">. </span><span class="hl-identifier">Motorola</span></pre></div></div>
+
+                                        <p>Please fix the extension description and the readme file on github.</p>
+
+                                        <p>BTW - this is a great extension anyway - thank you!</p>
+                                    </div>
+                                </div>
+                                <div class="comment alt-0">
+                                    <a class="cid" id="c9884" title="permalink to this comment" href="#c9884">#9884</a>
+
+                                    <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/6495/">CNGOD(external links)</a> at 2012/09/19 04:18am</div>
+                                <div class="title">Recursive traversal how to do?</div>
+                                <div class="content"><p>Can you give a recursive traversal of useful code?</p>
+                                </div>
+                            </div>
+                            <div class="comment alt-1">
+                                <a class="cid" id="c9620" title="permalink to this comment" href="#c9620">#9620</a>
+
+                                <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/58027/">julianm(external links)</a> at 2012/08/29 12:34pm</div>
+                            <div class="title">JOIN with Categories</div>
+                            <div class="content"><p>Great extension. I got it work! But I have a question:</p>
+
+                                <p>If I have a tbl_presentation and categories extension configured for these presentations. How can I get all the the categories (roots for example) for those presentations that have certain condition? (ie: tbl_presentation.status = 'active') ?</p>
+                            </div>
+                        </div>
+                        <div class="comment alt-0">
+                            <a class="cid" id="c8995" title="permalink to this comment" href="#c8995">#8995</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/5951/">CeBe(external links)</a> at 2012/07/11 07:35pm</div>
+                        <div class="title">github page is fixed</div>
+                        <div class="content"><p>@andrew1 just fixed the error.</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c8994" title="permalink to this comment" href="#c8994">#8994</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/71957/">andrew1(external links)</a> at 2012/07/11 06:44pm</div>
+                        <div class="title">Can't access on github</div>
+                        <div class="content"><p>Would love to be able to use this extension but can't access it on the link provided to github.</p>
+
+                            <p>Getting Fatal error: Cannot use object of type stdClass as array in /var/lib/jenkins/workspace/yiiext.github.com/app/components/YiiextGithubApi.php on line 72</p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c7747" title="permalink to this comment" href="#c7747">#7747</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/19435/">Cstdenis(external links)</a> at 2012/04/14 06:22am</div>
+                        <div class="title">Looks useful</div>
+                        <div class="content"><p>Could benefit from using of Postgresql's ltree data type where available:
+                                http://www.postgresql.org/docs/9.1/static/ltree.html</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c7641" title="permalink to this comment" href="#c7641">#7641</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/607/">br0sk(external links)</a> at 2012/04/04 07:26am</div>
+                        <div class="title">Memory problem when using a large number of models instances</div>
+                        <div class="content"><p><strong>The Problem</strong></p>
+
+                            <p>I have noticed a bit of a problem with it if you use it for exports or similar tasks where you are traversing through the whole database getting data and pushing it out to a file.</p>
+
+                            <p>The extension has an internal cache stored in a static variable. This can be disastrous since this means that the memory of the model you just used will be stored in memory and because of that is not released when you loop through to the next element.</p>
+
+                            <p>I was traversing through about 100000 items and after adding a call to a model that uses the nested set behaviour my export script started running out of memory.</p>
+
+                            <p>I am using a call like this in a loop:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$ancestor</span><span class="hl-code"> = </span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">ancestors</span><span class="hl-brackets">(</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">find</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                            <p>If you look in the afterFind Method in the nested set behaviour it does this:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$owner</span><span class="hl-code">=</span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">getOwner</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">self</span><span class="hl-code">::</span><span class="hl-var">$_cached</span><span class="hl-brackets">[</span><span class="hl-identifier">get_class</span><span class="hl-brackets">(</span><span class="hl-var">$owner</span><span class="hl-brackets">)</span><span class="hl-brackets">]</span><span class="hl-brackets">[</span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">_id</span><span class="hl-code">=</span><span class="hl-identifier">self</span><span class="hl-code">::</span><span class="hl-var">$_c</span><span class="hl-code">++</span><span class="hl-brackets">]</span><span class="hl-code">=</span><span class="hl-var">$owner</span><span class="hl-code">;</span></pre></div></div>
+
+                            <p>This stores the object in a static array. Quite quickly this will fill the memory up. This problem is probably only ever going to show up in the rare event of you traversing through a large number of nodes and I can see that this is the wanted behaviour in most cases.</p>
+
+                            <p><strong>The Solution</strong></p>
+
+                            <p>Make sure to destruct the model manually after you have used it.
+                                Like so:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-var">$ancestor</span><span class="hl-code">-&gt;</span><span class="hl-identifier">__destruct</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                            <p>The nested set behaviour has a destructor that removes the object from the static cache.</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-reserved">unset</span><span class="hl-brackets">(</span><span class="hl-identifier">self</span><span class="hl-code">::</span><span class="hl-var">$_cached</span><span class="hl-brackets">[</span><span class="hl-identifier">get_class</span><span class="hl-brackets">(</span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">getOwner</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">]</span><span class="hl-brackets">[</span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">_id</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code">;</span></pre></div></div>
+
+                            <p><strong>Suggestion</strong></p>
+
+                            <p>Add possibility to turn caching off in the behaviour.</p>
+
+                            <p>Something like:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-reserved">public</span> <span class="hl-reserved">function</span> <span class="hl-identifier">behaviors</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span>
+    <span class="hl-brackets">{</span>
+      <span class="hl-reserved">return</span> <span class="hl-reserved">array</span><span class="hl-brackets">(</span>
+            <span class="hl-quotes">'</span><span class="hl-string">NestedSetBehavior</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-reserved">array</span><span class="hl-brackets">(</span>
+                <span class="hl-quotes">'</span><span class="hl-string">class</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">application.components.behaviors.trees.NestedSetBehavior</span><span class="hl-quotes">'</span><span class="hl-code">,
+                </span><span class="hl-quotes">'</span><span class="hl-string">leftAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">left</span><span class="hl-quotes">'</span><span class="hl-code">,
+                </span><span class="hl-quotes">'</span><span class="hl-string">rightAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">right</span><span class="hl-quotes">'</span><span class="hl-code">,
+                </span><span class="hl-quotes">'</span><span class="hl-string">levelAttribute</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-quotes">'</span><span class="hl-string">level</span><span class="hl-quotes">'</span><span class="hl-code">,
+                </span><span class="hl-quotes">'</span><span class="hl-string">hasManyRoots</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-reserved">true</span><span class="hl-code">,
+                </span><span class="hl-quotes">'</span><span class="hl-string">cache</span><span class="hl-quotes">'</span><span class="hl-code">=&gt;</span><span class="hl-reserved">false</span>
+        <span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span></pre></div></div>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c6778" title="permalink to this comment" href="#c6778">#6778</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/58957/">McSilvio (external links)</a> at 2012/02/04 06:12pm</div>
+                        <div class="title">Multiple Users</div>
+                        <div class="content"><p>Hi there,
+                                I'd like to attach a user_id field to this table and have 1 tree per user. Do you think this plugin will work in this way?</p>
+
+                            <p>Thanks for the great work,
+                                Marco.</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c6701" title="permalink to this comment" href="#c6701">#6701</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/2865/">naser(external links)</a> at 2012/01/30 06:38am</div>
+                        <div class="title">use it with CMenu</div>
+                        <div class="content"><p>hi, thanks for your great job
+                                is there a best solution to use it with CMenu?</p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c5491" title="permalink to this comment" href="#c5491">#5491</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link silver" href="http://www.yiiframework.com/user/9285/">yiqing95(external links)</a> at 2011/10/16 12:54am</div>
+                        <div class="title">pagination with  nestedset</div>
+                        <div class="content"><p>when  a top level root  has  too many  children ,  if  want to use the pagination .
+                                how to  ?   i  noticed this method : 
+                                public function descendants($depth=null, $self = false)</p>
+
+                            <p>too many children means  the tree may be too deep or too wide . both situation need consider how to apply pagination ,  any idea ?</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c5003" title="permalink to this comment" href="#c5003">#5003</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link bronze" href="http://www.yiiframework.com/user/7096/">drumaddict (external links)</a> at 2011/09/05 08:26am</div>
+                        <div class="title">Nested Set Behavior Administration GUI with jsTree</div>
+                        <div class="content"><p>Hi,I have just uploaded an extension for Nested Set Behavior Administration with jsTree plugin.This is the Link:
+                                <a href="http://www.yiiframework.com/extension/nestedsetadmingui" title="">Nested Set Behavior Administration GUI with jsTree (external links)</a></p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c4978" title="permalink to this comment" href="#c4978">#4978</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/510/">Spear(external links)</a> at 2011/09/02 06:01pm</div>
+                        <div class="title">How to build a CTreeView</div>
+                        <div class="content"><p>A very useful extension, thank you so much for sharing! 
+                                Could you please help me get this clear — how exactly can I display the whole tree via CTreeView widget? What is the right way to get the whole tree, when three has many roots?</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c4678" title="permalink to this comment" href="#c4678">#4678</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link silver" href="http://www.yiiframework.com/user/9285/">yiqing95(external links)</a> at 2011/08/03 02:18pm</div>
+                        <div class="title">glad to see the example about how to use this fantastic  extension.</div>
+                        <div class="content"><p>the usage example is very helpful , also  we can check it out from svn  , in the unit test directory one can find more usage!</p>
+
+                            <p>how about  developing an extension that bridge the nestedset model and the adjacency model , we can translate one model easily to another .  there are some code pieces in the  internet converting the nestedset to adjacency model . you need create both table and config  the mapping for two table fields( because some table may be exist earlier  and may have different field name ) ,often  converting  take place in midnight ,it will cost a lot of time .</p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c4546" title="permalink to this comment" href="#c4546">#4546</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/31021/">Mohit(external links) </a> at 2011/07/19 09:28am</div>
+                        <div class="title">jqGrid Tree with Nested Sets using multiple roots</div>
+                        <div class="content"><p>I just implemented jqGrid Tree view using Nested Sets with multiple nodes. It took me sometime to work out the logic, so i thought i could share my code, if some other beginner like me needs to check.</p>
+
+                            <p>Using Nested Sets in multiple roots mode requires the use of the 'adjacency' jqGrid tree Model. Atleast that is what i understand.</p>
+
+                            <p>The view file details:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-inlinetags">&lt;?php</span>
+<span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerCoreScript</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">jquery.ui</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerCssFile</span><span class="hl-brackets">(</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">baseUrl</span><span class="hl-code"> . </span><span class="hl-quotes">'</span><span class="hl-string">/css/ui-lightness/jquery-ui-1.8.13.custom.css</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerCssFile</span><span class="hl-brackets">(</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">baseUrl</span><span class="hl-code"> . </span><span class="hl-quotes">'</span><span class="hl-string">/css/ui.jqgrid.css</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerScriptFile</span><span class="hl-brackets">(</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">baseUrl</span><span class="hl-code"> . </span><span class="hl-quotes">'</span><span class="hl-string">/js/jqGrid/i18n/grid.locale-en.js</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-identifier">CClientScript</span><span class="hl-code">::</span><span class="hl-identifier">POS_HEAD</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerScriptFile</span><span class="hl-brackets">(</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">baseUrl</span><span class="hl-code"> . </span><span class="hl-quotes">'</span><span class="hl-string">/js/jqGrid/jquery.jqGrid.min.js</span><span class="hl-quotes">'</span><span class="hl-code">, </span><span class="hl-identifier">CClientScript</span><span class="hl-code">::</span><span class="hl-identifier">POS_HEAD</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-inlinetags">?&gt;</span><span class="hl-code">
+&lt;</span><span class="hl-identifier">table</span> <span class="hl-identifier">id</span><span class="hl-code">=</span><span class="hl-quotes">"</span><span class="hl-string">list</span><span class="hl-quotes">"</span><span class="hl-code">&gt;&lt;/</span><span class="hl-identifier">table</span><span class="hl-code">&gt; 
+&lt;</span><span class="hl-identifier">div</span> <span class="hl-identifier">id</span><span class="hl-code">=</span><span class="hl-quotes">"</span><span class="hl-string">pager</span><span class="hl-quotes">"</span><span class="hl-code">&gt;&lt;/</span><span class="hl-identifier">div</span><span class="hl-code">&gt; 
+&lt;?</span><span class="hl-identifier">php</span>
+<span class="hl-var">$script</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">
+    jQuery("#list").jqGrid(
+    {
+        treeGrid: true,
+        treeGridModel: "adjacency",
+        ExpandColumn: "name",
+        rowNum: -1,
+        url: "</span><span class="hl-quotes">'</span><span class="hl-code"> . </span><span class="hl-var">$this</span><span class="hl-code">-&gt;</span><span class="hl-identifier">createUrl</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">fetchTree</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code"> . </span><span class="hl-quotes">'</span><span class="hl-string">",
+        datatype: "json",
+        treedatatype: "json",
+        treeIcons: {plus:"ui-icon-plus",minus:"ui-icon-minus",leaf:"ui-icon-cancel"},
+        mtype: "POST",
+        ExpandColClick: true,
+        colNames:["id", "Group Name"],
+        colModel :
+            [ 
+                {name:"id", index:"id", width:1, hidden: true, key: true},
+                {name:"name", index:"name", width:300, sortable: false}
+            ],
+        height: "auto",
+        caption: "View Groups"
+    });
+</span><span class="hl-quotes">'</span><span class="hl-code">;
+ 
+</span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">clientScript</span><span class="hl-code">-&gt;</span><span class="hl-identifier">registerScript</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-string">jqGrid</span><span class="hl-quotes">'</span><span class="hl-code">,</span><span class="hl-var">$script</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-inlinetags">?&gt;</span></pre></div></div>
+
+                            <p>The actionFetchTree method:</p>
+
+                            <div class="hl-code"><div class="hl-main"><pre><span class="hl-reserved">public</span> <span class="hl-reserved">function</span> <span class="hl-identifier">actionFetchTree</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span>
+    <span class="hl-brackets">{</span>
+        <span class="hl-var">$ADDWHERE</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-quotes">'</span><span class="hl-code">;
+        </span><span class="hl-reserved">if</span> <span class="hl-brackets">(</span><span class="hl-reserved">isset</span> <span class="hl-brackets">(</span><span class="hl-var">$_REQUEST</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">nodeid</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span>
+            <span class="hl-var">$node</span><span class="hl-code"> = </span><span class="hl-brackets">(</span><span class="hl-identifier">integer</span><span class="hl-brackets">)</span><span class="hl-var">$_REQUEST</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">nodeid</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-code">;
+        </span><span class="hl-reserved">else</span>
+            <span class="hl-var">$node</span><span class="hl-code"> = </span><span class="hl-number">0</span><span class="hl-code">;
+        </span><span class="hl-comment">//</span><span class="hl-comment"> detect if here we post the data from allready loaded tree</span>
+        <span class="hl-comment">//</span><span class="hl-comment"> we can make here other checks</span>
+        <span class="hl-reserved">if</span><span class="hl-brackets">(</span> <span class="hl-var">$node</span><span class="hl-code"> &gt;</span><span class="hl-number">0</span><span class="hl-brackets">)</span> 
+        <span class="hl-brackets">{</span>
+            <span class="hl-comment">//</span><span class="hl-comment">in jqGrid the level starts from 0, but in nested sets with multiple roots the level starts from 1</span>
+            <span class="hl-var">$n_lvl</span><span class="hl-code"> = </span><span class="hl-brackets">(</span><span class="hl-identifier">integer</span><span class="hl-brackets">)</span><span class="hl-var">$_REQUEST</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">n_level</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-code"> + </span><span class="hl-number">1</span><span class="hl-code">;         
+            </span><span class="hl-var">$parent</span><span class="hl-code"> = </span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">db</span><span class="hl-code">
+                    -&gt;</span><span class="hl-identifier">createCommand</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">Select id, root, lft, rgt from tbl_tree WHERE id = </span><span class="hl-var">$node</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">
+                    -&gt;</span><span class="hl-identifier">queryRow</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+            </span><span class="hl-var">$ADDWHERE</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string"> root = </span><span class="hl-quotes">"</span><span class="hl-code"> . </span><span class="hl-var">$parent</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">root</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-code"> . </span><span class="hl-quotes">"</span><span class="hl-string"> AND level = </span><span class="hl-quotes">"</span><span class="hl-code"> . </span><span class="hl-brackets">(</span><span class="hl-var">$n_lvl</span><span class="hl-code">+</span><span class="hl-number">1</span><span class="hl-brackets">)</span><span class="hl-code"> . </span><span class="hl-quotes">"</span><span class="hl-string"> AND lft &gt; </span><span class="hl-quotes">"</span><span class="hl-code"> . </span><span class="hl-var">$parent</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">lft</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-code"> . </span><span class="hl-quotes">"</span><span class="hl-string"> AND rgt &lt; </span><span class="hl-quotes">"</span><span class="hl-code"> . </span><span class="hl-var">$parent</span><span class="hl-brackets">[</span><span class="hl-quotes">"</span><span class="hl-string">rgt</span><span class="hl-quotes">"</span><span class="hl-brackets">]</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span> 
+        <span class="hl-reserved">else</span> 
+        <span class="hl-brackets">{</span> 
+            <span class="hl-comment">//</span><span class="hl-comment"> initial grid</span>
+            <span class="hl-var">$n_lvl</span><span class="hl-code"> =</span><span class="hl-number">0</span><span class="hl-code">;
+            </span><span class="hl-var">$ADDWHERE</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string"> level = 1 </span><span class="hl-quotes">"</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span>        
+        <span class="hl-var">$SQL1</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string">SELECT id, root, name, level-1 as lvl, lft, rgt, is_ledger from tbl_tree WHERE </span><span class="hl-var">$ADDWHERE</span><span class="hl-string"> order by root, lft</span><span class="hl-quotes">"</span><span class="hl-code">;
+ 
+        </span><span class="hl-identifier">header</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">Content-type: text/html;charset=utf-8</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-var">$response</span><span class="hl-code">-&gt;</span><span class="hl-identifier">page</span><span class="hl-code"> = </span><span class="hl-number">1</span><span class="hl-code">;
+        </span><span class="hl-var">$response</span><span class="hl-code">-&gt;</span><span class="hl-identifier">total</span><span class="hl-code"> = </span><span class="hl-number">1</span><span class="hl-code">;
+        </span><span class="hl-var">$cmd</span><span class="hl-code"> = </span><span class="hl-identifier">Yii</span><span class="hl-code">::</span><span class="hl-identifier">app</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">-&gt;</span><span class="hl-identifier">db</span><span class="hl-code">-&gt;</span><span class="hl-identifier">createCommand</span><span class="hl-brackets">(</span><span class="hl-var">$SQL1</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-var">$result</span><span class="hl-code"> = </span><span class="hl-var">$cmd</span><span class="hl-code">-&gt;</span><span class="hl-identifier">queryAll</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-var">$i</span><span class="hl-code">=</span><span class="hl-number">0</span><span class="hl-code">;
+        </span><span class="hl-reserved">foreach</span> <span class="hl-brackets">(</span><span class="hl-var">$result</span> <span class="hl-reserved">as</span> <span class="hl-var">$row</span><span class="hl-brackets">)</span>
+        <span class="hl-brackets">{</span>
+            <span class="hl-reserved">if</span> <span class="hl-brackets">(</span><span class="hl-var">$row</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">is_ledger</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code"> == </span><span class="hl-reserved">true</span><span class="hl-brackets">)</span> <span class="hl-var">$leaf</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">true</span><span class="hl-quotes">'</span><span class="hl-code">;</span><span class="hl-reserved">else</span> <span class="hl-var">$leaf</span><span class="hl-code">=</span><span class="hl-quotes">'</span><span class="hl-string">false</span><span class="hl-quotes">'</span><span class="hl-code">;
+            </span><span class="hl-reserved">if</span> <span class="hl-brackets">(</span><span class="hl-var">$row</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">lvl</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code"> == </span><span class="hl-number">0</span><span class="hl-brackets">)</span> <span class="hl-var">$root</span><span class="hl-code"> = </span><span class="hl-reserved">NULL</span><span class="hl-code">; </span><span class="hl-reserved">else</span> <span class="hl-var">$root</span><span class="hl-code"> = </span><span class="hl-var">$parent</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">id</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code">;
+            </span><span class="hl-var">$l</span><span class="hl-code"> = </span><span class="hl-brackets">(</span><span class="hl-identifier">integer</span><span class="hl-brackets">)</span><span class="hl-var">$row</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">lvl</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code">;
+            </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span> <span class="hl-var">$n_lvl</span><span class="hl-code"> ==  </span><span class="hl-var">$l</span><span class="hl-brackets">)</span>
+            <span class="hl-brackets">{</span>
+                <span class="hl-var">$response</span><span class="hl-code">-&gt;</span><span class="hl-identifier">rows</span><span class="hl-brackets">[</span><span class="hl-var">$i</span><span class="hl-brackets">]</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">cell</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code">=</span><span class="hl-reserved">array</span>
+                    <span class="hl-brackets">(</span>
+                        <span class="hl-var">$row</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">id</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code">,
+                        </span><span class="hl-var">$row</span><span class="hl-brackets">[</span><span class="hl-quotes">'</span><span class="hl-string">name</span><span class="hl-quotes">'</span><span class="hl-brackets">]</span><span class="hl-code">,
+                        </span><span class="hl-var">$n_lvl</span><span class="hl-code">,
+                        </span><span class="hl-var">$root</span><span class="hl-code">,
+                        </span><span class="hl-var">$leaf</span><span class="hl-code">,
+                        </span><span class="hl-quotes">'</span><span class="hl-string">false</span><span class="hl-quotes">'</span>
+                    <span class="hl-brackets">)</span><span class="hl-code">;
+                </span><span class="hl-var">$i</span><span class="hl-code">++;
+            </span><span class="hl-brackets">}</span>
+        <span class="hl-brackets">}</span>
+        <span class="hl-reserved">echo</span> <span class="hl-identifier">json_encode</span><span class="hl-brackets">(</span><span class="hl-var">$response</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span></pre></div></div>
+
+                            <p>The explanation is given in the jqGrid wiki site where the usage of Adjacency Model is described. The only point to remember here is that while sending the children nodes we need to send the immediate parent id, and not the root id for that tree. So, in the beginning of the code, we try to obtain the root details through a queryRow() call</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c4520" title="permalink to this comment" href="#c4520">#4520</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/31021/">Mohit</a> at 2011/07/16 07:41am</div>
+                        <div class="title">Transaction Checking while deleting node</div>
+                        <div class="content"><p>This is really a great extension.</p>
+
+                            <p>Please notice that while performing the moveNode action, the checking is being done to find out if a txn has already been set (i.e., if there was a beginTransaction() issued by some controller). And only if it has not been set, the extension tries to set one by itself.</p>
+
+                            <p>But while deleting a Node, the same is not being done. I feel that this checking could have been done in the delete method also. In my implementation, i have enabled this checking and it is working fine, as of now.</p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c4468" title="permalink to this comment" href="#c4468">#4468</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/2328/">mindplay(external links)</a> at 2011/07/11 10:33pm</div>
+                        <div class="title">Fantastic work!</div>
+                        <div class="content"><p>Beautiful work!</p>
+
+                            <p>One note, this is technically not a nested set, but an adjacency list - this type of tree implementation is optimized for fast reading, but writes are more expensive than a nested set. It also had the advantage (over a nested set) of maintaining sibling order.</p>
+
+                            <p>Personally I prefer adjacency lists - and this is an awesome implementation, queries neatly packaged as scopes, operations fully wrapped in transactions, fully unit tested, etc. - very, very nice work!</p>
+
+                            <p>Thanks!</p>
+                        </div>
+
+                        <div class="comment alt-1">
+                            <a class="cid" id="c4310" title="permalink to this comment" href="#c4310">#4310</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/26655/">hav3fun(external links)</a> at 2011/06/24 07:50am</div>
+                        <div class="title">Several trees in the same table, is it possible?</div>
+                        <div class="content"><p>First of all, great extension.</p>
+
+                            <p>Now I need to extend its functionality in order to keep several trees in the same table. Not one tree with several roots, but several trees within the same table. I would need this "profile_id" filter to paint one tree or another.</p>
+
+                            <p>I have a table "profile_component" with fields "id", "left", "right" and "level" to manage the nested set behavior. But it also has a field "profile_id", so that the records with profile_id=0 represent one tree, the records with profile_id=1 represent a second tree, and so on.</p>
+
+                            <p>Does anybody know how should I extend the component so that I can get one tree or another by setting this "profile_id" attribute?</p>
+
+                            <p>I´m using also <a href="http://www.yiiframework.com/extension/jstree" title="JsTree">JsTree(external links)</a> to render the tree and <a href="http://www.yiiframework.com/extension/ejnestedtreeactions" title="EJNestedTreeActions">EJNestedTreeActions(external links)</a> to deal with the tree actions.</p>
+
+                            <p>Thanks in advance</p>
+                        </div>
+
+                        <div class="comment alt-0">
+                            <a class="cid" id="c4180" title="permalink to this comment" href="#c4180">#4180</a>
+
+                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link silver" href="http://www.yiiframework.com/user/9285/">yiqing95(external links) </a> at 2011/06/14 03:10am</div>
+                        <div class="title">want to know does it can apply to different ActiveRecord class?</div>
+                        <div class="content"><p>in a project there may have many models , which have the tree struct . and  if this 
+                                extension can apply to multiple ar or can only to one specific ar . if attach to many different ar , does it need to modify the category table schema ,  may be add some field like : cate_type varchar(20) ..
+                                or i misunderstand the usage ,  i will modify the ar's table add the table field come from the category .<br>
+                                    the tree struct can added to a exist table(which in first version may be plain ) ,let's say : menu(id,text,url).
+                                    some time later ,  we  need the menu to support tree struct , there are two choices :
+                                    1.add some another fields to the menu table ,like pid, level etc..;
+                                    2.- use another table such as node to maintain the relation :node(id ,type, id_type,type_pid,type_level)<br>
+                                        the choice 2 may need do a lots things when perform the crud operations. for query
+                                        may use the left join or inner join .  and create , update , delete become even complex . 
+                                        so  if i use this extension in my project , i have to modify the existing ar's table.</p>
+                                        </div>
+
+                                        <div class="comment alt-1">
+                                            <a class="cid" id="c4027" title="permalink to this comment" href="#c4027">#4027</a>
+
+                                            <div class="clear"></div></div>			<div class="meta"><a class="g-user-rank-link" href="http://www.yiiframework.com/user/769/">mc.aser(external links)</a> at 2011/05/30 02:11pm</div>
+                                        <div class="title">How track event change node?, move, create, update, delete?</div>
+                                        <div class="content"><p>How track event change node, moved, created, updated, deleted?
+                                                Event onAfterSave not work! I need delete cache if changed structur of tree. And it is I have to do in model.</p>
+
+                                            <p>Thanks :) !</p>
+                                        </div>
+                                        </div>
+                                        </div>
+
+
+
+                                        </body></html>
