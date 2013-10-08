@@ -24,7 +24,7 @@
     <span class="index-system-head">服务器信息</span>
     <span class="index-system-content">
          <p>程序名称 : Fircms</p>
-         <p>系统版本 : 0.6</p>
+         <p>系统版本 : 0.3</p>
          <p>操作系统 : <?php echo PHP_OS;?> </p>
          <p>PHP环境 : <?php echo PHP_VERSION;?></p>
          <p>Mysql版本 <?php echo mysql_get_server_info();?></p>
