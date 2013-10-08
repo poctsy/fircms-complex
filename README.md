@@ -33,8 +33,12 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 >protected/runtime/admin
 
-
-
+<pre>
+默认是sqlite数据库作为演示作用，没来得及仔细测试。
+更改mysql数据库可避免意外问题。
+下面是修改的文件位置，去除mysql的代码注释，将sqlite注释掉。
+protected/config/database.php 
+</pre>
 
  
 ### 使用说明： ###
