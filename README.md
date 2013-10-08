@@ -1,7 +1,7 @@
 fircms 
 ======
 
-FIRCMS基于yiiframework的cms，采用apache2.0开源协议。。。
+FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 >.这是自己第一次写php程序，9月份开始写，到今天已经写了一个月。
 
