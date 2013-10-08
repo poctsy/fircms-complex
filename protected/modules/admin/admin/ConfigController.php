@@ -58,8 +58,9 @@ class ConfigController extends FController
 		if(isset($_POST['Config']))
 		{
 			$model->attributes=$_POST['Config'];
-                 Yii::app()->config->set($model->key, $model->value);
-				$this->redirect(array('admin'));
+            if(!empty($model->key)){
+                Yii::app()->config->set($model->key, $model->value);
+                $this->redirect(array('admin'));}
 		}
 
 		$this->render('config_update',array(
