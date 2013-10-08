@@ -68,7 +68,8 @@ class EConfig extends CApplicationComponent
 				$dbCommand->execute();
 			}
 		}
-
+//去除导致在sqlite下报错的limit语句
+ /* 原来
 		if (false === isset($dbCommand))
 		{
 			$dbCommand = $db->createCommand("UPDATE `{$this->configTableName}` SET `value` = :value WHERE `key` = :key LIMIT 1");
@@ -76,7 +77,14 @@ class EConfig extends CApplicationComponent
 			$dbCommand->bindParam(':key', $key, PDO::PARAM_STR);
 			$dbCommand->execute();
 		}
-
+*/
+        if (false === isset($dbCommand))
+        {
+            $dbCommand = $db->createCommand("UPDATE `{$this->configTableName}` SET `value` = :value WHERE `key` = :key");
+            $dbCommand->bindValue(':value', serialize($value), PDO::PARAM_STR);
+            $dbCommand->bindParam(':key', $key, PDO::PARAM_STR);
+            $dbCommand->execute();
+        }
 		$this->_config[$key] = serialize($value);
 
 		if (false !== $cache)
