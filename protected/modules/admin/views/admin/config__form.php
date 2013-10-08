@@ -21,7 +21,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'key'); ?>
-		<?php echo $form->textField($model,'key',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'key',array('size'=>60,'maxlength'=>100,'readonly'=>$model->isNewRecord ? false : true)); ?>
 		<?php echo $form->error($model,'key'); ?>
 	</div>
 
