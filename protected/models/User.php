@@ -1,7 +1,7 @@
 <?php
 /**
  * @version   User.php  19:30 2013年09月11日
- * @author    poctsy <pocmail@foxmail.com>
+ * @author    poctsy <poctsy@foxmail.com>
  * @copyright Copyright (c) 2013 poctsy
  * @link      http://www.fircms.com
  */

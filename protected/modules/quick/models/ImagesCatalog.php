@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @author   poctsy  <pocmail@foxmail.com>
+ * @author   poctsy  <poctsy@foxmail.com>
  * @copyright Copyright (c) 2013 poctsy
  * @link      http://www.fircms.com
  * @version   ImagesCatalog.php  17:17 2013年09月13日  

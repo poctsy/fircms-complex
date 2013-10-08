@@ -1,7 +1,7 @@
 <?php
 /**
 * @version   Upload.php  19:20 2013年09月11日
-* @author    poctsy <pocmail@foxmail.com>
+* @author    poctsy <poctsy@foxmail.com>
 * @copyright Copyright (c) 2013 poctsy
 * @link      http://www.fircms.com
 */

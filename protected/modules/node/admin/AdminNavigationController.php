@@ -2,7 +2,7 @@
 
 /**
 * @version   NavigationController.php  16:58 2013年09月13日
-* @author    poctsy <pocmail@foxmail.com>
+* @author    poctsy <poctsy@foxmail.com>
 * @copyright Copyright (c) 2013 poctsy
 * @link      http://www.fircms.com
 */

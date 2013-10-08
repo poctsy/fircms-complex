@@ -11,4 +11,4 @@ $this->pageTitle=Yii::app()->name;
 	<li>View file: <code><?php echo __FILE__; ?></code></li>
 </ul>
 
-<p>by:poc   ,mail:pocmail@foxmail.com</p>
+<p>by:poctsy   ,mail:poctsy@foxmail.com</p>

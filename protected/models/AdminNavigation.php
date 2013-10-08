@@ -1,7 +1,7 @@
 <?php
 /**
  * @version   AdminNavigation.php  10:45 2013年09月28日
- * @author    poctsy <pocmail@foxmail.com>
+ * @author    poctsy <poctsy@foxmail.com>
 * @copyright Copyright (c) 2013 poctsy
  * @link      http://www.fircms.com
 */

@@ -35,7 +35,7 @@ return array (
   'Create ImagesCatalog' => '添加图集栏目',
   'Create Mould' => '添加模型',
   'Create PictureCatalog' => '添加图片栏目',
-  'FrontendLogin' => '用户登录',
+  'FrontendLogin' => '前台用户登录',
   'Home' => '首页',
   'Login' => '登录',
   'Logout' => '退出',

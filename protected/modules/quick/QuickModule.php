@@ -1,16 +1,10 @@
 <?php
 /**
-* quick module class file.
-*
-* @author poc <pocmail@foxmail.com>
-* @copyright Copyright &copy; 2013 poc
-* @version 0.4.0
-* 
-* change the default
-* 模块管理控制器统一规范  采用驼峰式写法，前缀Q 例如:QManage
-*
-*该模块以来Catalog无限分类模块
-*/
+ * @author   poctsy  <poctsy@foxmail.com>
+ * @copyright Copyright (c) 2013 poctsy
+ * @link      http://www.fircms.com
+ * @version   QuickModule.php
+ */
 class QuickModule extends FModule
 {
 

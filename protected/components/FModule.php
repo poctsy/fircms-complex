@@ -1,7 +1,7 @@
 <?php
 /**
  * @version   FModule.php
- * @author   poctsy  <pocmail@foxmail.com>
+ * @author   poctsy  <poctsy@foxmail.com>
  * @copyright Copyright (c) 2013 poctsy
  * @link      http://www.fircms.com
  */

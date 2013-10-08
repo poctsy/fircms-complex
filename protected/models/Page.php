@@ -1,6 +1,6 @@
 <?php
 /**
-* @author   poctsy  <pocmail@foxmail.com>
+* @author   poctsy  <poctsy@foxmail.com>
 * @copyright Copyright (c) 2013 poctsy
 * @link      http://www.fircms.com
 * @version   Page.php  16:21 2013年10月03日  

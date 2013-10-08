@@ -1,7 +1,7 @@
 <?php
 /**
 * @version   ConfigController.php  14:36 2013年10月01日
-* @author    poctsy <pocmail@foxmail.com>
+* @author    poctsy <poctsy@foxmail.com>
 * @copyright Copyright (c) 2013 poctsy
 * @link      http://www.fircms.com
 */
