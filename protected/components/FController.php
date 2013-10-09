@@ -11,16 +11,16 @@ class FController extends Controller {
      * @var string the default layout for the controller view. Defaults to 'column1',
      * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
      */
+    public $items=array();
     public $layout = '//layouts/column1';
     public $plugin_id;
 
-    public function setCatalogList($pluginname) {
-    
-        $plugin = Plugin::model()->find(array('condition' => 'en_name=:plugin', 'params' => array('plugin' => $pluginname)));
-        $this->plugin_id = $plugin->id;
-        $CatalogList = Catalog::selectChildTreeData(Catalog::findAllPluginTree($this->plugin_id));
-        $pluginname.='CatalogList';
-        Yii::app()->params[$pluginname] = $CatalogList;
+    public function catalogList($pluginname) {
+
+        $pluginId = Plugin::nameGetId($pluginname);
+        $pluginTree=Catalog::findPluginTree($pluginId);
+        $catalogList = Catalog::makeSelectTreeChild($pluginTree);
+        return $catalogList;
     }
 
     public function setQuickPlugin($pluginname) {

@@ -10,8 +10,8 @@ $this->breadcrumbs=array(
 ?>
 <div style="margin-bottom:100px">
 
-<h1>前台未施工</h1>
-<h2><?php echo CHtml::link('进入后台', Yii::app()->baseUrl.'/admin.php'); ?></h2>
+<h3>前台施工与后台代码 数据表重构中</h3>
+<h1><?php echo CHtml::link('进入后台', Yii::app()->baseUrl.'/admin.php'); ?></h1>
 
 </div>
 

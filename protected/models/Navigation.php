@@ -10,10 +10,13 @@
  * This is the model class for table "{{navigation}}".
  *
  * The followings are the available columns in table '{{navigation}}':
-
+ * @property integer $id
+ * @property string $lft
+ * @property string $rgt
+ * @property string $root
+ * @property integer $level
+ * @property string $name
  * @property string $type
- * @property integer $root
- * @property string $resource
  */
 class Navigation extends FActiveRecord {
 
@@ -28,6 +31,13 @@ class Navigation extends FActiveRecord {
         return '{{navigation}}';
     }
 
+    public function relations() {
+        // NOTE: you may need to adjust the relation name and the related
+        // class name for the relations automatically generated below.
+        return array(
+            'catalog'=>array(self::BELONGS_TO, 'Catalog', 'catalog_id'),
+        );
+    }
     /**
      * @return array validation rules for model attributes.
      */
@@ -35,27 +45,31 @@ class Navigation extends FActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-
             array('name,type','required','on'=>'parent'),
             array('parent,root,catalog_id','required','on'=>'child'),
-            array('node_id,type', 'unique'),
+            array('id,type', 'unique'),
             array('parent,root', 'numerical', 'integerOnly' => true),
             array('type,name', 'length', 'max' => 20),
             array('catalog_id', 'length', 'max' => 50),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('name,node_id,type, root, catalog_id', 'safe', 'on' => 'search'),
+            array('name,id,type, root, catalog_id', 'safe', 'on' => 'search'),
         );
     }
 
+
     /**
-     * @return array relational rules.
+     * Id of the div in which the tree will berendered.
      */
-    public function relations() {
-        // NOTE: you may need to adjust the relation name and the related
-        // class name for the relations automatically generated below.
+    public function behaviors() {
         return array(
-            'node' => array(self::BELONGS_TO, 'Node', 'node_id')
+            'NestedSetBehavior' => array(
+                'class' => 'ext.nestedBehavior.NestedSetBehavior',
+                'leftAttribute' => 'lft',
+                'rightAttribute' => 'rgt',
+                'levelAttribute' => 'level',
+                'hasManyRoots' => true
+            ),
         );
     }
 
@@ -71,7 +85,7 @@ class Navigation extends FActiveRecord {
             'root' => '资源类型',
             'catalog_id' => '内容栏目',
             'parent'=>'导航条',
-           
+
         );
     }
 
@@ -92,7 +106,7 @@ class Navigation extends FActiveRecord {
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('node_id', $this->node_id);
+        $criteria->compare('id', $this->id);
         $criteria->compare('type', $this->type, true);
         $criteria->compare('root', $this->root);
         $criteria->compare('catalog_id', $this->catalog_id, true);
@@ -130,52 +144,45 @@ class Navigation extends FActiveRecord {
     }
 
 
-    public static function printULTree() {
-
-            $type = Node::NODE_NAVIGATION;
-            $actionname = 'navigation';
-
-        $rootnode = Node::model()->find(array('condition' => 'type=:type', 'params' => array(':type' => $type)));
-        if ($rootnode == NULL)
-            return;
+    public static function printTree() {
 
         $criteria = new CDbCriteria;
-        $criteria->addNotInCondition('id', array($rootnode->id));
-        $criteria->compare('root', $rootnode->id);
         $criteria->order = "root,lft";
-        $nodes = Node::model()->findAll($criteria);
+        $navigations = Navigation::model()->findAll($criteria);
+
         $level = 0;
         echo CHtml::openTag('span', array('class' => 'node_name_nav') );
-        echo "导航条";
+
         echo CHtml::closeTag('span');
 
 
-        foreach ($nodes as $n => $node) {
+        foreach ($navigations as $n => $navigation) {
 
-            if ($node->level == $level)
+            if ($navigation->level == $level)
                 echo CHtml::closeTag('li') . "\n";
-            else if ($node->level > $level)
+            else if ($navigation->level > $level)
                 echo CHtml::openTag('ul') . "\n";
             else {
                 echo CHtml::closeTag('li') . "\n";
 
-                for ($i = $level - $node->level; $i; $i--) {
+                for ($i = $level - $navigation->level; $i; $i--) {
                     echo CHtml::closeTag('ul') . "\n";
                     echo CHtml::closeTag('li') . "\n";
                 }
             }
 
 
-           if($node->navigation_name != NULL){
-               $name=$node->navigation_name;
-          }else{
-             $catalog=Catalog::model()->findByPk($node->navigation->catalog_id);
-             $name=$catalog->name;
+            if($navigation->isRoot()){
+                $name=$navigation->name;
+                $updateAction="update";
+            }else{
+                $catalog=Catalog::model()->findByPk($navigation->catalog_id);
+                    $name=$catalog->name;
+                    $updateAction="updatechild";
+            }
 
-          }
-
-            echo CHtml::openTag('li', array('id' => 'node_' . $node->id, 'rel' => $name));
-            echo CHtml::openTag('span', array('class' => 'nav_node_name') );
+            echo CHtml::openTag('li', array('id' => 'node_' . $navigation->id, 'rel' => $name));
+            echo CHtml::openTag('span', array('class' => 'name') );
             echo CHtml::encode($name);
             echo CHtml::decode('&nbsp;&nbsp;&nbsp;');
             echo CHtml::closeTag('span');
@@ -183,10 +190,14 @@ class Navigation extends FActiveRecord {
 
 
             echo CHtml::openTag('span', array('class' => 'cudlink'));
-            echo CHtml::openTag('a', array('href' => Yii::app()->createUrl("node/" . $actionname . "/update", array("id" => $node->id))));
+            if(!$navigation->isRoot()){
+                echo CHtml::Link('(上移', Yii::app()->createUrl("node/navigation/prevup", array("id" => $navigation->id)));
+                echo CHtml::Link('下移)', Yii::app()->createUrl("node/navigation/nextup", array("id" => $navigation->id)));
+            }
+            echo CHtml::openTag('a', array('href' => Yii::app()->createUrl("node/navigation/".$updateAction, array("id" => $navigation->id))));
             echo CHtml::encode("更新");
             echo CHtml::closeTag('a');
-            echo CHtml::openTag('a', array("class" => "delete", 'href' => Yii::app()->createUrl("node/" . $actionname . "/delete", array("id" => $node->id))));
+            echo CHtml::openTag('a', array("class" => "delete", 'href' => Yii::app()->createUrl("node/navigation/delete", array("id" => $navigation->id))));
             echo CHtml::encode("删除");
             echo CHtml::closeTag('a');
             echo CHtml::closeTag('span');
@@ -194,7 +205,7 @@ class Navigation extends FActiveRecord {
 
 
 
-            $level = $node->level;
+            $level = $navigation->level;
         }
 
         for ($i = $level; $i; $i--) {
@@ -203,142 +214,87 @@ class Navigation extends FActiveRecord {
         }
     }
 
-    public static function printULTree_noAnchors() {
-        $nodes = Node::model()->findAll(array('order' => 'lft'));
-        $level = 0;
 
-        foreach ($nodes as $n => $node) {
-            if ($node->level == $level)
-                echo CHtml::closeTag('li') . "\n";
-            else if ($node->level > $level)
-                echo CHtml::openTag('ul') . "\n";
-            else {         //if $node->level<$level
-                echo CHtml::closeTag('li') . "\n";
-
-                for ($i = $level - $node->level; $i; $i--) {
-                    echo CHtml::closeTag('ul') . "\n";
-                    echo CHtml::closeTag('li') . "\n";
-                }
-            }
-            if($node->navigation_name != NULL){
-                $name=$node->navigation_name;
-            }else{
-                $catalog=Catalog::model()->findByPk($node->navigation->catalog_id);
-                $name=$catalog->name;
-
-            }
-            echo CHtml::openTag('li');
-            echo CHtml::encode($name);
-            $level = $node->level;
-        }
-
-        for ($i = $level; $i; $i--) {
-            echo CHtml::closeTag('li') . "\n";
-            echo CHtml::closeTag('ul') . "\n";
-        }
-    }
 
     public static function getOptionlevel($level) {
         return str_repeat(self::LEVEL, $level - 1);
     }
 
-    //为单一模型 查找分类
-    public static function findAllPluginTree($plugin_id) {
-        $typename= Node::NODE_NAVIGATION;
-        $rootnode = self::findRoot($typename);
-        if ($rootnode == NULL)
-            return;
 
-        $criteria = new CDbCriteria;
-        $criteria->with='catalog';
-        $criteria->compare('root', $rootnode->id);
-        $criteria->compare('catalog.plugin_id', $plugin_id);
-        $nodes = Node::model()->findAll($criteria);
-
-        return $nodes;
-    }
-
-
-
-    public static function findRoot() {
-
-            $type = Node::NODE_NAVIGATION;
-
-        $rootnode = Node::model()->find(array('condition' => 'type=:type', 'params' => array(':type' => $type)));
-        return $rootnode;
-    }
 
     public static function findAllTree() {
-        $typename= Node::NODE_NAVIGATION;
-        $rootnode = self::findRoot($typename);
-        if ($rootnode == NULL)
-            return;
 
         $criteria = new CDbCriteria;
-        $criteria->compare('root', $rootnode->id);
         $criteria->order = "root,lft";
-        $nodes = Node::model()->findAll($criteria);
+        $navigations = Navigation::model()->findAll($criteria);
 
-        return $nodes;
+        return $navigations;
     }
     public static function findAllTree_noRoot() {
-        $typename= Node::NODE_NAVIGATION;
-        $rootnode = self::findRoot($typename);
-        if ($rootnode == NULL)
-            return;
-
+        $rootId=Navigation::model()->roots()->find()->id;
         $criteria = new CDbCriteria;
-        $criteria->addNotInCondition('id', array($rootnode->id));
-        $criteria->compare('root', $rootnode->id);
+        $criteria->addNotInCondition('id', array($rootId));
         $criteria->order = "root,lft";
-        $nodes = Node::model()->findAll($criteria);
+        $navigations = Navigation::model()->findAll($criteria);
 
-        return $nodes;
+        return $navigations;
     }
 
-    public static function findNavChildCatalog(){
+    public static function findAllRoot(){
 
-        $typename = Node::NODE_NAVIGATION;
-        $rootnode = self::findRoot($typename);
-        if ($rootnode == NULL)
-            return;
 
-        $nodes=Node::model()->find('type=?',array($typename));
-        $childrens=$nodes->children()->findAll();
-        return  $childrens;
+        $navigations = Navigation::model()->roots()->findAll();
+
+
+        return  $navigations;
 
     }
 
 
 
-    public static function selectTreeData($nodes) {
+    public static function makeSelectTree($navigations) {
 
         $treeSelect = array();
         $level = 0;
         //如果nodes为NULL， 则默认他为数组 不报错
-        if ($nodes == NULL)
-            $nodes = array();
+        if ($navigations == NULL)
+            $navigations = array();
 
-        foreach ($nodes as $node) {
-            $treeSelect[$node->id] = self::getOptionlevel($node->level) . $node->navigation_name;
+        foreach ($navigations as $navigation) {
+            $treeSelect[$navigation->id] = self::getOptionlevel($navigation->level) . $navigation->name;
         }
         return $treeSelect;
     }
 
-    public static function selectChildTreeData($nodes) {
+    public static function makeSelectTreeChild($navigations) {
         $treeSelect = array();
         $level = 0;
         //如果nodes为NULL， 则默认他为数组 不报错
-        if ($nodes == NULL)
-            $nodes = array();
-        foreach ($nodes as $node) {
-            $treeSelect[$node->id] = $node->navigation_name;
+        if ($navigations == NULL)
+            $navigations = array();
+        foreach ($navigations as $navigation) {
+            $treeSelect[$navigation->id] = $navigation->name;
         }
         return $treeSelect;
     }
 
 
+    public static function nameGet($name){
+        $catalg=Navigation::model()->find('type=?',array($name));
+        return $catalg;
+    }
 
+
+    //前台导航的内容栏目的节点
+    public static function navCatalog($name) {
+        $root=self::nameGet($name);
+
+        $navigations = $root->children()->findAll();;
+        foreach ($navigations as $navigation){
+            $navCatalog[]=$navigation->catalog_id;
+        }
+        return $navCatalog;
+    }
 
 
 }

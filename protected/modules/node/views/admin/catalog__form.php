@@ -96,7 +96,7 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
 
         echo $form->dropDownList($model, 'parent',
-            Catalog::selectTreeData(Catalog::findAllTree()), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
+            Catalog::makeSelectTree(Catalog::model()->findAll(array('order'=>'lft'))), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
         ); ?>
         <?php echo $form->error($model, 'parent'); ?>
     </div>
@@ -127,6 +127,14 @@ if(val==" . Catalog::CATALOG_LINK . "){
         <?php echo $form->textField($model, 'name', array('size' => 30, 'maxlength' => 30)); ?>
         <?php echo $form->error($model, 'name'); ?>
     </div>
+
+    <div class="row">
+        <?php echo $form->labelEx($model, 'url'); ?>
+        <?php echo $form->textField($model, 'url', array('size' => 30, 'maxlength' => 30)); ?>
+        <?php echo $form->error($model, 'url'); ?>
+    </div>
+
+
     <div class="row">
         <?php echo $form->labelEx($model, 'thumb'); ?>
         <?php
@@ -145,11 +153,7 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
         <?php echo $form->error($model, 'thumb'); ?>
     </div>
-    <div class="row">
-        <?php echo $form->labelEx($model, 'url'); ?>
-        <?php echo $form->textField($model, 'url', array('size' => 30, 'maxlength' => 30)); ?>
-        <?php echo $form->error($model, 'url'); ?>
-    </div>
+
 
     <div class="row">
         <?php echo $form->labelEx($model, 'title'); ?>
@@ -178,13 +182,13 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
     <div class="row">
         <?php echo $form->labelEx($model, 'list_view'); ?>
-        <?php echo $form->dropDownList($model, 'list_view', Fircms::getView("node"), array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'list_view', Fircms::getView("post","list_"), array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'list_view'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'content_view'); ?>
-        <?php echo $form->dropDownList($model, 'content_view', Fircms::getView("plugin"), array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'content_view', Fircms::getView("post","content_"), array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'content_view'); ?>
     </div>
 

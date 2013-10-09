@@ -8,10 +8,6 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' => Yii::t('core', 'Create Catalog'), 'url' => array('/node/catalog/create')),
-    array('label'=>Yii::t('core', 'Create ArticleCatalog'), 'url'=>array('/quick/articlecatalog/create')),
-    array('label'=>Yii::t('core', 'Create FileCatalog'), 'url'=>array('/quick/filecatalog/create')),
-    array('label'=>Yii::t('core', 'Create ImagesCatalog'), 'url'=>array('/quick/imagescatalog/create')),
-    array('label'=>Yii::t('core', 'Create PictureCatalog'), 'url'=>array('/quick/picturecatalog/create')),
     array('label'=>Yii::t('core', 'Manage Catalog'), 'url'=>array('/node/catalog/admin')),
 
 );
@@ -63,6 +59,6 @@ jQuery(document).on('click','#catalogtree a.delete',function() {
 
 
 <div id="catalogtree">
-    <div><?php Catalog::printULTree(); ?></div>
+    <div><?php Catalog::printTree(); ?></div>
 </div>
 

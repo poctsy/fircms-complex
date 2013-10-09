@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu = array(
     array('label' =>"创建导航条", 'url' => array('create')),
-    array('label' =>"添加链接到导航条", 'url' => array('childcreate')),
+    array('label' =>"添加链接到导航条", 'url' => array('createchild')),
     array('label' =>"管理导航条", 'url' => array('admin')),
 );
 ?>

@@ -42,46 +42,23 @@ class CatalogController extends FController {
         return $model;
     }
 
-    public function loadNodeModel($id) {
-        $model = Node::model()->findByPk($id);
-        if ($model === null)
-            throw new CHttpException(404, 'The requested page does not exist.');
-        return $model;
-    }
 
     public function actionCreate() {
-        $rootNodeModel = Catalog::findRoot();
-        if ($rootNodeModel == NUll) {
-            $rootNodeModel = new Node;
-            $rootNodeModel->type = Node::NODE_CATALOG;
-            $rootNodeModel->saveNode();
-            $rootModel = new Catalog;
-            $rootModel->node_id = $rootNodeModel->id;
-            $rootModel->name = "顶级分类";
-            $rootModel->save();
-        }elseif($this->loadModel($rootNodeModel->id)== NUll){
-            $rootModel = new Catalog();
-            $rootModel->node_id = $rootNodeModel->id;
-            $rootModel->name = "顶级分类";
-            $rootModel->save();
-        }
 
+        Catalog::createRoot();
         $model = new Catalog;
         $model->scenario='update';
 
-        $nodeModel = new Node;
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Catalog'])) {
             $model->attributes = $_POST['Catalog'];
 
-            $parentModel = $this->loadNodeModel($model->parent);
-            if ($nodeModel->appendTo($parentModel)) {
-                //获取插入的树id,插入到分类表
-                $model->node_id = $nodeModel->id;
-                //判断添加数据成功 才跳转到管理页，  创建不成功，停在本页  示错误信息
-                if($model->save() && $this->addordermoduld($model->type,$model->plugin_id,$model->node_id))
+            $parentModel = $this->loadModel($model->parent);
+            if ($model->appendTo($parentModel)) {
+
                     $this->redirect(array('admin'));
             }
 
@@ -96,19 +73,7 @@ class CatalogController extends FController {
         ));
     }
 
-    private function addordermoduld($type,$plugin_id,$catalog_id){
-       if($type==Catalog::CATALOG_SINGLEPAGE_MOULD){
-           $plugin=Plugin::model()->findByPk($plugin_id);
-           if($plugin->en_name=='page'){
-               $model = new Page;
-               $model->catalog_id=$catalog_id;
-               if($model->save())
-                  return true;
-           }
-       }else{
-           return true;
-       }
-    }
+
 
     /**
      * Updates a particular model.
@@ -119,13 +84,13 @@ class CatalogController extends FController {
 
 
         //获取原node
-        $nodeModel = $this->loadNodeModel($id);
+        $model = $this->loadModel($id);
         //获取catalog表单
         $model = $this->loadModel($id);
         $model->scenario='update';
-        $beforeNodeModel = $nodeModel;
+        $beforeModel = $model;
         $beforeParent = NULL;
-        $beforeParent = $nodeModel->getParent()->id;
+        $beforeParent = $model->getParent()->id;
         $model->parent = $beforeParent;
 
 
@@ -137,15 +102,15 @@ class CatalogController extends FController {
 
 
             //  不等于自身id                 不等于当前父节点                 
-            if ($model->parent != $nodeModel->id && $model->parent != $beforeParent) {
+            if ($model->parent != $model->id && $model->parent != $beforeParent) {
 
                 //不允许是自身的子节点
-                if (!$this->loadNodeModel($model->parent)->isDescendantOf($beforeNodeModel)) {
+                if (!$this->loadModel($model->parent)->isDescendantOf($beforeModel)) {
 
-                    @$nodeModel->moveAsLast($this->loadNodeModel($model->parent));
+                    @$model->moveAsLast($this->loadModel($model->parent));
                 }
             }
-            if($model->save() &&$nodeModel->saveNode())
+            if($model->saveNode())
              $this->redirect(array('admin'));
         }
 
@@ -156,7 +121,7 @@ class CatalogController extends FController {
 
     public function actionPrevUp($id) {
         $id = (int) $id;
-        $model = $this->loadNodeModel($id);
+        $model = $this->loadModel($id);
         $prevSibling = $model->prevSibling;
         if (is_object($prevSibling))
             $model->moveBefore($prevSibling);
@@ -165,7 +130,7 @@ class CatalogController extends FController {
 
     public function actionNextUp($id) {
         $id = (int) $id;
-        $model = $this->loadNodeModel($id);
+        $model = $this->loadModel($id);
         $nextSibling = $model->nextSibling;
         if (is_object($nextSibling))
             $model->moveAfter($nextSibling);
@@ -178,21 +143,19 @@ class CatalogController extends FController {
      * @param integer $id the ID of the model to be deleted
      */
     public function actionDelete($id) {
-       if (Yii::app()->request->isPostRequest) {
-            $count=Node::model()->findByPk($id)->descendants()->count();
+      // if (Yii::app()->request->isPostRequest) {
+            $count=Catalog::model()->findByPk($id)->descendants()->count();
 
-            if($count>0){
-                $this->redirect(array('/node/adminnavigation/admin'));
-            }else{
+           if($count>0){
+               $this->redirect(array('admin'));
+           }elseif($model = $this->loadModel($id)){
 
-                if($model = @Catalog::model()->findByPk($id))
-                    $model->delete();
-                if($nodeModel = @$this->loadNodeModel($id))
-                   $nodeModel->deleteNode();
-            }
+               $model->deleteNavigation();
+               $model->deleteNode();
+           }
 
 
-      }
+    //  }
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

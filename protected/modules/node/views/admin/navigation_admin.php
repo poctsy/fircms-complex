@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 
 $this->menu = array(
     array('label' =>"创建导航条", 'url' => array('create')),
-    array('label' =>"绑定内容栏目到导航条", 'url' => array('childcreate')),
+    array('label' =>"绑定内容栏目到导航条", 'url' => array('createchild')),
     array('label' =>"管理导航条", 'url' => array('admin')),
 );
 $cs1 = Yii::app()->getClientScript();
@@ -58,8 +58,8 @@ jQuery(document).on('click','#navigationtree a.delete',function() {
 //$b->moveAsFirst($a);      
 ?>
 
-
+默认首页导航条1 (top_1)
 <div id="navigationtree" >
-    <div><?php Navigation::printULTree(); ?></div>
+    <div><?php Navigation::printTree(); ?></div>
 </div>
 

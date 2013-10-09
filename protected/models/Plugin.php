@@ -122,5 +122,13 @@ class Plugin extends CActiveRecord
         $cleanHtml = $p->purify($value);
         return $cleanHtml;
     }
+
+    public static function nameGetId($name){
+        $plugin = Plugin::model()->find(array(
+            'condition' => 'en_name=:plugin',
+            'params' => array('plugin' => $name))
+        );
+        return $plugin->id;
+    }
 }
 

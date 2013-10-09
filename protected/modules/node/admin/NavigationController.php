@@ -40,32 +40,11 @@ class NavigationController extends FController {
         return $model;
     }
 
-    public function loadNodeModel($id) {
-        $model = Node::model()->findByPk($id);
-        if ($model === null)
-            throw new CHttpException(404, 'The requested page does not exist.');
-        return $model;
-    }
+
 
     public function actionCreate() {
-        $rootNodeModel =Navigation::findRoot();
-        if ($rootNodeModel == NUll) {
-            $rootNodeModel = new Node;
-            $rootNodeModel->type = Node::NODE_NAVIGATION;
-            $rootNodeModel->saveNode();
-            $rootModel = new Navigation();
-            $rootModel->node_id = $rootNodeModel->id;
-            $rootModel->name = "顶级分类";
-            $rootModel->save();
-        }elseif($this->loadModel($rootNodeModel->id)== NUll){
-            $rootModel = new Navigation();
-            $rootModel->node_id = $rootNodeModel->id;
-            $rootModel->name = "顶级分类";
-            $rootModel->save();
-        }
-        $parentModel=$rootNodeModel;
+
         $model = new Navigation;
-        $nodeModel = new Node;
         $model->scenario='parent';
 
         if (isset($_POST['Navigation'])) {
@@ -73,15 +52,11 @@ class NavigationController extends FController {
             $model->attributes = $_POST['Navigation'];
 
             if($model->validate($model->attributes)){
-                if ($nodeModel->appendTo($parentModel)) {
-                    //获取插入的树id,插入到导航表
-                    $model->node_id = $nodeModel->id;
-                    $model->root =0;
-                    if($model->save()){
+                    if($model->saveNode()){
                         $this->redirect(array('admin'));
 
                     }
-                }
+
 
             }
 
@@ -97,7 +72,7 @@ class NavigationController extends FController {
     }
 
 //顶级nav不允许继承其他子节点，链接允许继承，所以做成2个控制器，来添加父导航，跟子链接
-    public function actionChildCreate() {
+    public function actionCreateChild() {
 
         $model = new Navigation;
 
@@ -109,12 +84,10 @@ class NavigationController extends FController {
                 $this->redirect(array('create'));}
 
             elseif($model->catalog_id != NULL){
-                $nodeModel = new Node;
-                $parentModel = $this->loadNodeModel($model->parent);
 
-                if ($nodeModel->appendTo($parentModel)) {
-                    $model->node_id = $nodeModel->id;
+                $parentModel = $this->loadModel($model->parent);
 
+                if ($model->appendTo($parentModel)) {
                     if($model->save())
                         $this->redirect(array('admin'));
                 }
@@ -125,26 +98,45 @@ class NavigationController extends FController {
         }
 
 
-        $this->render('navigation_childcreate', array(
+        $this->render('navigation_create_child', array(
             'model' => $model
         ));
     }
 
+
+    public function actionUpdate($id) {
+
+        $model = $this->loadModel($id);
+        // Uncomment the following line if AJAX validation is needed
+        // $this->performAjaxValidation($model);
+
+        if (isset($_POST['Navigation']) ) {
+            $model->attributes = $_POST['Navigation'];
+
+            if($model->saveNode())
+                $this->redirect(array('admin'));
+        }
+
+
+            $this->render('navigation_update', array(
+                'model' => $model
+            ));
+
+
+    }
     /**
      * Updates a particular model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
-        //获取原node
-        $nodeModel = $this->loadNodeModel($id);
-        //获取原navigation表单
+    public function actionUpdateChild($id) {
+
+
         $model = $this->loadModel($id);
-        $beforeNodeModel = $nodeModel;
-        $beforeParent = NULL;
-        $beforeParent = $nodeModel->getParent()->id;
-        //这里的parent是赋予表单显示的
-        $model->parent = $beforeParent;
+
+        $model->parent = $model->getParent()->id;
+        $beforeModel=$model;
+        $beforeModelParent=$model->parent;
 
 
         // Uncomment the following line if AJAX validation is needed
@@ -156,34 +148,29 @@ class NavigationController extends FController {
 
 
             //  不等于自身id                 不等于当前父节点
-            if ($model->parent != $nodeModel->id && $model->parent != $beforeParent) {
+            if ($model->parent != $model->id && $model->parent != $beforeModelParent) {
 
                 //不允许是自身的子节点
-                if (!$this->loadNodeModel($model->parent)->isDescendantOf($beforeNodeModel)) {
+                if (!$this->loadModel($model->parent)->isDescendantOf($beforeModel)) {
 
-                    @$nodeModel->moveAsLast($this->loadNodeModel($model->parent));
+                    $model->moveAsLast($this->loadModel($model->parent));
                 }
             }
-            if($model->save()&&$nodeModel->saveNode())
+            if($model->saveNode())
                 $this->redirect(array('admin'));
         }
 
 
-        if($model->root == 0){
-            $this->render('navigation_update', array(
+            $this->render('navigation_update_child', array(
                 'model' => $model
             ));
-        }else{
-            $this->render('navigation_childupdate', array(
-                'model' => $model
-            ));
-        }
+
 
     }
 
     public function actionPrevUp($id) {
         $id = (int) $id;
-        $model = $this->loadNodeModel($id);
+        $model = $this->loadModel($id);
         $prevSibling = $model->prevSibling;
         if (is_object($prevSibling))
             $model->moveBefore($prevSibling);
@@ -192,7 +179,7 @@ class NavigationController extends FController {
 
     public function actionNextUp($id) {
         $id = (int) $id;
-        $model = $this->loadNodeModel($id);
+        $model = $this->loadModel($id);
         $nextSibling = $model->nextSibling;
         if (is_object($nextSibling))
             $model->moveAfter($nextSibling);
@@ -206,16 +193,12 @@ class NavigationController extends FController {
      */
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
-            $count=Node::model()->findByPk($id)->descendants()->count();
+            $count=Navigation::model()->findByPk($id)->descendants()->count();
 
             if($count>0){
                 $this->redirect(array('admin'));
-            }else{
-
-                if($model = Navigation::model()->findByPk($id))
-                    $model->delete();
-                if($nodeModel = $this->loadNodeModel($id))
-                    $nodeModel->deleteNode();
+            }elseif($model = $this->loadModel($id)){
+                    $model->deleteNode();
             }
 
         }

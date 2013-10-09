@@ -36,7 +36,7 @@
     <div id="nav_pugin_bar"  style="display: none">
         <ul>
             <li><a href="<?php echo Yii::app()->createUrl('/admin/plugin/view/'); ?>" target="main" ><span>内容管理</span></a></li>
-            <li><a href="<?php echo Yii::app()->createUrl('/plugin/images/admin'); ?>" target="main" ><span>图集管理</span></a></li>
+            <li><a href="<?php echo Yii::app()->createUrl('/post/images/admin'); ?>" target="main" ><span>图集管理</span></a></li>
             <li><a href="<?php echo Yii::app()->createUrl('/admin/plugin/admin'); ?>" target="main" ><span>模块管理</span></a></li>
 
 

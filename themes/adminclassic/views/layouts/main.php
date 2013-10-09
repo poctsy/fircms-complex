@@ -30,11 +30,11 @@
         <?php $this->widget('zii.widgets.CMenu',array(
             'items'=>array(
                 array('label'=>Yii::t('core', 'Home'), 'url'=>array('/admin/index/index'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>Yii::t('core', 'Article'), 'url'=>array('/plugin/article/admin'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>Yii::t('core', 'Picture'), 'url'=>array('/plugin/picture/admin'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>Yii::t('core', 'Images'), 'url'=>array('/plugin/images/admin'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>Yii::t('core', 'Page'), 'url'=>array('/plugin/page/admin'), 'visible'=>!Yii::app()->user->isGuest),
-                array('label'=>Yii::t('core', 'File'), 'url'=>array('/plugin/file/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('core', 'Article'), 'url'=>array('/post/article/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('core', 'Picture'), 'url'=>array('/post/picture/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('core', 'Images'), 'url'=>array('/post/images/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('core', 'Page'), 'url'=>array('/post/page/admin'), 'visible'=>!Yii::app()->user->isGuest),
+                array('label'=>Yii::t('core', 'File'), 'url'=>array('/post/file/admin'), 'visible'=>!Yii::app()->user->isGuest),
          array('label'=>Yii::t('core', 'Attachment'), 'url'=>array('/attachment/manage/admin'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>"查看留言", 'url'=>array('/comment/message/admin'), 'visible'=>!Yii::app()->user->isGuest),
                 array('label'=>"查看反馈", 'url'=>array('/comment/feedback/admin'), 'visible'=>!Yii::app()->user->isGuest),
