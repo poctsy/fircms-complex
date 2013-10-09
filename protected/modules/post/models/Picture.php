@@ -15,7 +15,7 @@ class Picture extends Post {
     public function rules() {
         return array_merge(
             array(
-                array('picture,title,catalog_id','required')),
+                array('picture','required')),
             parent::rules()
         );
     }

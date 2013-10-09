@@ -13,7 +13,7 @@ class File extends Post {
     public function rules() {
         return array_merge(
             array(
-                array('file,title,catalog_id','required')),
+                array('file','required')),
             parent::rules()
         );
     }
