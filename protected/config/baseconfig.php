@@ -51,7 +51,7 @@ return array(
             'configTableName' => '{{config}}',
             'strictMode' => false,
         ),
-        'db' => require(Fircms::$baseConfigPath . '/database.php'),
+        'db' => require(Fircms::$baseConfigPath . DIRECTORY_SEPARATOR . 'database.php'),
         'errorHandler' => array(
         ),
     

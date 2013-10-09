@@ -13,7 +13,7 @@ return array(
 	'components'=>array(
 		// uncomment the following to use a MySQL database
 
-        'db' => require(Fircms::$baseConfigPath . '/database.php'),
+        'db' => require(Fircms::$baseConfigPath . DIRECTORY_SEPARATOR .'database.php'),
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
