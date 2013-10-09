@@ -1,3 +1,6 @@
+.clear{
+    clear: both;
+}
 
 #header{
     color: #ffffff;
@@ -14,14 +17,13 @@
     float: left;
 
 }
-#adminnav a{
-    color: #ffffff;
+
+#adminnav ul {
+
+    float: left;
+
 }
-#adminnav img{
-    padding-top: 7px;
-    width:67px;
-    height:60px;
-}
+
 #adminnav ul li{
     list-style: none;
     padding-right: 10px;
@@ -31,12 +33,15 @@
 
 }
 
-
-#adminnav ul {
-
-    float: left;
-
+#adminnav a{
+    color: #ffffff;
 }
+#adminnav img{
+    padding-top: 7px;
+    width:67px;
+    height:60px;
+}
+
 #adminnav span{
     font-size: 12px;
     float: left;
@@ -53,9 +58,7 @@
     float: right;
 }
 
-.clear{
-    clear: both;
-}
+
 
 #mainmenu
 {
@@ -159,10 +162,6 @@ div.breadcrumbs a
 }
 
 
-.portlet
-{
-
-}
 
 .portlet-decoration
 {
@@ -316,11 +315,22 @@ label{
     float: left;
 
 }
+
+#nav_select ul{
+    margin-left: 5px;
+}
+
+
 #sidebar li{
     margin-top:5px;
     list-style: none;
 }
 
+#sidebar li a:hover{
+    color: #ffffff;
+    background: url(../img/left-select.gif) no-repeat;
+
+}
 
 #sidebar a{
 
@@ -331,19 +341,13 @@ label{
     text-decoration: none;
 
 }
-#sidebar li a:hover{
-    color: #ffffff;
-    background: url(../img/left-select.gif) no-repeat;
-
-}
 
 #nav_select{
     margin-top: 5px;
     height: 720px;
 }
-#nav_select ul{
-    margin-left: 5px;
-}
+
+
 #content{
     padding-left: 10px;
     margin: 5px;
