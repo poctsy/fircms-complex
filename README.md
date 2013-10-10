@@ -21,7 +21,9 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 ### 部署说明： ###
 
-#### 需要建立3个文件夹  ####
+#### 需要建立3个文件夹 ，与导入数据表 ####
+
+#####建立3个文件夹
 - 根目录下新建assets文件夹
 - protected目录下新建runtime文件夹
 - protected\runtime目录下新建admin文件夹
@@ -33,11 +35,17 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 >protected/runtime/admin
 
+
+#####导入数据表
+>数据库配置文件位置：protected/config/database.php
+>数据库配置文件位置：protected/data/fircms.xxxx.sql
+
+- 数据库名dbname  
+- 数据库帐号username 
+- 数据库密码password
+
 <pre>
-默认是sqlite数据库作为演示作用，没来得及仔细测试。
-更改mysql数据库可避免意外问题。
-下面是修改的文件位置，去除mysql的代码注释，将sqlite注释掉。
-protected/config/database.php 
+暂时取消sqlite版本。
 </pre>
 
  
