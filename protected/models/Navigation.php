@@ -173,7 +173,7 @@ class Navigation extends FActiveRecord {
 
 
             if($navigation->isRoot()){
-                $name=$navigation->name;
+                $name=$navigation->name.'    (调用参数:'.$navigation->type.')';
                 $updateAction="update";
             }else{
                 $catalog=Catalog::model()->findByPk($navigation->catalog_id);

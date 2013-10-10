@@ -58,7 +58,7 @@ jQuery(document).on('click','#navigationtree a.delete',function() {
 //$b->moveAsFirst($a);      
 ?>
 
-默认首页导航条1 (top_1)
+
 <div id="navigationtree" >
     <div><?php Navigation::printTree(); ?></div>
 </div>

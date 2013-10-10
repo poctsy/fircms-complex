@@ -1,6 +1,7 @@
 <?php
 class TopNav extends CWidget
 {
+    //暂时为二级菜单，后期再加参数
     public $name;
     public $rootUlCss;
     public $childULCss;
@@ -45,7 +46,7 @@ class TopNav extends CWidget
                 if ($catalog->level == $level)
                     echo CHtml::closeTag('li') . "\n";
                 else if ($catalog->level > $level)
-                    echo CHtml::openTag('ul') . "\n";
+                    echo CHtml::openTag('ul',array('class'=>$this->childULCss)) . "\n";
                 else {
                     echo CHtml::closeTag('li') . "\n";
 
