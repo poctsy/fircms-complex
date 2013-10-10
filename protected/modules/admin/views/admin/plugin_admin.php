@@ -36,8 +36,8 @@ $('.search-form form').submit(function(){
 		'id',
 		'name',
                'en_name',
-              'listprefix',
-		'prefix',
+              'first_prefix',
+		'second_prefix',
 		'path',
 		              array(
             'class' => 'CButtonColumn',

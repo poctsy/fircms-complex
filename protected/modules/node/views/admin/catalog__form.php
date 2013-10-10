@@ -41,18 +41,18 @@ if(val==" .  Catalog::CATALOG_LIST_MOULD . "){
    }
 if(val==" .  Catalog::CATALOG_COVER_MOULD . "){
          $('#Catalog_plugin_id_cover').show();
-         $('#Catalog_list_view').attr('disabled',true)
+         $('#Catalog_first_view').attr('disabled',true)
 
    }
 if(val==" . Catalog::CATALOG_SINGLEPAGE_MOULD . "){
           $('#Catalog_plugin_id_singlepage').show();
-          $('#Catalog_list_view').attr('disabled',true)
+          $('#Catalog_first_view').attr('disabled',true)
 
 
     }
-if(val==" . Catalog::CATALOG_MULTIPLE_MOULD . "){
+if(val==" . Catalog::CATALOG_OTHER_MOULD . "){
           $('#Catalog_plugin_id_multiple').show();
-          $('#Catalog_list_view').attr('disabled',true)
+          $('#Catalog_first_view').attr('disabled',true)
 
 
     }
@@ -61,8 +61,8 @@ if(val==" . Catalog::CATALOG_LINK . "){
   $('#Catalog_title').attr('disabled',true)
     $('#Catalog_keyword').attr('disabled',true)
       $('#Catalog_description').attr('disabled',true)
-        $('#Catalog_list_view').attr('disabled',true)
-          $('#Catalog_content_view').attr('disabled',true)
+        $('#Catalog_first_view').attr('disabled',true)
+          $('#Catalog_second_view').attr('disabled',true)
             $('#Catalog_plugin_id_link').show()
             $('#Catalog_plugin_id_link').attr('disabled',true)
 
@@ -85,7 +85,7 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
     <div class="row">
         <?php echo $form->labelEx($model, 'type'); ?>
-        <?php echo $form->radioButtonList($model, 'type', array(Catalog::CATALOG_LIST_MOULD => '列表',Catalog::CATALOG_COVER_MOULD => '封面', Catalog::CATALOG_SINGLEPAGE_MOULD => '单页' ,Catalog::CATALOG_MULTIPLE_MOULD => '多页', Catalog::CATALOG_LINK => '链接'), array('class' => 'typeredio', 'separator' => "")); ?>
+        <?php echo $form->radioButtonList($model, 'type', array(Catalog::CATALOG_LIST_MOULD => '列表',Catalog::CATALOG_COVER_MOULD => '封面', Catalog::CATALOG_SINGLEPAGE_MOULD => '单页' ,Catalog::CATALOG_OTHER_MOULD => '其他', Catalog::CATALOG_LINK => '链接'), array('class' => 'typeredio', 'separator' => "")); ?>
         <?php echo $form->error($model, 'type'); ?>
     </div>
 
@@ -114,7 +114,7 @@ if(val==" . Catalog::CATALOG_LINK . "){
         <?php echo $form->error($model, 'plugin_id_singlepage'); ?>
 
 
-        <?php echo $form->dropDownList($model, 'plugin_id_multiple', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_MULTIPLE_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
+        <?php echo $form->dropDownList($model, 'plugin_id_multiple', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_OTHER_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
         <?php echo $form->error($model, 'plugin_id_multiple'); ?>
 
         <?php echo
@@ -181,23 +181,18 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'list_view'); ?>
-        <?php echo $form->dropDownList($model, 'list_view', Fircms::getView("post","list_"), array('style' => 'width:200px')); ?>
-        <?php echo $form->error($model, 'list_view'); ?>
+        <?php echo $form->labelEx($model, 'first_view'); ?>
+        <?php echo $form->dropDownList($model, 'first_view', Fircms::getView("post","list_"), array('style' => 'width:200px')); ?>
+        <?php echo $form->error($model, 'first_view'); ?>
     </div>
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'content_view'); ?>
-        <?php echo $form->dropDownList($model, 'content_view', Fircms::getView("post","content_"), array('style' => 'width:200px')); ?>
-        <?php echo $form->error($model, 'content_view'); ?>
+        <?php echo $form->labelEx($model, 'second_view'); ?>
+        <?php echo $form->dropDownList($model, 'second_view', Fircms::getView("post","content_"), array('style' => 'width:200px')); ?>
+        <?php echo $form->error($model, 'second_view'); ?>
     </div>
 
 
-    <div class="row">
-        <?php echo $form->labelEx($model, 'page_view'); ?>
-        <?php echo $form->dropDownList($model, 'page_view', Fircms::getView("page","page_"), array('style' => 'width:200px')); ?>
-        <?php echo $form->error($model, 'page_view'); ?>
-    </div>
 
 
     <div class="row">

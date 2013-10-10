@@ -37,7 +37,7 @@ class Catalog extends FActiveRecord {
     const CATALOG_LIST_MOULD = 1;
     const CATALOG_COVER_MOULD = 2;
     const CATALOG_SINGLEPAGE_MOULD = 3;
-    const CATALOG_MULTIPLE_MOULD = 4;
+    const CATALOG_OTHER_MOULD = 4;
     const CATALOG_LINK = 5;
     public $type=self::CATALOG_LIST_MOULD;
 
@@ -86,13 +86,13 @@ class Catalog extends FActiveRecord {
             array('plugin_id,type,parent,plugin_id_list,plugin_id_cover,plugin_id_singlepage,plugin_id_multiple', 'numerical', 'integerOnly' => true),
             array(' keyword, description, url', 'length', 'max' => 30),
             array('title', 'length', 'max' => 50),
-            array('list_view', 'length', 'max' => 55),
-            array('content_view', 'length', 'max' => 55),
+            array('first_view', 'length', 'max' => 55),
+            array('second_view', 'length', 'max' => 55),
 
             array('content', 'filter', 'filter' => array($this, 'contentPurify')),
-            array('name,title, keyword, description,content, content_view,list_view', 'filter', 'filter' => array($this, 'Purify')),
+            array('name,title, keyword, description,content, second_view,first_view', 'filter', 'filter' => array($this, 'Purify')),
 
-            array('id,lft, rgt, level,name,title, keyword, description, type, plugin_id, url, content, content_view', 'safe', 'on' => 'search'),
+            array('id,lft, rgt, level,name,title, keyword, description, type, plugin_id, url, content, second_view', 'safe', 'on' => 'search'),
 
         );
     }
@@ -124,9 +124,8 @@ class Catalog extends FActiveRecord {
             'description' => '网页描述(SEO)',
             'type' => '栏目模式',
             'plugin_id' => '选择模型',
-            'list_view' => '列表页模板',
-            'content_view' => '内容页模板',
-            'page_view' => '单页模板',
+            'first_view' => '栏目页视图模板',
+            'second_view' => '内容页视图模板',
             'content' => '栏目简介',
         );
     }
@@ -161,7 +160,7 @@ class Catalog extends FActiveRecord {
         $criteria->compare('plugin_id', $this->plugin_id);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('content', $this->content, true);
-        $criteria->compare('view', $this->content_view, true);
+        $criteria->compare('view', $this->second_view, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -192,7 +191,7 @@ class Catalog extends FActiveRecord {
             $this->plugin_id=$this->plugin_id_cover;
         if($this->type == Catalog::CATALOG_SINGLEPAGE_MOULD)
             $this->plugin_id=$this->plugin_id_singlepage;
-        if($this->type == Catalog::CATALOG_MULTIPLE_MOULD)
+        if($this->type == Catalog::CATALOG_OTHER_MOULD)
             $this->plugin_id=$this->plugin_id_multiple;
         if($this->plugin_id==NULL){
             $this->plugin_id=1;

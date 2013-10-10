@@ -35,7 +35,7 @@ class PostController extends FController
         }
         $dataProvider=new CActiveDataProvider('Post',array('criteria'=>$criteria));
 
-        $this->render($catalogModel->list_view,array(
+        $this->render($catalogModel->first_view,array(
             'dataProvider'=>$dataProvider,
         ));
     }
@@ -47,7 +47,7 @@ class PostController extends FController
      */
     public function actionView($id)
     {
-        $this->render(Post::content_view($id),array(
+        $this->render(Post::second_view($id),array(
             'model'=>$this->loadModel($id),
         ));
     }

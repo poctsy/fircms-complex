@@ -26,7 +26,7 @@
 	</div>
     <?php echo $form->labelEx($model, 'type'); ?>
     <?php echo $form->dropDownList($model, 'type',
-        array(Catalog::CATALOG_LIST_MOULD=>"列表模块",Catalog::CATALOG_COVER_MOULD=>'封面模块',Catalog::CATALOG_SINGLEPAGE_MOULD=>'单页模块',Catalog::CATALOG_MULTIPLE_MOULD=>'多页模块')
+        array(Catalog::CATALOG_LIST_MOULD=>"列表模块",Catalog::CATALOG_COVER_MOULD=>'封面模块',Catalog::CATALOG_SINGLEPAGE_MOULD=>'单页模块',Catalog::CATALOG_OTHER_MOULD=>'其他模块')
     ); ?>
     <?php echo $form->error($model, 'type'); ?>
         <div class="row">
@@ -36,14 +36,14 @@
 	</div>
         
         <div class="row">
-		<?php echo $form->labelEx($model,'listprefix'); ?>
-		<?php echo $form->textField($model,'listprefix',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'listprefix'); ?>
+		<?php echo $form->labelEx($model,'first_prefix'); ?>
+		<?php echo $form->textField($model,'first_prefix',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->error($model,'first_prefix'); ?>
 	</div>
 	<div class="row">
-		<?php echo $form->labelEx($model,'prefix'); ?>
-		<?php echo $form->textField($model,'prefix',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'prefix'); ?>
+		<?php echo $form->labelEx($model,'second_prefix'); ?>
+		<?php echo $form->textField($model,'second_prefix',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->error($model,'second_prefix'); ?>
 	</div>
 
 	<div class="row">

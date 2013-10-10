@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 10 月 09 日 07:37
+-- 生成日期: 2013 年 10 月 10 日 07:24
 -- 服务器版本: 5.5.24-log
 -- PHP 版本: 5.3.13
 
@@ -19,34 +19,6 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `fircms`
 --
-
--- --------------------------------------------------------
-
---
--- 表的结构 `fircms_article`
---
-
-CREATE TABLE IF NOT EXISTS `fircms_article` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catalog_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `keyword` varchar(30) NOT NULL DEFAULT '',
-  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图，可为空',
-  `description` varchar(30) NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL COMMENT '编辑者',
-  `view_count` int(11) NOT NULL DEFAULT '0' COMMENT '观看的次数',
-  `create_time` int(11) NOT NULL DEFAULT '0',
-  `content` text NOT NULL COMMENT '文章数据',
-  PRIMARY KEY (`id`),
-  KEY `FK_article_catalog` (`catalog_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- 转存表中的数据 `fircms_article`
---
-
-INSERT INTO `fircms_article` (`id`, `catalog_id`, `title`, `keyword`, `thumb`, `description`, `user_id`, `view_count`, `create_time`, `content`) VALUES
-(8, 389, '11', '', '', '', 0, 0, 0, '11');
 
 -- --------------------------------------------------------
 
@@ -224,34 +196,30 @@ CREATE TABLE IF NOT EXISTS `fircms_catalog` (
   `level` smallint(5) unsigned NOT NULL,
   `name` varchar(30) NOT NULL,
   `thumb` varchar(130) DEFAULT NULL,
-  `title` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL DEFAULT '',
   `keyword` varchar(30) NOT NULL DEFAULT '',
   `description` varchar(30) NOT NULL DEFAULT '',
   `type` int(11) NOT NULL COMMENT '栏目列表类型',
-  `navigation_id` int(11) NOT NULL,
   `plugin_id` int(11) NOT NULL COMMENT '文章类型/ 为view模板自动查找选择做先决条件',
-  `url` varchar(30) NOT NULL,
-  `content` text NOT NULL COMMENT '栏目简介',
-  `list_view` varchar(50) NOT NULL DEFAULT '' COMMENT '列表页视图',
-  `content_view` varchar(50) NOT NULL DEFAULT '' COMMENT '文章详细页视图',
+  `url` varchar(30) NOT NULL DEFAULT '',
+  `content` text COMMENT '栏目简介',
+  `first_view` varchar(50) NOT NULL DEFAULT '' COMMENT '列表页视图',
+  `second_view` varchar(50) NOT NULL DEFAULT '' COMMENT '文章详细页视图',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=409 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=422 ;
 
 --
 -- 转存表中的数据 `fircms_catalog`
 --
 
-INSERT INTO `fircms_catalog` (`id`, `lft`, `rgt`, `level`, `name`, `thumb`, `title`, `keyword`, `description`, `type`, `navigation_id`, `plugin_id`, `url`, `content`, `list_view`, `content_view`) VALUES
-(390, 1, 20, 1, '顶级分类', NULL, '', '', '', 1, 0, 1, '', '', '', ''),
-(391, 2, 3, 2, '111', '', '', '', '', 1, 0, 2, '', '', 'list_article_one', 'content_article_one'),
-(392, 4, 5, 2, '222', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(393, 6, 7, 2, '22', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(394, 8, 9, 2, '555', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(395, 10, 11, 2, '1111', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(402, 12, 13, 2, '公司简介', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(403, 14, 15, 2, '222', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(404, 16, 17, 2, '222', '', '', '', '', 3, 0, 2, '', '', '', 'content_article_one'),
-(408, 18, 19, 2, '333', '', '222', '', '', 3, 0, 1, '', '', '', 'content_article_one');
+INSERT INTO `fircms_catalog` (`id`, `lft`, `rgt`, `level`, `name`, `thumb`, `title`, `keyword`, `description`, `type`, `plugin_id`, `url`, `content`, `first_view`, `second_view`) VALUES
+(409, 1, 14, 1, '顶级分类', NULL, '', '', '', 1, 1, '', '', '', ''),
+(410, 2, 7, 2, '2222', '', '', '', '', 1, 2, 'aa', '11', 'list_post', 'content_post'),
+(411, 8, 13, 2, '2222', '', '', '', '', 1, 2, 'cc', '222', 'list_post', 'content_post'),
+(415, 3, 4, 3, '22', '', '', '', '', 1, 2, 'bb', '', 'list_post', 'content_post'),
+(416, 5, 6, 3, '2222', '', '', '', '', 1, 2, '22', '', 'list_post', 'content_post'),
+(420, 9, 12, 3, '555', '', '', '', '', 1, 2, '55', '', 'list_post', 'content_post'),
+(421, 10, 11, 4, '333', '', '', '', '', 1, 2, '222', '', 'list_post', 'content_post');
 
 -- --------------------------------------------------------
 
@@ -320,57 +288,6 @@ CREATE TABLE IF NOT EXISTS `fircms_feedback` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `fircms_file`
---
-
-CREATE TABLE IF NOT EXISTS `fircms_file` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catalog_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `keyword` varchar(30) NOT NULL DEFAULT '',
-  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图，可为空',
-  `description` varchar(30) NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL COMMENT '编辑者',
-  `view_count` int(11) NOT NULL DEFAULT '0' COMMENT '观看的次数',
-  `create_time` int(11) NOT NULL DEFAULT '0',
-  `file` text NOT NULL COMMENT '文件序列化数据',
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_file_catalog` (`catalog_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-
--- --------------------------------------------------------
-
---
--- 表的结构 `fircms_images`
---
-
-CREATE TABLE IF NOT EXISTS `fircms_images` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catalog_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `keyword` varchar(30) NOT NULL DEFAULT '',
-  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图，可为空',
-  `description` varchar(30) NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL COMMENT '编辑者',
-  `view_count` int(11) NOT NULL DEFAULT '0' COMMENT '观看的次数',
-  `create_time` int(11) NOT NULL DEFAULT '0',
-  `images` text NOT NULL COMMENT '图片数据  一个产品可拥有多个详细图片，在内容页里可以切换',
-  `content` text NOT NULL COMMENT '图集描述说明',
-  PRIMARY KEY (`id`),
-  KEY `FK_images__catalog` (`catalog_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- 转存表中的数据 `fircms_images`
---
-
-INSERT INTO `fircms_images` (`id`, `catalog_id`, `title`, `keyword`, `thumb`, `description`, `user_id`, `view_count`, `create_time`, `images`, `content`) VALUES
-(8, 388, '333', '', '', '', 0, 0, 0, '{img}{src}attachment/image/20131007/20131007172617_24798.jpg{/src}{text}undefined{/text}{/img}', '343');
-
--- --------------------------------------------------------
-
---
 -- 表的结构 `fircms_message`
 --
 
@@ -411,12 +328,20 @@ CREATE TABLE IF NOT EXISTS `fircms_navigation` (
   `root` int(11) unsigned NOT NULL,
   `lft` int(11) unsigned NOT NULL,
   `rgt` int(10) unsigned NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `name` varchar(30) NOT NULL DEFAULT '',
   `level` smallint(5) unsigned NOT NULL,
   `catalog_id` int(11) NOT NULL,
   `type` varchar(20) NOT NULL COMMENT '位置类型，例如top bottom sider',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=397 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=403 ;
+
+--
+-- 转存表中的数据 `fircms_navigation`
+--
+
+INSERT INTO `fircms_navigation` (`id`, `root`, `lft`, `rgt`, `name`, `level`, `catalog_id`, `type`) VALUES
+(401, 401, 1, 4, '首页导航条1', 1, 0, 'top_1'),
+(402, 401, 2, 3, '', 2, 410, '');
 
 -- --------------------------------------------------------
 
@@ -430,36 +355,7 @@ CREATE TABLE IF NOT EXISTS `fircms_page` (
   `content` text NOT NULL COMMENT '单页数据',
   PRIMARY KEY (`id`),
   KEY `FK_page_catalog_id` (`catalog_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- 转存表中的数据 `fircms_page`
---
-
-INSERT INTO `fircms_page` (`id`, `catalog_id`, `content`) VALUES
-(3, 408, '111');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `fircms_picture`
---
-
-CREATE TABLE IF NOT EXISTS `fircms_picture` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catalog_id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `keyword` varchar(30) NOT NULL DEFAULT '',
-  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图，可为空',
-  `description` varchar(30) NOT NULL DEFAULT '',
-  `user_id` int(11) NOT NULL COMMENT '编辑者',
-  `view_count` int(11) NOT NULL DEFAULT '0' COMMENT '观看的次数',
-  `create_time` int(11) NOT NULL DEFAULT '0',
-  `picture` text NOT NULL COMMENT '图片序列化数据  一个产品可拥有多个详细图片，在内容页里可以切换',
-  `content` text NOT NULL COMMENT '图集描述说明',
-  PRIMARY KEY (`id`),
-  KEY `FK_picture__catalog` (`catalog_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -471,25 +367,50 @@ CREATE TABLE IF NOT EXISTS `fircms_plugin` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `en_name` varchar(30) NOT NULL,
-  `type` int(11) NOT NULL DEFAULT '0' COMMENT '模型0:无分类;1:列表模型;2封面模型;3单页模型;4:多页模型;',
-  `listprefix` varchar(30) NOT NULL DEFAULT '',
-  `prefix` varchar(30) NOT NULL DEFAULT '',
+  `type` int(11) NOT NULL DEFAULT '0' COMMENT '内容模型0:无分类;1:列表模型;2封面模型;3单页模型;4:其他模型;',
+  `first_prefix` varchar(30) NOT NULL DEFAULT '',
+  `second_prefix` varchar(30) NOT NULL DEFAULT '',
   `path` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `fircms_plugin`
 --
 
-INSERT INTO `fircms_plugin` (`id`, `name`, `en_name`, `type`, `listprefix`, `prefix`, `path`) VALUES
+INSERT INTO `fircms_plugin` (`id`, `name`, `en_name`, `type`, `first_prefix`, `second_prefix`, `path`) VALUES
 (1, '空模块', 'null', 0, 'null', 'null', 'null'),
-(2, '文章模块', 'article', 1, 'list_article_', 'content_article_', 'plugin'),
-(3, '图片模块', 'picture', 1, 'list_picture_', 'content_picture_', 'plugin'),
-(4, '图集模块', 'images', 1, 'list_images_', 'content_images_', 'plugin'),
-(5, '文件模块', 'file', 1, 'list_file_', 'content_file_', 'plugin'),
-(6, '默认单页', 'page', 3, '', 'content_page_', 'plugin');
+(2, '文章模块', 'article', 1, 'list_article_', 'content_article_', 'post'),
+(3, '图片模块', 'picture', 1, 'list_picture_', 'content_picture_', 'post'),
+(4, '图集模块', 'images', 1, 'list_images_', 'content_images_', 'post'),
+(5, '文件模块', 'file', 1, 'list_file_', 'content_file_', 'post'),
+(6, '默认单页', 'page', 3, 'post_', '', 'page'),
+(7, '默认封面', 'cover', 2, 'cover_', '', 'cover');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `fircms_post`
+--
+
+CREATE TABLE IF NOT EXISTS `fircms_post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catalog_id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `keyword` varchar(30) NOT NULL DEFAULT '',
+  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图，可为空',
+  `description` varchar(30) NOT NULL DEFAULT '',
+  `user_id` int(11) NOT NULL COMMENT '编辑者',
+  `view_count` int(11) NOT NULL DEFAULT '0' COMMENT '观看的次数',
+  `create_time` int(11) NOT NULL DEFAULT '0',
+  `content` text NOT NULL COMMENT '文字数据',
+  `images` text NOT NULL COMMENT '图片数据  一个产品可拥有多个详细图片，在内容页里可以切换',
+  `picture` text NOT NULL COMMENT '单图数据',
+  `file` text NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_article_catalog` (`catalog_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -575,7 +496,7 @@ CREATE TABLE IF NOT EXISTS `fircms_user` (
 
 INSERT INTO `fircms_user` (`id`, `username`, `password`, `salt`, `email`, `created_time`, `last_login_time`, `this_login_time`, `last_login_ip`, `this_login_ip`, `realname`, `province`, `city`, `company`, `weibo`, `phone`, `qq`, `profile`) VALUES
 (1, 'fircms', '550e35731605e382ece7229bf526e3cc', 'TUhGDB&,7-okBSM0y!ql1j]C+=w)RQqQ', 'webmaster@example.com', 1380376428, 1381034291, 1381132703, '127.0.0.1', '127.0.0.1', '', '', '', '', '', 0, 0, ''),
-(2, 'admin', '5d1fdb4cb565375a39561a85b6585b54', ':u!9f}`s1Dk)5-fnG8wP{,dS5N,)5Yb@', 'admin@admin.com', 1380376428, 1381136804, 1381286508, '127.0.0.1', '127.0.0.1', '', '', '', '', '', 0, 0, '');
+(2, 'admin', '5d1fdb4cb565375a39561a85b6585b54', ':u!9f}`s1Dk)5-fnG8wP{,dS5N,)5Yb@', 'admin@admin.com', 1380376428, 1381286508, 1381307799, '127.0.0.1', '127.0.0.1', '', '', '', '', '', 0, 0, '');
 
 --
 -- 限制导出的表

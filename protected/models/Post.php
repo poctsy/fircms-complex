@@ -158,14 +158,14 @@ class Post extends FActiveRecord {
         return true;
     }
 
-    public function list_view($name){
+    public function first_view($name){
         $catalog=Catalog::nameGet($name);
-        return $catalog->list_view;
+        return $catalog->first_view;
     }
 
-    public function content_view($id){
+    public function second_view($id){
         $model=Post::model()->findByPk($id);
-        return $model->catalog->content_view;
+        return $model->catalog->second_view;
     }
 
 }
