@@ -49,7 +49,10 @@
 <a name="%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E" class="anchor" href="#%E9%83%A8%E7%BD%B2%E8%AF%B4%E6%98%8E"><span class="octicon octicon-link"></span></a>部署说明：</h3>
 
 <h4>
-<a name="%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" href="#%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="octicon octicon-link"></span></a>需要建立3个文件夹</h4>
+<a name="%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9-%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E8%A1%A8" class="anchor" href="#%E9%9C%80%E8%A6%81%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9-%E4%B8%8E%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="octicon octicon-link"></span></a>需要建立3个文件夹 ，与导入数据表</h4>
+
+<h5>
+<a name="%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9" class="anchor" href="#%E5%BB%BA%E7%AB%8B3%E4%B8%AA%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="octicon octicon-link"></span></a>建立3个文件夹</h5>
 
 <ul>
 <li>根目录下新建assets文件夹</li>
@@ -65,11 +68,21 @@
 <p>protected/runtime/admin</p>
 </blockquote>
 
-<pre>
-默认是sqlite数据库作为演示作用，没来得及仔细测试。
-更改mysql数据库可避免意外问题。
-下面是修改的文件位置，去除mysql的代码注释，将sqlite注释掉。
-protected/config/database.php 
+<h5>
+<a name="%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E8%A1%A8" class="anchor" href="#%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E8%A1%A8"><span class="octicon octicon-link"></span></a>导入数据表</h5>
+
+<blockquote>
+<p>数据库配置文件位置：protected/config/database.php
+数据库配置文件位置：protected/data/fircms.xxxx.sql</p>
+</blockquote>
+
+<ul>
+<li>数据库名dbname<br>
+</li>
+<li>数据库帐号username </li>
+<li>数据库密码password</li>
+</ul><pre>
+暂时取消sqlite版本。
 </pre>
 
 <h3>
