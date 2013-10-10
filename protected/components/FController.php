@@ -23,12 +23,7 @@ class FController extends Controller {
         return $catalogList;
     }
 
-    public function setQuickPlugin($pluginname) {
-     
-        $plugin = Plugin::model()->find(array("condition"=>"en_name=:pluginname",'params'=>array(':pluginname'=>$pluginname)));
-        $pluginname.='quick';
-        Yii::app()->params[$pluginname] = $plugin;
-    }
+
     
     final public function resolveViewFile($viewName, $viewPath, $basePath, $moduleViewPath = null) {
         if (empty($viewName))
