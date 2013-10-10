@@ -17,7 +17,6 @@
  * @property string $name
  * @property string $keyword
  * @property string $description
- * @property string $type
  * @property integer $plugin_id
  * @property string $url
  * @property text $content
@@ -34,18 +33,9 @@ class Catalog extends FActiveRecord {
     const LEVEL = "…";
     public $_rootName="顶级分类";
 
-    const CATALOG_LIST_MOULD = 1;
-    const CATALOG_COVER_MOULD = 2;
-    const CATALOG_SINGLEPAGE_MOULD = 3;
-    const CATALOG_OTHER_MOULD = 4;
-    const CATALOG_LINK = 5;
-    public $type=self::CATALOG_LIST_MOULD;
+
 
     public $parent;
-    public $plugin_id_list;
-    public $plugin_id_cover;
-    public $plugin_id_singlepage;
-    public $plugin_id_multiple;
 
 
     public function tableName() {
@@ -77,13 +67,13 @@ class Catalog extends FActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('parent,name,thumb,plugin_id_list,plugin_id_cover,plugin_id_singlepage,plugin_id_multiple', 'safe',),
+            array('parent,name,thumb,plugin_id', 'safe',),
 
-            array('type,parent', 'required', 'on' => 'catalogupdate'),
-            array('name,url', 'required'),
+            array('parent', 'required', 'on' => 'catalogupdate'),
+            array('name,url,plugin_id', 'required'),
 
 
-            array('plugin_id,type,parent,plugin_id_list,plugin_id_cover,plugin_id_singlepage,plugin_id_multiple', 'numerical', 'integerOnly' => true),
+            array('plugin_id,parent,', 'numerical', 'integerOnly' => true),
             array(' keyword, description, url', 'length', 'max' => 30),
             array('title', 'length', 'max' => 50),
             array('first_view', 'length', 'max' => 55),
@@ -92,7 +82,7 @@ class Catalog extends FActiveRecord {
             array('content', 'filter', 'filter' => array($this, 'contentPurify')),
             array('name,title, keyword, description,content, second_view,first_view', 'filter', 'filter' => array($this, 'Purify')),
 
-            array('id,lft, rgt, level,name,title, keyword, description, type, plugin_id, url, content, second_view', 'safe', 'on' => 'search'),
+            array('id,lft, rgt, level,name,title, keyword, description, plugin_id, url, content, second_view', 'safe', 'on' => 'search'),
 
         );
     }
@@ -122,8 +112,7 @@ class Catalog extends FActiveRecord {
             'title' => '网页标题',
             'keyword' => '网页关键字(SEO)',
             'description' => '网页描述(SEO)',
-            'type' => '栏目模式',
-            'plugin_id' => '选择模型',
+            'plugin_id' => '绑定模块',
             'first_view' => '栏目页视图模板',
             'second_view' => '内容页视图模板',
             'content' => '栏目简介',
@@ -156,7 +145,6 @@ class Catalog extends FActiveRecord {
         $criteria->compare('title', $this->title, true);
         $criteria->compare('keyword', $this->keyword, true);
         $criteria->compare('description', $this->description, true);
-        $criteria->compare('type', $this->type, true);
         $criteria->compare('plugin_id', $this->plugin_id);
         $criteria->compare('url', $this->url, true);
         $criteria->compare('content', $this->content, true);
@@ -184,40 +172,27 @@ class Catalog extends FActiveRecord {
 
 
 
-    public function beforeSave(){
-        if($this->type == Catalog::CATALOG_LIST_MOULD)
-            $this->plugin_id=$this->plugin_id_list;
-        if($this->type == Catalog::CATALOG_COVER_MOULD)
-            $this->plugin_id=$this->plugin_id_cover;
-        if($this->type == Catalog::CATALOG_SINGLEPAGE_MOULD)
-            $this->plugin_id=$this->plugin_id_singlepage;
-        if($this->type == Catalog::CATALOG_OTHER_MOULD)
-            $this->plugin_id=$this->plugin_id_multiple;
-        if($this->plugin_id==NULL){
-            $this->plugin_id=1;
-        }
-        return true;
-    }
+
 
 
     public function afterSave(){
-        $this->createPage($this->type,$this->plugin_id,$this->id);
+        $this->createPage($this->plugin_id,$this->id);
         return true;
 
     }
 
-    public  function createPage($type,$plugin_id,$id){
+    public  function createPage($plugin_id,$id){
 
-        if($type==Catalog::CATALOG_SINGLEPAGE_MOULD){
+
             $plugin=Plugin::model()->findByPk($plugin_id);
             if($plugin->en_name=='page'){
                 $model = new Page;
                 $model->catalog_id=$id;
                 $model->save();
-                var_dump($type.$plugin_id.$id);
+
 
             }
-        }
+
     }
 
     public static function printTree() {

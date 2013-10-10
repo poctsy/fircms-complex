@@ -12,5 +12,5 @@ $this->breadcrumbs=array(
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
-	'itemView'=>'post__view',
+	'itemView'=>'article__view_default',
 )); ?>

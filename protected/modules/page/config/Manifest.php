@@ -3,7 +3,7 @@ return array(
     'fircms' => array(
         'modules' => array(
             'page' => array(
-               // 'defaultController' => 'index/index',
+               'defaultController' => 'page/index',
             ),
         ),
     ),
@@ -11,7 +11,7 @@ return array(
     'fsadmin' => array(
         'modules' => array(
             'page' => array(
-              //  'defaultController' => 'index/index',
+               'defaultController' => 'page/admin',
             ),
 
         ),

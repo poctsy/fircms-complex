@@ -3,7 +3,7 @@ return array(
     'fircms' => array(
         'modules' => array(
             'cover' => array(
-               // 'defaultController' => 'index/index',
+              'defaultController' => 'cover/index',
             ),
         ),
     ),

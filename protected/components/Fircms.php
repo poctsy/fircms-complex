@@ -15,6 +15,7 @@ class Fircms {
     static public $params = array();
 
     static public function getView($modules,$select='all') {
+
         $DirViewNew = array();
         $DirView2New = array();
         $DirView3New = array();

@@ -30,41 +30,16 @@ function check(val){
    $('#catalog-form').find('input').attr('disabled',false)
    $('#catalog-form').find('select').attr('disabled',false)
 
-$('#Catalog_plugin_id_list').hide();
-$('#Catalog_plugin_id_cover').hide();
-$('#Catalog_plugin_id_singlepage').hide();
-$('#Catalog_plugin_id_multiple').hide();
-$('#Catalog_plugin_id_link').hide()
-if(val==" .  Catalog::CATALOG_LIST_MOULD . "){
-          $('#Catalog_plugin_id_list').show();
-
-   }
-if(val==" .  Catalog::CATALOG_COVER_MOULD . "){
-         $('#Catalog_plugin_id_cover').show();
-         $('#Catalog_first_view').attr('disabled',true)
-
-   }
-if(val==" . Catalog::CATALOG_SINGLEPAGE_MOULD . "){
-          $('#Catalog_plugin_id_singlepage').show();
-          $('#Catalog_first_view').attr('disabled',true)
 
 
-    }
-if(val==" . Catalog::CATALOG_OTHER_MOULD . "){
-          $('#Catalog_plugin_id_multiple').show();
-          $('#Catalog_first_view').attr('disabled',true)
-
-
-    }
-if(val==" . Catalog::CATALOG_LINK . "){
+if(val==" . Plugin::LINK_MOULD . "){
 
   $('#Catalog_title').attr('disabled',true)
     $('#Catalog_keyword').attr('disabled',true)
       $('#Catalog_description').attr('disabled',true)
         $('#Catalog_first_view').attr('disabled',true)
           $('#Catalog_second_view').attr('disabled',true)
-            $('#Catalog_plugin_id_link').show()
-            $('#Catalog_plugin_id_link').attr('disabled',true)
+
 
    }
 
@@ -84,13 +59,6 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
 
     <div class="row">
-        <?php echo $form->labelEx($model, 'type'); ?>
-        <?php echo $form->radioButtonList($model, 'type', array(Catalog::CATALOG_LIST_MOULD => '列表',Catalog::CATALOG_COVER_MOULD => '封面', Catalog::CATALOG_SINGLEPAGE_MOULD => '单页' ,Catalog::CATALOG_OTHER_MOULD => '其他', Catalog::CATALOG_LINK => '链接'), array('class' => 'typeredio', 'separator' => "")); ?>
-        <?php echo $form->error($model, 'type'); ?>
-    </div>
-
-
-    <div class="row">
         <?php echo $form->labelEx($model, 'parent'); ?>
         <?php
 
@@ -101,24 +69,20 @@ if(val==" . Catalog::CATALOG_LINK . "){
         <?php echo $form->error($model, 'parent'); ?>
     </div>
     <div class="row">
+        <?php
+        $plugin_list=Plugin::pluginData(Plugin::LIST_MOULD);
+        $plugin_cover=Plugin::pluginData(Plugin::COVER_MOULD);
+        $plugin_singlepage=Plugin::pluginData(Plugin::SINGLEPAGE_MOULD);
+        $plugin_other=Plugin::pluginData(Plugin::OTHER_MOULD);
+        $plugin_id=array_merge($plugin_list,$plugin_cover,$plugin_singlepage,$plugin_other);
+        ?>
         <?php echo $form->labelEx($model, 'plugin_id'); ?>
-        <?php echo $form->dropDownList($model, 'plugin_id_list', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_LIST_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
-        <?php echo $form->error($model, 'plugin_id_list'); ?>
+        <?php echo $form->dropDownList($model, 'plugin_id', $plugin_id, array('style' => 'width:130px;')); ?>
+        <?php echo $form->error($model, 'plugin_id'); ?>
 
 
-        <?php echo $form->dropDownList($model, 'plugin_id_cover', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_COVER_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
-        <?php echo $form->error($model, 'plugin_id_cover'); ?>
 
 
-        <?php echo $form->dropDownList($model, 'plugin_id_singlepage', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_SINGLEPAGE_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
-        <?php echo $form->error($model, 'plugin_id_singlepage'); ?>
-
-
-        <?php echo $form->dropDownList($model, 'plugin_id_multiple', CHtml::listData(Plugin::model()->findAll("type=?",array(Catalog::CATALOG_OTHER_MOULD)), 'id', 'name'), array('style' => 'width:130px;')); ?>
-        <?php echo $form->error($model, 'plugin_id_multiple'); ?>
-
-        <?php echo
-        CHtml::dropDownList('Catalog_plugin_id_link',0,array(), array('style' => 'width:130px;')); ?>
 
     </div>
 
@@ -181,15 +145,36 @@ if(val==" . Catalog::CATALOG_LINK . "){
 
 
     <div class="row">
+        <?php
+
+        $list_first_view=Plugin::sortView(Plugin::LIST_MOULD,'first');
+        $cover_first_view=Plugin::sortView(Plugin::COVER_MOULD,'first');
+        $singlepage_first_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'first');
+        $first_view=array_merge($list_first_view,$cover_first_view,$singlepage_first_view);
+        ?>
+
         <?php echo $form->labelEx($model, 'first_view'); ?>
-        <?php echo $form->dropDownList($model, 'first_view', Fircms::getView("post","list_"), array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'first_view', $first_view, array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'first_view'); ?>
+
+
     </div>
 
     <div class="row">
+
+
+        <?php
+        $list_second_view=Plugin::sortView(Plugin::LIST_MOULD,'second');
+        $cover_second_view=Plugin::sortView(Plugin::COVER_MOULD,'second');
+        $singlepage_second_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'second');
+        $second_view=array_merge($list_second_view,$cover_second_view,$singlepage_second_view);
+        ?>
+
         <?php echo $form->labelEx($model, 'second_view'); ?>
-        <?php echo $form->dropDownList($model, 'second_view', Fircms::getView("post","content_"), array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'second_view', $second_view, array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'second_view'); ?>
+
+
     </div>
 
 

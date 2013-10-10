@@ -26,7 +26,7 @@
 	</div>
     <?php echo $form->labelEx($model, 'type'); ?>
     <?php echo $form->dropDownList($model, 'type',
-        array(Catalog::CATALOG_LIST_MOULD=>"列表模块",Catalog::CATALOG_COVER_MOULD=>'封面模块',Catalog::CATALOG_SINGLEPAGE_MOULD=>'单页模块',Catalog::CATALOG_OTHER_MOULD=>'其他模块')
+        array(Plugin::LIST_MOULD=>"列表模块",Plugin::COVER_MOULD=>'封面模块',Plugin::SINGLEPAGE_MOULD=>'单页模块',Plugin::OTHER_MOULD=>'其他模块')
     ); ?>
     <?php echo $form->error($model, 'type'); ?>
         <div class="row">

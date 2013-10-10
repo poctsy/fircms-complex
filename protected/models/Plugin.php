@@ -20,6 +20,11 @@
  */
 class Plugin extends CActiveRecord
 {
+    const LIST_MOULD = 1;
+    const COVER_MOULD = 2;
+    const SINGLEPAGE_MOULD = 3;
+    const OTHER_MOULD = 4;
+    const LINK_MOULD = 5;
     /**
      * @return string the associated database table name
      */
@@ -132,5 +137,35 @@ class Plugin extends CActiveRecord
         );
         return $plugin->id;
     }
+
+
+    public static function sortView($type,$sort){
+        $view=array();
+        $model=Plugin::model()->findAll("type=?",array($type));
+        foreach($model as $k){
+            if($sort == 'first' && $k->path != '' && $k->first_prefix != '')
+             $view[$k->en_name]=Fircms::getView($k->path,$k->first_prefix);
+            if($sort == 'second'&& $k->path != '' && $k->second_prefix != '')
+            $view[$k->en_name]=Fircms::getView($k->path,$k->second_prefix);
+         }
+         return array_filter($view);
+    }
+
+    public static function pluginData($type){
+        $data=array();
+        $model=Plugin::model()->findAll("type=?",array($type));
+        if($type == 1)$type='列表';
+        if($type == 2)$type='封面';
+        if($type == 3)$type='单页';
+        if($type == 4)$type='其他';
+        if($type == 5)$type='链接';
+        foreach($model as $k){
+
+            $data[$type]=array($k->id=>$k->name);
+        }
+
+        return  $data;
+    }
+
 }
 
