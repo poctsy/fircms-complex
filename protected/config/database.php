@@ -12,7 +12,7 @@ return array (
             'tablePrefix' => 'fircms_',
 
       */
-                     'connectionString' => 'sqlite:protected/data/sqlite/fircms0.3.3.db',
+                     'connectionString' => 'sqlite:protected/data/sqlite/fircms0.3.3.1.db',
                        'emulatePrepare' => true,
                         'enableProfiling' => true,
                         'tablePrefix' => 'fircms_',

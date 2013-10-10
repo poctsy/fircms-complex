@@ -2,7 +2,10 @@
 class TopNav extends CWidget
 {
     public $name;
-    public $roots=array();
+    public $rootUlCss;
+    public $childULCss;
+    private  $roots=array();
+
     public function init()
     {
 
@@ -18,7 +21,7 @@ class TopNav extends CWidget
 
 
     public function renderNav($roots){
-        echo CHtml::openTag('ul') . "\n";
+        echo CHtml::openTag('ul',array('class'=>$this->rootUlCss)) . "\n";
         foreach ($roots as $root){
             $a=Catalog::model()->findByPk($root);
 
@@ -38,7 +41,7 @@ class TopNav extends CWidget
             $catalogs=Catalog::model()->findByPk($a->id)->children()->findAll();
 
             foreach ($catalogs as $n => $catalog) {
-                echo CHtml::openTag('ul') . "\n";
+               // echo CHtml::openTag('ul',array('class'=>$this->childULCss)) . "\n";
                 if ($catalog->level == $level)
                     echo CHtml::closeTag('li') . "\n";
                 else if ($catalog->level > $level)
@@ -70,10 +73,10 @@ class TopNav extends CWidget
                 echo CHtml::closeTag('li') . "\n";
                 echo CHtml::closeTag('ul') . "\n";
             }
-            echo CHtml::closeTag('li') . "\n";
+           // echo CHtml::closeTag('li') . "\n";
 
         }
-        echo CHtml::closeTag('ul') . "\n";
+
     }
 
 }
