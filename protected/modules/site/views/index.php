@@ -15,7 +15,7 @@
     widget调试
 <?php
 $this->widget('TopNav',array(
-    'name'=>'top_1','rootUlCss'=>'root','childULCss'=>'child'));
+    'name'=>'top_1','id'=>$this->action->id,'rootUlCss'=>'root','childULCss'=>'child'));
 ?>
 
 

@@ -193,7 +193,11 @@ if(val==" . Catalog::CATALOG_LINK . "){
     </div>
 
 
-
+    <div class="row">
+        <?php echo $form->labelEx($model, 'page_view'); ?>
+        <?php echo $form->dropDownList($model, 'page_view', Fircms::getView("page","page_"), array('style' => 'width:200px')); ?>
+        <?php echo $form->error($model, 'page_view'); ?>
+    </div>
 
 
     <div class="row">

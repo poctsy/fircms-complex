@@ -2,6 +2,7 @@
 class TopNav extends CWidget
 {
     //暂时为二级菜单，后期再加参数
+    public $id;
     public $name;
     public $rootUlCss;
     public $childULCss;
@@ -10,6 +11,7 @@ class TopNav extends CWidget
     public function init()
     {
 
+       $this->id=$this->id.'_nav';
        $this->roots=Navigation::navCatalog($this->name);
 
     }
@@ -22,7 +24,7 @@ class TopNav extends CWidget
 
 
     public function renderNav($roots){
-        echo CHtml::openTag('ul',array('class'=>$this->rootUlCss)) . "\n";
+        echo CHtml::openTag('ul',array('class'=>$this->rootUlCss,'id'=>$this->id)) . "\n";
         foreach ($roots as $root){
             $a=Catalog::model()->findByPk($root);
 

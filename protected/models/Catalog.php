@@ -126,6 +126,7 @@ class Catalog extends FActiveRecord {
             'plugin_id' => '选择模型',
             'list_view' => '列表页模板',
             'content_view' => '内容页模板',
+            'page_view' => '单页模板',
             'content' => '栏目简介',
         );
     }
