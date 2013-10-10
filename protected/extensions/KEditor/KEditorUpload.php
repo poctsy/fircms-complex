@@ -60,20 +60,20 @@ class KEditorUpload extends CAction {
                 $thumb->resize(140, 140);
                 $thumburl = $thumb_upload_dir . '/' . $filename . '.' . $ext;
                 $thumb->save($thumburl);
-           
+
             }
 
-           $upload=new Upload;
-           $upload->type=$dir;
-           $upload->name=$filename;
-           $relativeUploadfile=str_replace(Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR,'',$uploadfile);
-           if($dir == 'thumb'){
-               $upload->path= str_replace('/image/','/thumb/',$relativeUploadfile);
-           }else{
-               $upload->path=$relativeUploadfile;
-           }
+            $upload=new Upload;
+            $upload->type=$dir;
+            $upload->name=$filename;
+            $relativeUploadfile=str_replace(Yii::getPathOfAlias('webroot').DIRECTORY_SEPARATOR,'',$uploadfile);
+            if($dir == 'thumb'){
+                $upload->path= str_replace('/image/','/thumb/',$relativeUploadfile);
+            }else{
+                $upload->path=$relativeUploadfile;
+            }
 
-          $upload->save();
+            $upload->save();
             echo CJSON::encode(array('error' => 0, 'url' => $originalurl));
         }else {
             echo CJSON::encode(array('error' => 1, 'message' => '未知错误'));

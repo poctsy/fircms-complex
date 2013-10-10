@@ -117,19 +117,7 @@ KindEditor.ready(function(K) {
 
     <div class="row">
         <?php echo $form->labelEx($model, 'thumb'); ?>
-        <?php
-        $this->widget('ext.KEditor.ThumbKEditor', array(
-            'model' => $model, //传入form model
-            'name' => 'thumb', //设置name
-            'properties' => array(
-                'extraFileUploadParams' => array(Yii::app()->request->csrfTokenName=>Yii::app()->request->getCsrfToken()),
-                'uploadJson' => Yii::app()->createUrl('attachment/upload/kupload'),
-            ),
-            'textfieldOptions' => array(
-                'size' => '30',
-            )
-        ));
-        ?>
+        <?php $this->widget('FThumb',array('model'=>$model))?>
 
         <?php echo $form->error($model, 'thumb'); ?>
     </div>
@@ -164,9 +152,7 @@ KindEditor.ready(function(K) {
 
     <div class="row">
         <?php echo $form->labelEx($model, 'content'); ?>
-        <?php echo $form->textarea($model, 'content', array('id' => 'contentqq', 'style' => 'width:100%;height:300px;visibility:hidden;')); ?>
-
-
+        <?php  $this->widget('FMiNiKe', array('model'=>$model));?>
         <?php echo $form->error($model, 'content'); ?>
     </div>
 

@@ -17,45 +17,7 @@
         'enableAjaxValidation' => false,
     ));
 
-
-
     ?>
-
-    <?php
-    Yii::app()->clientScript->registerScript('catalog_form', "
-
-check($('#Catalog_type').find('input[checked=checked]').attr('value'));
-$('.typeredio').click(function(){check(val=$(this).attr('value'))})
-function check(val){
-   $('#catalog-form').find('input').attr('disabled',false)
-   $('#catalog-form').find('select').attr('disabled',false)
-
-
-
-if(val==" . Plugin::LINK_MOULD . "){
-
-  $('#Catalog_title').attr('disabled',true)
-    $('#Catalog_keyword').attr('disabled',true)
-      $('#Catalog_description').attr('disabled',true)
-        $('#Catalog_first_view').attr('disabled',true)
-          $('#Catalog_second_view').attr('disabled',true)
-
-
-   }
-
-}
-
-
-
-
-
-
-");
-    ?>
-
-
-
-
 
 
     <div class="row">
@@ -63,21 +25,15 @@ if(val==" . Plugin::LINK_MOULD . "){
         <?php
 
 
-        echo $form->dropDownList($model, 'parent',
-            Catalog::makeSelectTree(Catalog::model()->findAll(array('order'=>'lft'))), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
+        echo $form->dropDownList($model, 'parent',Catalog::selectTree(),
+            array('class' => 'span4', 'encode' => false, 'style' => 'width:200px;')
         ); ?>
         <?php echo $form->error($model, 'parent'); ?>
     </div>
     <div class="row">
-        <?php
-        $plugin_list=Plugin::pluginData(Plugin::LIST_MOULD);
-        $plugin_cover=Plugin::pluginData(Plugin::COVER_MOULD);
-        $plugin_singlepage=Plugin::pluginData(Plugin::SINGLEPAGE_MOULD);
-        $plugin_other=Plugin::pluginData(Plugin::OTHER_MOULD);
-        $plugin_id=array_merge($plugin_list,$plugin_cover,$plugin_singlepage,$plugin_other);
-        ?>
+
         <?php echo $form->labelEx($model, 'plugin_id'); ?>
-        <?php echo $form->dropDownList($model, 'plugin_id', $plugin_id, array('style' => 'width:130px;')); ?>
+        <?php echo $form->dropDownList($model, 'plugin_id', Plugin::everyPluginData(), array('style' => 'width:200px;')); ?>
         <?php echo $form->error($model, 'plugin_id'); ?>
 
 
@@ -101,20 +57,7 @@ if(val==" . Plugin::LINK_MOULD . "){
 
     <div class="row">
         <?php echo $form->labelEx($model, 'thumb'); ?>
-        <?php
-        $this->widget('ext.KEditor.ThumbKEditor', array(
-            'model' => $model, //传入form model
-            'name' => 'thumb', //设置name
-            'properties' => array(
-                'extraFileUploadParams' => array(Yii::app()->request->csrfTokenName=>Yii::app()->request->getCsrfToken()),
-                'uploadJson' => Yii::app()->createUrl('attachment/upload/kupload'),
-            ),
-            'textfieldOptions' => array(
-                'size' => '30',
-            )
-        ));
-        ?>
-
+        <?php $this->widget('FThumb',array('model'=>$model))?>
         <?php echo $form->error($model, 'thumb'); ?>
     </div>
 
@@ -145,16 +88,10 @@ if(val==" . Plugin::LINK_MOULD . "){
 
 
     <div class="row">
-        <?php
 
-        $list_first_view=Plugin::sortView(Plugin::LIST_MOULD,'first');
-        $cover_first_view=Plugin::sortView(Plugin::COVER_MOULD,'first');
-        $singlepage_first_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'first');
-        $first_view=array_merge($list_first_view,$cover_first_view,$singlepage_first_view);
-        ?>
 
         <?php echo $form->labelEx($model, 'first_view'); ?>
-        <?php echo $form->dropDownList($model, 'first_view', $first_view, array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'first_view', Plugin::first_view(), array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'first_view'); ?>
 
 
@@ -163,15 +100,10 @@ if(val==" . Plugin::LINK_MOULD . "){
     <div class="row">
 
 
-        <?php
-        $list_second_view=Plugin::sortView(Plugin::LIST_MOULD,'second');
-        $cover_second_view=Plugin::sortView(Plugin::COVER_MOULD,'second');
-        $singlepage_second_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'second');
-        $second_view=array_merge($list_second_view,$cover_second_view,$singlepage_second_view);
-        ?>
+
 
         <?php echo $form->labelEx($model, 'second_view'); ?>
-        <?php echo $form->dropDownList($model, 'second_view', $second_view, array('style' => 'width:200px')); ?>
+        <?php echo $form->dropDownList($model, 'second_view',Plugin::second_view(), array('style' => 'width:200px')); ?>
         <?php echo $form->error($model, 'second_view'); ?>
 
 
@@ -182,8 +114,7 @@ if(val==" . Plugin::LINK_MOULD . "){
 
     <div class="row">
         <?php echo $form->labelEx($model, 'content'); ?>
-        <?php  Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/js/minike.js');?>
-        <?php echo $form->textarea($model, 'content', array('id' => 'contentqq', 'style' => 'width:100%;height:200px;visibility:hidden;')); ?>
+        <?php  $this->widget('FMiNiKe', array('model'=>$model));?>
         <?php echo $form->error($model, 'content'); ?>
     </div>
 

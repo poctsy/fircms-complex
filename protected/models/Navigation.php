@@ -278,6 +278,9 @@ class Navigation extends FActiveRecord {
         return $treeSelect;
     }
 
+    public function selectTreeChild(){
+       return Navigation::makeSelectTreeChild(Navigation::findAllRoot());
+    }
 
     public static function nameGet($name){
         $catalg=Navigation::model()->find('type=?',array($name));

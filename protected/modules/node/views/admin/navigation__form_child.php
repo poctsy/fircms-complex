@@ -26,7 +26,7 @@
     <div class="row">
         <?php echo $form->labelEx($model, 'parent'); ?>
         <?php
-        echo $form->dropDownList($model, 'parent', Navigation::makeSelectTreeChild(Navigation::findAllRoot()), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
+        echo $form->dropDownList($model, 'parent', Navigation::selectTreeChild(), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
         );
         ?>
         <?php echo $form->error($model, 'parent'); ?>
@@ -39,7 +39,7 @@
                 <?php
 
                 echo $form->dropDownList($model, 'catalog_id',
-                    Catalog::makeSelectTree(Catalog::findAllTree_noRoot()), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
+                    Catalog::selectTree_noRoot(), array('class' => 'span4', 'encode' => false, 'style' => 'width:130px;')
                 ); ?>
                 <?php echo $form->error($model, 'catalog_id'); ?>
             </div>

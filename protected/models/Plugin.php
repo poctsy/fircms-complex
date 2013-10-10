@@ -139,7 +139,7 @@ class Plugin extends CActiveRecord
     }
 
 
-    public static function sortView($type,$sort){
+    public function sortView($type,$sort){
         $view=array();
         $model=Plugin::model()->findAll("type=?",array($type));
         foreach($model as $k){
@@ -151,7 +151,23 @@ class Plugin extends CActiveRecord
          return array_filter($view);
     }
 
-    public static function pluginData($type){
+    public function first_view(){
+        $list_first_view=Plugin::sortView(Plugin::LIST_MOULD,'first');
+        $cover_first_view=Plugin::sortView(Plugin::COVER_MOULD,'first');
+        $singlepage_first_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'first');
+        $first_view=array_merge($list_first_view,$cover_first_view,$singlepage_first_view);
+        return $first_view;
+    }
+
+    public function second_view(){
+        $list_second_view=Plugin::sortView(Plugin::LIST_MOULD,'second');
+        $cover_second_view=Plugin::sortView(Plugin::COVER_MOULD,'second');
+        $singlepage_second_view=Plugin::sortView(Plugin::SINGLEPAGE_MOULD,'second');
+        $second_view=array_merge($list_second_view,$cover_second_view,$singlepage_second_view);
+        return $second_view;
+    }
+
+    public function pluginData($type){
         $data=array();
         $model=Plugin::model()->findAll("type=?",array($type));
         if($type == 1)$type='列表';
@@ -164,6 +180,24 @@ class Plugin extends CActiveRecord
         }
 
         return $ds;
+    }
+
+    public function everyPluginData(){
+        $plugin_list=Plugin::pluginData(Plugin::LIST_MOULD);
+        $plugin_cover=Plugin::pluginData(Plugin::COVER_MOULD);
+        $plugin_singlepage=Plugin::pluginData(Plugin::SINGLEPAGE_MOULD);
+        $plugin_other=Plugin::pluginData(Plugin::OTHER_MOULD);
+        $plugin_id=array_merge($plugin_list,$plugin_cover,$plugin_singlepage,$plugin_other);
+        return $plugin_id;
+    }
+
+    public function everyPlugin(){
+
+        $plugin=array(Plugin::LIST_MOULD=>"列表模块",
+            Plugin::COVER_MOULD=>'封面模块',
+            Plugin::SINGLEPAGE_MOULD=>'单页模块',
+            Plugin::OTHER_MOULD=>'其他模块');
+        return $plugin;
     }
 
 }

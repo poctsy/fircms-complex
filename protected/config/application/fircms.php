@@ -3,6 +3,9 @@
 $basePath = dirname(dirname(dirname(__FILE__)));
 require ($basePath . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'Fircms.php');
 $main = array(
+    'import' => array(
+        'application.widget.fircms.*'
+    ),
     'defaultController' => 'site/index',
     'theme' => 'default',
     'components' => array(
@@ -14,7 +17,7 @@ $main = array(
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
-           'errorAction' => 'u/login/error',
+           'errorAction' => 'site/error/index',
         ),
     ),
 );

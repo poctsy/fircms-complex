@@ -323,6 +323,7 @@ class Catalog extends FActiveRecord {
         return $treeSelect;
     }
 
+
     public static function makeSelectTreeChild($catalogs) {
 
         $treeSelect = array();
@@ -337,6 +338,13 @@ class Catalog extends FActiveRecord {
         return $treeSelect;
     }
 
+    public function selectTree_noRoot(){
+     return Catalog::makeSelectTree(Catalog::findAllTree_noRoot());
+    }
+
+    public function selectTree(){
+        return Catalog::makeSelectTree(Catalog::model()->findAll(array('order'=>'lft')));
+    }
     public function createRoot(){
         if(Catalog::model()->roots()->count()<1){
             $root=new Catalog();

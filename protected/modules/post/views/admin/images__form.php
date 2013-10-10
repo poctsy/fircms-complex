@@ -6,23 +6,8 @@
 
 <div class="form">
 
- 
-    <?php
-    $dir = Yii::app()->basePath . '/extensions/KEditor/keSource';
-    $baseUrl = Yii::app()->getAssetManager()->publish($dir);
-    $cs = Yii::app()->getClientScript();
 
-    $cs->registerCssFile($baseUrl . '/themes/default/default.css');
-    $cs->registerCoreScript('jquery.ui');
-    
-    if (YII_DEBUG)
-        $cs->registerScriptFile($baseUrl . '/kindeditor.js');
-    else
-        $cs->registerScriptFile($baseUrl . '/kindeditor-min.js');
-    $cs->registerScriptFile(Yii::app()->theme->baseUrl . '/js/imgesform.js');
-   
- 
-    ?>
+
 
     <?php
     $form = $this->beginWidget('CActiveForm', array(
@@ -41,9 +26,9 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'catalog_id'); ?>
-        <?php 
+        <?php
         echo $form->dropDownList($model, 'catalog_id',$this->catalogList("images"));
-               
+
         ?>
 
         <?php echo $form->error($model, 'catalog_id'); ?>
@@ -59,20 +44,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'thumb'); ?>
-        <?php
-        $this->widget('ext.KEditor.ThumbKEditor', array(
-            'model' => $model, //传入form model
-            'name' => 'thumb', //设置name
-            'properties' => array(
-                'extraFileUploadParams' => array(Yii::app()->request->csrfTokenName=>Yii::app()->request->getCsrfToken()),
-                'uploadJson' => Yii::app()->createUrl('attachment/upload/kupload'),
-            ),
-            'textfieldOptions' => array(
-                'size' => '30',
-            )
-        ));
-        ?>
-
+        <?php $this->widget('FThumb',array('model'=>$model))?>
         <?php echo $form->error($model, 'thumb'); ?>
     </div>
 
@@ -96,23 +68,13 @@
     <div class="row">
 
         <?php echo $form->labelEx($model, 'images') . '(温馨提示：拖拽图片可自由排序)'; ?>
-        <?php echo CHtml::button("图片上传", array('id' => 'Images_selectImage')); ?>
-        <?php echo CHtml::button("浏览服务器", array('id' => 'filemanager')); ?>
-
-        <div id='imagesnow' style='width: 100%;height:260px; border:1px dashed slategray;overflow-y:scroll;' onload="startimagesnow">
-            <ul id="sortable"></ul>
-
-        </div>
-
-
-        <?php echo $form->hiddenField($model, 'images'); ?>
+        <?php $this->widget('FImges',array('model'=>$model))?>
         <?php echo $form->error($model, 'images'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model, 'content'); ?>
-        <?php  Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/js/minike.js');?>
-        <?php echo $form->textarea($model, 'content', array('id' => 'contentqq', 'style' => 'width:100%;height:300px;visibility:hidden;')); ?>
+        <?php $this->widget('FMiNiKe',array('model'=>$model))?>
         <?php echo $form->error($model, 'content'); ?>
     </div>
 

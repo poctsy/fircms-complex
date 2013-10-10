@@ -3,6 +3,9 @@
 $basePath = dirname(dirname(dirname(__FILE__)));
 require ($basePath . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'Fircms.php');
 $main = array(
+    'import' => array(
+        'application.widget.fsadmin.*'
+    ),
     'defaultController' => 'admin/index/index',
    'theme' => 'admin',
     'components' => array(

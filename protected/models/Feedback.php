@@ -142,4 +142,14 @@ class Feedback extends FActiveRecord
             return "产品建议";
         }
     }
+
+    public function everyCategory(){
+        $category=array('1'=>'索取资料','2'=>'产品购买','商务合作','其他反馈');
+        return $category;
+    }
+
+    public function everyStatus(){
+        $status=array('1'=>'未阅读信息','2'=>'已阅读信息');
+        return $status;
+    }
 }

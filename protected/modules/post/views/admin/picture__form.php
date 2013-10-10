@@ -8,8 +8,8 @@
 
 
 
- 
-   <?php
+
+    <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'picture-form',
         // Please note: When you enable ajax validation, make sure the corresponding
@@ -26,7 +26,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'catalog_id'); ?>
-         <?php 
+        <?php
         echo $form->dropDownList($model, 'catalog_id',$this->catalogList("picture"));
         ?>
 
@@ -43,20 +43,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'thumb'); ?>
-        <?php
-        $this->widget('ext.KEditor.ThumbKEditor', array(
-            'model' => $model, //传入form model
-            'name' => 'thumb', //设置name
-            'properties' => array(
-                'extraFileUploadParams' => array(Yii::app()->request->csrfTokenName=>Yii::app()->request->getCsrfToken()),
-                'uploadJson' => Yii::app()->createUrl('attachment/upload/kupload'),
-            ),
-            'textfieldOptions' => array(
-                'size' => '30',
-            )
-        ));
-        ?>
-
+        <?php  $this->widget('FThumb', array('model'=>$model));?>
         <?php echo $form->error($model, 'thumb'); ?>
     </div>
 
@@ -68,8 +55,6 @@
 
 
 
-    <?php //echo $form->hiddenField($model, 'images', array('size' => 30, 'maxlength' => 30));   ?>
-
     <div class="row">
         <?php echo $form->labelEx($model, 'description'); ?>
         <?php echo $form->textField($model, 'description', array('size' => 30, 'maxlength' => 30)); ?>
@@ -78,34 +63,18 @@
 
 
     <div class="row">
-      <?php echo $form->labelEx($model, 'picture'); ?>
-      <?php
-        $this->widget('ext.KEditor.PictureKEditor', array(
-            'model' => $model, //传入form model
-            'name' => 'picture', //设置name
-            'properties' => array(
-                'extraFileUploadParams' => array(Yii::app()->request->csrfTokenName=>Yii::app()->request->getCsrfToken()),
-                'uploadJson' => Yii::app()->createUrl('attachment/upload/kupload'),
-                'allowFileManager'=>true,
-                'fileManagerJson' => Yii::app()->createUrl('attachment/upload/kmanageJson'),
-               ),
-            'textfieldOptions' => array(
-                'size' => '30',
-            )
-        ));
-        ?>
- 
+        <?php echo $form->labelEx($model, 'picture'); ?>
+        <?php  $this->widget('FPicture', array('model'=>$model));?>
         <?php echo $form->error($model, 'picture'); ?>
-    </div> 
+    </div>
 
-     
+
     <div class="row">
         <?php echo $form->labelEx($model, 'content'); ?>
-        <?php  Yii::app()->getClientScript()->registerScriptFile(Yii::app()->theme->baseUrl . '/js/minike.js');?>
-        <?php echo $form->textarea($model, 'content', array('id' => 'contentqq', 'style' => 'width:100%;height:300px;visibility:hidden;')); ?>
+        <?php  $this->widget('FMiNiKe', array('model'=>$model));?>
         <?php echo $form->error($model, 'content'); ?>
     </div>
- 
+
     <div class="row buttons">
         <?php echo CHtml::submitButton($model->isNewRecord ? '创建' : '保存'); ?>
     </div>

@@ -22,13 +22,13 @@
     <div class="row">
         <?php echo $form->labelEx($model,'category'); ?>
 
-        <?php echo $form->dropDownList($model,'category',array('1'=>'索取资料','2'=>'产品购买','商务合作','其他反馈')); ?>
+        <?php echo $form->dropDownList($model,'category',Feedback::everyCategory()); ?>
         <?php echo $form->error($model,'category'); ?>
     </div>
 
     <div class="row">
         <?php echo $form->labelEx($model,'status'); ?>
-        <?php echo $form->dropDownList($model,'status',array('1'=>'未阅读信息','2'=>'已阅读信息')); ?>
+        <?php echo $form->dropDownList($model,'status',Feedback::everyStatus()); ?>
         <?php echo $form->error($model,'status'); ?>
     </div>
 

@@ -37,17 +37,7 @@ class LoginController extends FController {
      * when an action is not explicitly requested by users.
      */
 
-    /**
-     * This is the action to handle external exceptions.
-     */
-    public function actionError() {
-        if ($error = Yii::app()->errorHandler->error) {
-            if (Yii::app()->request->isAjaxRequest)
-                echo $error['message'];
-            else
-                $this->render('login_error', $error);
-        }
-    }
+
 
     /**
      * Displays the login page
