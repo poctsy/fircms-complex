@@ -9,7 +9,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
         array('label'=>Yii::t('core', 'Create Plugin'), 'url'=>array('create')),
-        array('label'=>Yii::t('core', 'Plugin Plugin'), 'url'=>array('admin')),
+        array('label'=>Yii::t('core', 'Manage Plugin'), 'url'=>array('admin')),
 );
 ?>
  

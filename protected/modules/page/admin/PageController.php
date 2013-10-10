@@ -40,7 +40,7 @@ class PageController extends FController
             $catalogModel->thumb=$model->catalog_thumb;
             $catalogModel->keyword=$model->catalog_keyword;
             $catalogModel->description=$model->catalog_description;
-            $catalogModel->save();
+            $catalogModel->saveNode();
 			if($model->save() )
 				$this->redirect(array('admin'));
 		}
@@ -58,8 +58,7 @@ class PageController extends FController
 	public function actionDelete($id)
 	{
 		$this->loadModel($id)->delete();
-        $this->loadCatalogModel($this->catalog_id)->delete();
-        $this->loadNodeModel($this->catalog_id)->delete();
+        $this->loadCatalogModel($this->catalog_id)->deleteNode();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
