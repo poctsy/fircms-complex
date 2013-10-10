@@ -288,7 +288,7 @@ class Navigation extends FActiveRecord {
     //前台导航的内容栏目的节点
     public static function navCatalog($name) {
         $root=self::nameGet($name);
-
+        $navCatalog=array();
         $navigations = $root->children()->findAll();;
         foreach ($navigations as $navigation){
             $navCatalog[]=$navigation->catalog_id;
