@@ -160,11 +160,10 @@ class Plugin extends CActiveRecord
         if($type == 4)$type='其他';
         if($type == 5)$type='链接';
         foreach($model as $k){
-
-            $data[$type][]=array($k->id=>$k->name);
+            $ds[$type][$k->id]=$k->name;
         }
 
-        return  $data;
+        return $ds;
     }
 
 }
