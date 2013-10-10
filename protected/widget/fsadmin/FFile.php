@@ -83,12 +83,12 @@ KindEditor.ready(function(K) {
     public function run()
     {
 
-echo CHtml::activeTextField($this->model, 'file', array('size' => 30));
-echo CHtml::button("文件上传", array('id' => 'File_select_file'));
+        echo CHtml::activeTextField($this->model, 'file', array('size' => 30));
+        echo CHtml::button("文件上传", array('id' => 'File_select_file'));
 
 
 
-}
+    }
 
 
 
