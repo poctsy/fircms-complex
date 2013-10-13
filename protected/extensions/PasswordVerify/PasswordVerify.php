@@ -2,6 +2,7 @@
 /**
  * @version   PasswordVerify.php
  * @author    poctsy <poctsy@foxmail.com>
+ * @link https://github.com/poctsy/PasswordVerify
  *
  * without encryption, simply confusion
  *不带加密，只是对密码的进行简单的混淆
@@ -20,18 +21,21 @@
  *Use the steps
  * 使用步骤：
  *
- * 1.Add import components
+ * 1.Add 'PasswordVerify' directory,move PasswordVerify.php and PVW.php in the directory
+ *在extensions下新建PasswordVerify目录。将(PasswordVerify.php 跟 PVW.php)文件拉进去。。
+ *
+ * 2.Add import components
  * 添加import组件
  * 'import' => array(
  *      'application.extensions.PasswordVerify.*'
  *  ),
  *
- * 2.Add in the password encryption transmission need to load the view page
+ * 3.Add in the password encryption transmission need to load the view page
  * 在需要加载的密码加密传输的视图页面添加
  *
  * <?php $this->widget('PVW');?>
  *
- *3.Modifying the controller
+ *4.Modifying the controller
  * 修改控制器
  *
  *  if(isset($_POST['LoginForm']))
