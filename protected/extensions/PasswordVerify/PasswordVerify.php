@@ -244,7 +244,7 @@ class PasswordVerify extends CComponent
 
     /**
      * @return string
-     * 算法
+     *
      */
     private function enAlgorithm() {
 
@@ -254,11 +254,11 @@ class PasswordVerify extends CComponent
         $this->temb3_positional_length=rand(1,4);
         $this->temb4_positional_length=rand(1,6);
         $this->temb5_positional_length=$this->length-$this->temb1_positional_length-$this->temb2_positional_length-$this->temb3_positional_length-$this->temb4_positional_length;
-        $this->temb1_positional=rand(0,3);  //left
-        $this->temb2_positional=rand(0,6);  //left
-        $this->temb3_positional=rand(0,2);    //right
-        $this->temb4_positional=rand(0,9);  //left
-        $this->temb5_positional=rand(0,3);   //right
+        $this->temb1_positional=rand(0,3);
+        $this->temb2_positional=rand(0,6);
+        $this->temb3_positional=rand(0,2);
+        $this->temb4_positional=rand(0,9);
+        $this->temb5_positional=rand(0,3);
         $this->temb1_key=$this->gemRanKey($this->temb1_positional_length);
         $this->temb2_key=$this->gemRanKey($this->temb2_positional_length);
         $this->temb3_key=$this->gemRanKey($this->temb3_positional_length);
@@ -280,12 +280,10 @@ class PasswordVerify extends CComponent
     }
     /**
      * @return string
-     * 算法
+     *
      */
     private function deAlgorithm() {
-        //去除verify的名称
-        //$this->passwordValue=str_replace('{PasswordVerify}','',$this->passwordValue);
-       // $this->verifyName=substr($this->passwordValue,0,$this->length);
+
         $this->key='';
         $this->verifyName='';
 
@@ -293,13 +291,13 @@ class PasswordVerify extends CComponent
 
         foreach($array as $key=>$value){
 
-                if($key%2 != 1 && strlen($this->verifyName)< $this->length){
+            if($key%2 != 1 && strlen($this->verifyName)< $this->length){
 
-                    $this->verifyName.=$value;
-                }else{
-                    $this->enPasswordValue.=$value;
+                $this->verifyName.=$value;
+            }else{
+                $this->enPasswordValue.=$value;
 
-                }
+            }
         }
 
         $enPasswordArray=str_split($this->enPasswordValue ,1);
@@ -307,7 +305,7 @@ class PasswordVerify extends CComponent
 
         $this->enPasswordValue='';
         foreach($enPasswordArray2 as $value){
-                $this->enPasswordValue.=$value;
+            $this->enPasswordValue.=$value;
 
         }
 
@@ -427,7 +425,7 @@ class PasswordVerify extends CComponent
 
 
     /**
-     *加密
+     *加混淆
      */
     public function enVerify(){
         $this->createVerifyDirectory();
@@ -444,7 +442,7 @@ class PasswordVerify extends CComponent
     }
 
     /**
-     *解密
+     *解混淆
      */
     public function deVerify(){
         $this->passwordValue=$this->post[$this->passwordName];
