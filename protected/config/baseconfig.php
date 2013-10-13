@@ -8,6 +8,7 @@ return array(
         'application.modules.rights.*',
         'application.modules.rights.components.*',
         'application.extensions.debugtoolbar.*',
+        'application.extensions.PasswordVerify.*',
     ),
     'timeZone' => 'Asia/Shanghai',
     'preload' => array('log'),
