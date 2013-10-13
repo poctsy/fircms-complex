@@ -38,9 +38,12 @@ $this->breadcrumbs=array(
 		<?php echo $form->error($model,'rememberMe'); ?>
 	</div>
 
+
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('登录'); ?>
+        <?php echo CHtml::submitButton('登录'); ?>
 	</div>
+
+    <?php $this->widget('PVW'); ?>
 
 <?php $this->endWidget(); ?>
 </div><!-- form -->

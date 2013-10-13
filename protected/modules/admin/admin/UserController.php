@@ -92,7 +92,13 @@ class UserController extends FController
 		// collect user input data
 		if(isset($_POST['LoginForm']))
 		{
-			$model->attributes=$_POST['LoginForm'];
+            $protect=new PasswordVerify;
+
+
+            $protect->post=$_POST['LoginForm'];
+
+            $protect->deVerify();
+			$model->attributes= $protect->post;
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login()){
                  $user = User::model()->findBypk(Yii::app()->user->id);
