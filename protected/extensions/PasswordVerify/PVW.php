@@ -5,7 +5,7 @@
  * @link https://github.com/poctsy/PasswordVerify
  *
  * without encryption, simply confusion
- *不带加密，只是对密码的进行简单的混淆
+ *不带加密，只是对密码进行简单的混淆
  *
  * transmission in the client server password to shake hands with the simple confusion,
  * prevention of scampish software "accidentally" collect account password.
