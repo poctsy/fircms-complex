@@ -26,7 +26,7 @@
 
 
 <div style="font-size: 3px;color: whitesmoke">
-        Copyright &copy; <?php echo date('Y'); ?> by fircms
+        Copyright &copy; <?php echo date('Y'); ?> by <a href="http://www.fircms.com"><span style="color:#fff;">fircms</span></a>
     </div>
 </div><!-- page -->
 
