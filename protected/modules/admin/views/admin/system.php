@@ -27,7 +27,7 @@
          <p>系统版本 : 0.3</p>
          <p>操作系统 : <?php echo PHP_OS;?> </p>
          <p>PHP环境 : <?php echo PHP_VERSION;?></p>
-         <p>Mysql版本 <?php echo mysql_get_server_info();?></p>
+         <p>Mysql版本： <?php echo @mysql_get_server_info();?><?php echo extension_loaded('pdo_mysql')?"PDO(√)":"PDO(×)"; ?></p>
     </span>
 </div>
 
