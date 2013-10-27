@@ -24,7 +24,7 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 #### 需要建立文件夹 ，与导入数据表 ####
 
 #####建立文件夹
-- 网页打开http://域名/install.php  点击初始化文件夹
+- 打开http://域名/install.php  点击初始化文件夹
  
 
 #####导入数据表
