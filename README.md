@@ -21,20 +21,11 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 ### 部署说明： ###
 
-#### 需要建立3个文件夹 ，与导入数据表 ####
+#### 需要建立文件夹 ，与导入数据表 ####
 
-#####建立3个文件夹
-- 根目录下新建assets文件夹
-- protected目录下新建runtime文件夹
-- protected\runtime目录下新建admin文件夹
-
-如下:
->assets/
-
->protected/runtime/
-
->protected/runtime/admin
-
+#####建立文件夹
+- 网页打开http://域名/install.php  点击初始化文件夹
+ 
 
 #####导入数据表
 >数据库配置文件位置：protected/config/database.php
