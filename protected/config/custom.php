@@ -16,7 +16,7 @@ return array(
         'name' => '后台',
         'language' => 'zh_cn',
       //  'theme' => 'admin',
-        'runtimePath' => Fircms::$basePath . DIRECTORY_SEPARATOR .'runtime'. DIRECTORY_SEPARATOR .'admin',
+        'runtimePath' => Fircms::$basePath . DIRECTORY_SEPARATOR .'runtime'. DIRECTORY_SEPARATOR .'fsadmin',
     ),
 );
 ?>

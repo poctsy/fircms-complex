@@ -19,6 +19,17 @@ class IndexController extends FController
 	$this->render('index_index');
      }
 
+    public function actionCreateDirectory(){
+        $DirPath = array_diff(scandir(Yii::app()->basePath. DIRECTORY_SEPARATOR. 'config' .DIRECTORY_SEPARATOR .'application'), array('..', '.','install'));
+
+        foreach ($DirPath as $Path) {
+            $Path  =Yii::app()->runtimePath. DIRECTORY_SEPARATOR.basename($Path,".php");
+
+            if (!file_exists($Path))mkdir($Path);
+        }
+        $this->redirect(Yii::app()->request->baseUrl);
+    }
+
 
 
 

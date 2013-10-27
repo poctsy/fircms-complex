@@ -9,6 +9,7 @@ $main = array(
     'defaultController' => 'install/index',
     'components' => array(
         'errorHandler' => array(
+            // use 'site/error' action to display errors
            'errorAction' => 'install/index/error',
         ),
     ),
