@@ -30,7 +30,7 @@ FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 #####导入数据表
 >数据库配置文件位置：protected/config/database.php
 
->数据库配置文件位置：protected/data/fircms.xxxx.sql
+>数据表文件位置：protected/data/fircms.xxxx.sql
 
 - 数据库名dbname  
 - 数据库帐号username 
