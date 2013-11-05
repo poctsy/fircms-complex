@@ -4,6 +4,8 @@ fircms
 FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
 
+转移https://github.com/poctsy/fircms
+
 ### 部署说明： ###
 
 #### 需要建立文件夹 ，与导入数据表 ####
