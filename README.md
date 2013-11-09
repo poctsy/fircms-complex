@@ -1,10 +1,11 @@
 fircms 
 ======
+简化目录架构，重构代码.
+转移https://github.com/poctsy/fircms
 
+=====
 FIRCMS基于yiiframework框架开发，采用apache2.0开源协议。。。
 
-
-转移https://github.com/poctsy/fircms
 
 ### 部署说明： ###
 
